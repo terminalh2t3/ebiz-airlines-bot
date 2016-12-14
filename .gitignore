@@ -1,0 +1,7 @@
+/.idea
+.DS_Store
+.babelrc
+/examples
+/test
+/assets
+/node_modules
