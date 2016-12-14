@@ -37,4 +37,4 @@ bot.hear('hello', (payload, chat) => {
     });
 });
 
-bot.start();
+bot.start(process.env.PORT || 5000);
