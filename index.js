@@ -1,4 +1,4 @@
 'use strict';
-const BootBot = require('./lib/BootBot');
+const BootBot = require('./lib/bot/BootBot');
 
 module.exports = BootBot;
