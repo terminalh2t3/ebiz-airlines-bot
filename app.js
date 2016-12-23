@@ -61,7 +61,14 @@ var bookshelf = require('bookshelf')(knex);
 const Aircraft = bookshelf.Model.extend({
     tableName: "Aircraft"
 });
-
+const FlightSchedule = bookshelf.Model.extend({
+    tableName: "FlightSchedule"
+});
+app.get('/',function(req, res) {
+    FlightSchedule.fetchAll().then(function (model) {
+        res.send(model.toJSON());
+    })
+});
 app.get('/test', function(req, res) {
     Aircraft.fetchAll().then(function(model) {
        res.send(model.toJSON());
