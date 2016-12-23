@@ -1,4 +1,8 @@
 'use strict';
+
+const pg = require('pg');
+pg.defaults.ssl = true;
+
 const BootBot = require('./lib/bot/BootBot');
 const config = require('config');
 
