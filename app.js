@@ -57,17 +57,19 @@ var knex = require('knex')({
     client: 'pg',
     connection: (process.env.DATABASE_URL) ? process.env.DATABASE_URL : config.get('database_url'),
 });
-var bookshelf = require('bookshelf')(knex);
-const Aircraft = bookshelf.Model.extend({
-    tableName: "Aircraft"
-});
-const FlightSchedule = bookshelf.Model.extend({
-    tableName: "FlightSchedule"
-});
+
+// var bookshelf = require('bookshelf')(knex);
+// const Aircraft = bookshelf.Model.extend({
+//     tableName: "public.Aircraft"
+// });
+// const FlightSchedule = bookshelf.Model.extend({
+//     tableName: "public.FlightSchedule"
+// });
+
 app.get('/',function(req, res) {
-    FlightSchedule.fetchAll().then(function (model) {
-        res.send(model.toJSON());
-    })
+    var Route = require("./lib/api/models/Route");
+    var allRoute = new Route.Route().getAll();
+    res.send(allRoute.toJSON());
 });
 app.get('/test', function(req, res) {
     Aircraft.fetchAll().then(function(model) {
