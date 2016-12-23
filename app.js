@@ -53,26 +53,10 @@ var port = 3000;        // set our port
 app.listen(port);
 console.log('Magic happens on port ' + port);
 
-var knex = require('knex')({
-    client: 'pg',
-    connection: (process.env.DATABASE_URL) ? process.env.DATABASE_URL : config.get('database_url'),
-});
-
-// var bookshelf = require('bookshelf')(knex);
-// const Aircraft = bookshelf.Model.extend({
-//     tableName: "public.Aircraft"
-// });
-// const FlightSchedule = bookshelf.Model.extend({
-//     tableName: "public.FlightSchedule"
-// });
+const Route = require('./lib/api/models/Route');
 
 app.get('/',function(req, res) {
-    var Route = require("./lib/api/models/Route");
-    var allRoute = new Route.Route().getAll();
-    res.send(allRoute.toJSON());
-});
-app.get('/test', function(req, res) {
-    Aircraft.fetchAll().then(function(model) {
-       res.send(model.toJSON());
+    Route.findAll().then(function (model) {
+        res.send(model.toJSON());
     });
 });

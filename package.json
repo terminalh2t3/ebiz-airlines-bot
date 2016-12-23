@@ -4,7 +4,7 @@
   "description": "Facebook Messenger Bot Framework",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "babel-node  app.js --presets es2015,stage-2",
     "test": "mocha --recursive test/*",
     "test:watch": "npm test -- --watch"
   },
@@ -34,6 +34,7 @@
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-2": "^6.18.0",
     "chai": "^3.5.0",
     "mocha": "^2.5.3",
     "sinon": "^1.17.4"
