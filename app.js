@@ -54,9 +54,20 @@ app.listen(port);
 console.log('Magic happens on port ' + port);
 
 const Route = require('./lib/api/models/Route');
+const Flight = require('./lib/api/models/FlightSchedule');
 
 app.get('/',function(req, res) {
     Route.findAll().then(function (model) {
+        res.send(model.toJSON());
+    });
+});
+
+app.get('/flight',function(req, res) {
+    var from = req.query.from;
+    var to = req.query.to;
+    Flight.query(function(qb) {
+        qb.where('flight_date', '>=', from).where('flight_date', '<=', to);
+    }).fetchAll().then(function (model) {
         res.send(model.toJSON());
     });
 });
