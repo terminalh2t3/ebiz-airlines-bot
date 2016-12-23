@@ -46,3 +46,24 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
 });
 
 bot.start(process.env.PORT || 5000);
+
+var express    = require('express');        // call express
+var app        = express();
+var port = 3000;        // set our port
+app.listen(port);
+console.log('Magic happens on port ' + port);
+
+var knex = require('knex')({
+    client: 'pg',
+    connection: (process.env.DATABASE_URL) ? process.env.DATABASE_URL : config.get('database_url'),
+});
+var bookshelf = require('bookshelf')(knex);
+const Aircraft = bookshelf.Model.extend({
+    tableName: "Aircraft"
+});
+
+app.get('/test', function(req, res) {
+    Aircraft.fetchAll().then(function(model) {
+       res.send(model.toJSON());
+    });
+});
