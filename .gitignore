@@ -6,4 +6,5 @@
 /assets
 /node_modules
 /dist
+/http/public/webshot
 .env
