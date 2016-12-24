@@ -1,4 +1,8 @@
 'use strict';
+
+const pg = require('pg');
+pg.defaults.ssl = true;
+
 const BootBot = require('./lib/bot/BootBot');
 const config = require('config');
 
@@ -42,3 +46,17 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
 });
 
 bot.start(process.env.PORT || 5000);
+
+var express    = require('express');        // call express
+var app        = express();
+var port = 3000;        // set our port
+app.listen(port);
+console.log('Magic happens on port ' + port);
+
+const Route = require('./lib/api/models/Route');
+
+app.get('/',function(req, res) {
+    Route.findAll().then(function (model) {
+        res.send(model.toJSON());
+    });
+});
