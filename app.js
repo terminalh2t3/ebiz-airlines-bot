@@ -59,7 +59,7 @@ bot.app.get('/',function(req, res) {
 });
 
 bot.app.get('/country',function(req, res) {
-    Route.findRoute("Hà Nội","Hải Phòng").then(function (result) {
-        console.log(result);
+    Route.findRoute("Hà Nội","Hồ Chí Minh", function (result) {
+        res.send(result.toJSON());
     });
 });
