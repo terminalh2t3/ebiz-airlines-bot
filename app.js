@@ -45,14 +45,15 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
     bot.module(require("./chatbot/modules/" + file));
 });
 
+bot.startWeb();
 bot.start(process.env.PORT || 5000);
 
 const Route = require('./lib/api/models/Route');
 const State = require('./lib/api/models/State');
 const Country = require('./lib/api/models/Country');
-
+const RouteTest = require('./lib/api/models/Route');
 bot.app.get('/',function(req, res) {
-    Route.findAll().then(function (model) {
+    RouteTest.findAll().then(function (model) {
         res.send(model.toJSON());
     });
 });
