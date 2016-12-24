@@ -1,4 +1,7 @@
 "use strict";
+/**
+ * @param bot Bootbot
+ */
 module.exports = (bot) => ({
     showBookingTicket({context, entities, sessionId, text})
     {
