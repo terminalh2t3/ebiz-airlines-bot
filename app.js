@@ -48,9 +48,17 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
 bot.start(process.env.PORT || 5000);
 
 const Route = require('./lib/api/models/Route');
+const State = require('./lib/api/models/State');
+const Country = require('./lib/api/models/Country');
 
 bot.app.get('/',function(req, res) {
     Route.findAll().then(function (model) {
         res.send(model.toJSON());
+    });
+});
+
+bot.app.get('/country',function(req, res) {
+    Route.findRoute("Hà Nội","Hải Phòng").then(function (result) {
+        console.log(result);
     });
 });
