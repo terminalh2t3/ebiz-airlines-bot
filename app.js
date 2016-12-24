@@ -51,7 +51,9 @@ bot.start(process.env.PORT || 5000);
 const Route = require('./lib/api/models/Route');
 const State = require('./lib/api/models/State');
 const Country = require('./lib/api/models/Country');
+const FlightSchedule = require('./lib/api/models/FlightSchedule');
 const RouteTest = require('./lib/api/models/Route');
+const FlightBusiness = require('./lib/api/business/FlightScheduleBusiness');
 bot.app.get('/',function(req, res) {
     RouteTest.findAll().then(function (model) {
         res.send(model.toJSON());
@@ -59,7 +61,7 @@ bot.app.get('/',function(req, res) {
 });
 
 bot.app.get('/country',function(req, res) {
-    Route.findRoute("Hà Nội","Hồ Chí Minh", function (result) {
-        res.send(result.toJSON());
+    FlightBusiness.findFlight("100000","700000", "2016-12-26",null ,function (data) {
+        res.send(data);
     });
 });
