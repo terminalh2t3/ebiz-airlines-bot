@@ -61,9 +61,10 @@ bot.app.get('/',function(req, res) {
 });
 
 bot.app.get('/country',function(req, res) {
-    FlightBusiness.findFlight("100000","700000", "2016-12-26",null ,function (data) {
+    FlightBusiness.findFlight("100000","700000", "2016-12-26", null ,function (data) {
         data.forEach(function (value) {
-            console.log(value);
+            console.log(value.relations.aircraft);
+            console.log(value.relations.route);
         })
     });
 });
