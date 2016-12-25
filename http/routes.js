@@ -2,7 +2,11 @@
 
 const routes = [
     {url: '/home', controller:'Home', action: 'run', alias: 'home', method: 'get'},
-    {url: '/util/render-image', controller:'Util', action: 'renderImage', method: 'get'}
+    {url: '/util/render-image', controller:'Util', action: 'renderImage', method: 'get'},
+    {url: '/flight/detail', controller:'Flight', action: 'show', method: 'get'},
+
+    //test
+    {url: '/test/flightSchedule', controller:'Test', action: 'flightSchedule', method: 'get'}
 ];
 
 class Route{
