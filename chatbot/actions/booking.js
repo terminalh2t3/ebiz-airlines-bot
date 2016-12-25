@@ -2,6 +2,7 @@
 /**
  * @param bot Bootbot
  */
+const FlightScheduleBusiness = require('../../lib/api/business/FlightScheduleBusiness');
 module.exports = (bot) => ({
     showBookingTicket({context, entities, sessionId, text})
     {
@@ -30,14 +31,34 @@ module.exports = (bot) => ({
             const recipientId = bot.sessions[sessionId].fbid;
             if(context.data.fromLocation && context.data.toLocation && context.data.dateTime){
                 //Send the ticket list
-                bot.sendTextMessage(recipientId, 'OK! Here is what you got');
+                bot.sendTextMessage(recipientId, 'OK! I will find the flights for you. Please' +
+                    'keep in mind that at the moment I can not booking for you with any extra bags via Messenger but it will support soon.');
+                bot.sendTypingIndicator(recipientId);
+                const fromLocation = context.data.fromLocation;
+                const toLocation = context.data.toLocation;
+                const dateTime = context.data.dateTime;
+
+                //standardize location
+                const airportApi = require('../../lib/bot/utils/airport-api');
+                airportApi.getAirport({term: fromLocation}, function(error, data){
+                    const iFrom = data.airports[0].iata;
+                    airportApi.getAirport({term: toLocation}, function(error, data){
+                        const iTo = data.airports[0].iata;
+                        FlightScheduleBusiness.findFlight(iFrom, iTo, dateTime, null, function(data){
+                            console.log(data);
+                        });
+                    });
+                });
+
+                bot.sendOffTypingIndicator(recipientId);
+
                 //clear branches
                 delete context.missingFrom;
                 delete context.missingTo;
                 delete context.missingTime;
 
-                //clear data
-                delete context.data;
+                //set context
+                context.bookingTicket = true;
 
                 //mark to context of store is done
                 context.done = true;

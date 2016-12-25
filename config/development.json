@@ -3,6 +3,8 @@
   "pageAccessToken" : "EAAJn6TCEUUEBAGwZC5jTPEJHGZA1I0GHJWwnV4DDGopSNBgH3GSCP7wghufan6llDSLrsI2FCpXHhAR4cP89mVOnuZB8DJYQDAFoZBjhbZCJHdcwhZA1lEYEOYTRqgqz2KTHOa8401i0QbN7OcH50OUdOs4pZCtZAxImgPwkSJ8nLAZDZD",
   "validationToken" : "ebizsolutions",
   "serverURL"       : "http://demo-chatbot.herokuapp.com",
-  "database_url"    : "postgres://trdczucnrhrtaf:-Ck0ag6FHo_ASToRoNxzntymnT@ec2-54-243-203-232.compute-1.amazonaws.com:5432/d4fumq7k3caj6v",
-  "wit_token"       : "XEOIWZBYV6L6M2E5VJDZQYNV6JOEWBFC"
+  "database_url"    : "postgres://postgres:123456@127.0.0.1:5432/ebizairlines",
+  "wit_token"       : "XEOIWZBYV6L6M2E5VJDZQYNV6JOEWBFC",
+  "apc-auth"        : "d81b6370d0",
+  "apc-auth-secret" : "0f757d2a62a79d5"
 }
