@@ -1,5 +1,6 @@
-<htm>
+<html>
     <body>
-        {{content}}
+        <pre id="json">{{JSON.stringify(content, undefined, 2)}}</pre>
+        {{error}}
     </body>
-</htm>
+</html>
