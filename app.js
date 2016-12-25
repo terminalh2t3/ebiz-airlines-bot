@@ -54,6 +54,7 @@ const Country = require('./lib/api/models/Country');
 const FlightSchedule = require('./lib/api/models/FlightSchedule');
 const RouteTest = require('./lib/api/models/Route');
 const FlightBusiness = require('./lib/api/business/FlightScheduleBusiness');
+
 bot.app.get('/',function(req, res) {
     RouteTest.findAll().then(function (model) {
         res.send(model.toJSON());
@@ -61,10 +62,11 @@ bot.app.get('/',function(req, res) {
 });
 
 bot.app.get('/country',function(req, res) {
-    FlightBusiness.findFlight("100000","700000", "2016-12-26", null ,function (data) {
+    FlightBusiness.findFlight("SGN","DAD", "2016-12-26", null ,function (data) {
         data.forEach(function (value) {
-            console.log(value.relations.aircraft);
-            console.log(value.relations.route);
+            console.log(value);
+            // console.log(value.relations.aircraft);
+            // console.log(value.relations.route);
         })
     });
 });
@@ -73,3 +75,23 @@ bot.app.get('/flightschedule',function(req, res) {
 
     });
 });
+
+bot.app.get('/flightschedule',function(req, res) {
+    FlightSchedule.testRelation().then(function(){
+
+    });
+});
+
+
+bot.app.get('/getroute',function(req, res) {
+    Route.query(function(qb) {
+        qb.select('r.*', 's1.state_code', 's2.state_code')
+            .from('Route as r')
+            .innerJoin('State as s1','r.depart_state', 's1.state_code' )
+            .innerJoin('State as s2','r.destination_state','s2.state_code')
+            .where('s1.postal_code', '=', '700000')
+            .where('s2.postal_code', '=', '550000')
+        }).fetch({debug:true}).then(function(result) {
+            console.log(result);
+        })
+    });
