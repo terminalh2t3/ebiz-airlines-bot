@@ -19,6 +19,17 @@ bot.startWeb();
 bot.start(process.env.PORT || 5000);
 bot.setWhiteListDomain([rootUrl]);
 
+const template = require('./lib/bot/utils/airport-template');
+
+var cron = require('node-cron');
+var task = cron.schedule('* * * * *', function() {
+    console.log("Sent Checkin Reminder");
+    template.sendCheckinRemind();
+}, false);
+
+task.start();
+
+
 const Route = require('./lib/api/models/Route');
 const State = require('./lib/api/models/State');
 const Country = require('./lib/api/models/Country');
