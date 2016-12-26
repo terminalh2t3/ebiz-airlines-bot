@@ -1,12 +1,14 @@
 "use strict";
 const   BaseController = require("./Base"),
-        View = require("../views/Base");
+        ejs = require('ejs');
 
 module.exports = BaseController.extend({
     name: "Home",
     content: null,
     run: function(req, res, next){
-        const v = new View(res, 'home');
-        v.render({'content': 'Hello world!!'});
+        const html = ejs.renderFile(__dirname + '/../templates/home.ejs', { content: 'Hello world!' }, {}, function(err, str){
+            console.log(str);
+            res.render('home', { content: 'Hello world!' })
+        });
     }
 });
