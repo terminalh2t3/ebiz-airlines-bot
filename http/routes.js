@@ -6,7 +6,9 @@ const routes = [
     {url: '/flight/detail', controller:'Flight', action: 'show', method: 'get'},
     //test
     {url: '/test/flightSchedule', controller:'Test', action: 'flightSchedule', method: 'get'},
-    {url: '/test/getFlightById', controller:'Test', action: 'getFlightById', method: 'get'}
+    {url: '/test/getFlightById', controller:'Test', action: 'getFlightById', method: 'get'},
+    {url: '/test/flightSchedule', controller:'Test', action: 'flightSchedule', method: 'get'},
+    {url: '/test/reminder', controller:'Test', action: 'checkInRemind', method: 'get'}
 ];
 
 class Route{
