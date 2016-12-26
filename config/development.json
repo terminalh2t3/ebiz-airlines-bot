@@ -1,11 +1,11 @@
 {
   "appSecret"       : "2c4757093c69eaee5d8985dd7e524f12",
-  "pageAccessToken" : "EAAJn6TCEUUEBAGwZC5jTPEJHGZA1I0GHJWwnV4DDGopSNBgH3GSCP7wghufan6llDSLrsI2FCpXHhAR4cP89mVOnuZB8DJYQDAFoZBjhbZCJHdcwhZA1lEYEOYTRqgqz2KTHOa8401i0QbN7OcH50OUdOs4pZCtZAxImgPwkSJ8nLAZDZD",
+  "pageAccessToken" : "EAAJn6TCEUUEBALNK8vreMyf556aqDHTeyxSQw2FhXDRxx80N0u54ryMyzwzHgyu9yp3htLqxqm81EEWjcTCqsPOzCnmZC7EMGZA8bDmhZBMOIJaozpeGoEeZAaBPPBrU7eBZAGImkA9ZCqZCg3t19JqlhHE8xJDp3ZCeBvxxIKBMTQZDZD",
   "validationToken" : "ebizsolutions",
   "serverURL"       : "http://demo-chatbot.herokuapp.com",
   "database_url"    : "postgres://postgres:123456@127.0.0.1:5432/ebizairlines",
   "wit_token"       : "XEOIWZBYV6L6M2E5VJDZQYNV6JOEWBFC",
   "apc-auth"        : "d81b6370d0",
   "apc-auth-secret" : "0f757d2a62a79d5",
-  "root-url"        : "https://20ed2c93.ngrok.io"
+  "root-url"        : "https://e1d90371.ngrok.io"
 }

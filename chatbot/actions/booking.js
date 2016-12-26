@@ -52,54 +52,31 @@ module.exports = (bot) => ({
                                 bot.sendTextMessage(recipientId, 'Sorry, we have no flight suitable for you.');
                             } else {
                                 const flights = data;
-                                // let elements = [];
-                                // const rootUrl = (process.env.ROOT_URL) ? process.env.ROOT_URL : require('config').get('root-url');
-                                // flights.forEach(function (flight) {
-                                //     const element = {
-                                //         "title": flight.ticket_price + '$',
-                                //         "image_url": rootUrl + '/util/render-flight-info?flight_id=' + flight.flight_id,
-                                //         "subtitle": "something",
-                                //         "default_action": {
-                                //             "type": "web_url",
-                                //             "url": rootUrl + 'flight/show?flight_id=' + flight.flight_id,
-                                //             "messenger_extensions": true,
-                                //             "webview_height_ratio": "tall",
-                                //             "fallback_url": rootUrl
-                                //         },
-                                //         "buttons":[
-                                //             {
-                                //                 "type": "web_url",
-                                //                 "url": rootUrl + 'flight/show?flight_id=' + flight.flight_id,
-                                //                 "title": 'View detail'
-                                //             }
-                                //         ]
-                                //     };
-                                //     elements.push(element);
-                                // });
-                                const elements = [
-                                    {
-                                        "title":"Welcome to Peter\'s Hats",
-                                        "image_url":"https://petersfancybrownhats.com/company_image.png",
-                                        "subtitle":"We\'ve got the right hat for everyone.",
+                                let elements = [];
+                                const rootUrl = (process.env.ROOT_URL) ? process.env.ROOT_URL : require('config').get('root-url');
+                                flights.forEach(function (flight) {
+                                    const element = {
+                                        "title": flight.ticket_price + '$',
+                                        "image_url": rootUrl + '/util/render-flight-info?flight_id=' + flight.flight_id,
+                                        "subtitle": "something",
                                         "default_action": {
-                                            "type":"web_url",
-                                            "url":"https://petersfancybrownhats.com",
-                                            "title":"View Website"
+                                            "type": "web_url",
+                                            "url": rootUrl + 'flight/show?flight_id=' + flight.flight_id,
+                                            "messenger_extensions": true,
+                                            "webview_height_ratio": "tall",
+                                            "fallback_url": rootUrl
                                         },
                                         "buttons":[
                                             {
-                                                "type":"web_url",
-                                                "url":"https://petersfancybrownhats.com",
-                                                "title":"View Website"
-                                            },{
-                                                "type":"postback",
-                                                "title":"Start Chatting",
-                                                "payload":"DEVELOPER_DEFINED_PAYLOAD"
+                                                "type": "web_url",
+                                                "url": rootUrl + 'flight/show?flight_id=' + flight.flight_id,
+                                                "title": 'View detail'
                                             }
                                         ]
-                                    }
-                                ];
-                                bot.sendGenericTemplate(recipientId, elements);
+                                    };
+                                    elements.push(element);
+                                });
+                                bot.sendGenericTemplate(recipientId, elements, {});
                                 bot.sendOffTypingIndicator(recipientId);
                             }
                         });

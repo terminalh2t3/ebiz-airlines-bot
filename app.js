@@ -14,8 +14,10 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
     bot.module(require("./chatbot/modules/" + file));
 });
 
+const rootUrl = (process.env.ROOT_URL) ? process.env.ROOT_URL : config.get('root-url');
 bot.startWeb();
 bot.start(process.env.PORT || 5000);
+bot.setWhiteListDomain([rootUrl]);
 
 const Route = require('./lib/api/models/Route');
 const State = require('./lib/api/models/State');
