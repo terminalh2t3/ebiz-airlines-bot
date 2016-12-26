@@ -5,7 +5,8 @@ const routes = [
     {url: '/util/render-image', controller:'Util', action: 'renderImage', method: 'get'},
     {url: '/flight/detail', controller:'Flight', action: 'show', method: 'get'},
     //test
-    {url: '/test/flightSchedule', controller:'Test', action: 'flightSchedule', method: 'get'}
+    {url: '/test/flightSchedule', controller:'Test', action: 'flightSchedule', method: 'get'},
+    {url: '/test/reminder', controller:'Test', action: 'checkInRemind', method: 'get'}
 ];
 
 class Route{
