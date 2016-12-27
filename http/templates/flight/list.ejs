@@ -1,0 +1,30 @@
+<% include ../partials/header.ejs %>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th> Flight ID</th>
+                <th> Flight Number</th>
+                <th> Boarding Time</th>
+                <th> Departure Time</th>
+                <th> Arrival Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% flights.forEach(function (flight) { %>
+            <tr>
+                <td><%= flight.get('flight_id') %></td>
+                <td><%= flight.get('flight_code') %></td>
+                <td><%= flight.get('boarding_time') %></td>
+                <td><%= flight.get('departure_time') %></td>
+                <td><%= flight.get('arrival_time') %></td>
+            </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>

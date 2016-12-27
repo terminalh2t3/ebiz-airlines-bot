@@ -1,12 +1,16 @@
 "use strict";
 const   BaseController = require("./Base"),
-    View = require("../views/Base");
+    ejs = require('ejs');
 
 module.exports = BaseController.extend({
     name: "Home",
     content: null,
-    show: function(req, res, next) {
-        const v = new View(res, 'flight/show');
-        v.render({});
-    }
+    list: function(req, res, next) {
+        const FlightSchedule = require('../../lib/api/business/FlightScheduleBusiness');
+        FlightSchedule.getAllFlight(function (error, result) {
+            res.render('flight/list', {
+                flights: result
+            });
+        });
+    },
 });
