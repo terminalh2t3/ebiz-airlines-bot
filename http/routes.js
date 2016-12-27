@@ -9,7 +9,9 @@ const routes = [
     {url: '/test/getFlightById', controller:'Test', action: 'getFlightById', method: 'get'},
     {url: '/test/flightSchedule', controller:'Test', action: 'flightSchedule', method: 'get'},
     {url: '/test/reminder', controller:'Test', action: 'checkInRemind', method: 'get'},
-    {url: '/test/boarding', controller:'Test', action: 'boardingPass', method: 'get'}
+    {url: '/test/booking', controller:'Test', action: 'bookingAll', method: 'get'},
+    {url: '/test/boarding', controller:'Test', action: 'boardingPass', method: 'get'},
+    {url: '/test/flightupdate', controller:'Test', action: 'flightUpdate', method: 'get'}
 ];
 
 class Route{

@@ -2,6 +2,7 @@
 const   BaseController = require("./Base");
 const FlightScheduleBusiness = require('../../lib/api/business/FlightScheduleBusiness');
 const template = require('../../lib/bot/utils/airport-template');
+const Booking = require('../../lib/api/models/Booking');
 module.exports = BaseController.extend({
     name: "Test",
     content: null,
@@ -15,15 +16,18 @@ module.exports = BaseController.extend({
             res.json(data);
         });
     },
+    bookingAll: function (req, res) {
+        Booking.fetchAll().then(function (booking) {
+            console.log(booking.toJSON())
+        })
+    },
     checkInRemind: function(req, res) {
         template.sendCheckinRemind();
     },
     boardingPass: function (req, res) {
-        FlightScheduleBusiness.boardingPass(function (error, boardings) {
-            //console.log(boardings);
-            // boardings.forEach(function (boarding) {
-            //     console.log(boarding);
-            // });
-        })
+        template.sendBoardingPass();
+    },
+    flightUpdate: function (req, res) {
+        template.sendFlightUpdate(9, "gate_change");
     }
 });
