@@ -19,11 +19,24 @@ bot.startWeb();
 bot.start(process.env.PORT || 5000);
 bot.setWhiteListDomain([rootUrl]);
 
+const template = require('./lib/bot/utils/airport-template');
+// //Run cron for sending check-in reminder.
+// var cron = require('node-cron');
+// var task = cron.schedule('* * * * *', function() {
+//     console.log("Sent Checkin Reminder");
+//     template.sendCheckinRemind();
+//     //console.log('Sent boarding pass');
+//     //template.sendBoardingPass();
+// }, false);
+//
+// task.start();
+
+
 const Route = require('./lib/api/models/Route');
 const State = require('./lib/api/models/State');
 const Country = require('./lib/api/models/Country');
 const FlightSchedule = require('./lib/api/models/FlightSchedule');
-const RouteTest = require('./lib/api/models/Route');
+const Booking = require('./lib/api/models/Booking');
 const FlightBusiness = require('./lib/api/business/FlightScheduleBusiness');
 
 bot.app.get('/',function(req, res) {
@@ -54,15 +67,10 @@ bot.app.get('/flightschedule',function(req, res) {
 });
 
 
-bot.app.get('/getroute',function(req, res) {
-    Route.query(function(qb) {
-        qb.select('r.*', 's1.state_code', 's2.state_code')
-            .from('Route as r')
-            .innerJoin('State as s1','r.depart_state', 's1.state_code' )
-            .innerJoin('State as s2','r.destination_state','s2.state_code')
-            .where('s1.postal_code', '=', '700000')
-            .where('s2.postal_code', '=', '550000')
-        }).fetch({debug:true}).then(function(result) {
-            console.log(result);
-        })
-    });
+bot.app.get('/booking',function(req, res) {
+    Booking.fetchAll({withRelated: ['flightSchedule']}).then(
+        function (model) {
+            console.log(model);
+        }
+    )
+});
