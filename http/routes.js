@@ -3,6 +3,7 @@
 const routes = [
     {url: '/home', controller:'Home', action: 'run', alias: 'home', method: 'get'},
     {url: '/util/render-flight-info', controller:'Util', action: 'renderFlightInfo', method: 'get'},
+    {url: '/flight/show', controller:'Flight', action: 'show', method: 'get'},
     {url: '/flight/detail', controller:'Flight', action: 'show', method: 'get'},
     {url: '/flight', controller:'Flight', action: 'list', method: 'get'},
     //test

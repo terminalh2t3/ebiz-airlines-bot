@@ -33,7 +33,7 @@ module.exports = (bot) => ({
             if(context.data.fromLocation && context.data.toLocation && context.data.dateTime){
                 //Send the ticket list
                 bot.sendTextMessage(recipientId, 'OK! I will find the flights for you. Please' +
-                    'keep in mind that at the moment I can not booking for you with any extra bags via Messenger but it will support soon.');
+                    ' keep in mind that at the moment I can not booking for you with any extra bags via Messenger but it will support soon.');
                 bot.sendTypingIndicator(recipientId);
                 const fromLocation = context.data.fromLocation;
                 const toLocation = context.data.toLocation;
@@ -55,21 +55,45 @@ module.exports = (bot) => ({
                                 let elements = [];
                                 const rootUrl = (process.env.ROOT_URL) ? process.env.ROOT_URL : require('config').get('root-url');
                                 flights.forEach(function (flight) {
+                                    const total = flight.ticket_price;
+                                    const taxPercent = 0.1;
+                                    const taxFee = Math.round(total * taxPercent);
+                                    const basePrice = total - taxFee;
+
                                     const element = {
-                                        "title": flight.ticket_price + '$',
+                                        "title": 'Booking ' + flight.flight_code,
                                         "image_url": rootUrl + '/util/render-flight-info?flight_id=' + flight.flight_id,
-                                        "subtitle": "something",
-                                        "default_action": {
-                                            "type": "web_url",
-                                            "url": rootUrl + 'flight/show?flight_id=' + flight.flight_id,
-                                            "messenger_extensions": true,
-                                            "webview_height_ratio": "tall",
-                                            "fallback_url": rootUrl
-                                        },
                                         "buttons":[
                                             {
+                                                "type":"payment",
+                                                "title":"buy",
+                                                "payload":"DEVELOPER_DEFINED_PAYLOAD",
+                                                "payment_summary":{
+                                                    "currency":"USD",
+                                                    "payment_type":"FIXED_AMOUNT",
+                                                    "is_test_payment" : true,
+                                                    "merchant_name":"Ebiz Airlines",
+                                                    "requested_user_info":[
+                                                        "contact_name",
+                                                        "contact_phone",
+                                                        "contact_email"
+                                                    ],
+                                                    "price_list":[
+                                                        {
+                                                            "label":"Subtotal",
+                                                            "amount": basePrice
+                                                        },
+                                                        {
+                                                            "label":"Taxes",
+                                                            "amount": taxFee
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            {
                                                 "type": "web_url",
-                                                "url": rootUrl + 'flight/show?flight_id=' + flight.flight_id,
+                                                "url": rootUrl + '/flight/show?flight_id=' + flight.flight_id,
+                                                "webview_height_ratio": "full",
                                                 "title": 'View detail'
                                             }
                                         ]
