@@ -9,7 +9,7 @@ module.exports = BaseController.extend({
         const flight_id = req.query.flight_id;
         const FlightSchedule = require('../../lib/api/business/FlightScheduleBusiness');
         FlightSchedule.getFlightById(flight_id, function(err, data){
-            const DateTime = require('node-datetime')
+            const DateTime = require('node-datetime');
             res.render('flight/show', {flightInfo: data, DateTime: DateTime});
         });
     },
