@@ -1,4 +1,5 @@
 'use strict';
+const bodyParser = require('body-parser');
 
 const routes = [
     {url: '/home', controller:'Home', action: 'run', alias: 'home', method: 'get'},
@@ -6,6 +7,10 @@ const routes = [
     {url: '/flight/show', controller:'Flight', action: 'show', method: 'get'},
     {url: '/flight/detail', controller:'Flight', action: 'show', method: 'get'},
     {url: '/flight', controller:'Flight', action: 'list', method: 'get'},
+    {url: '/flight/update-delay', controller:'Flight', action: 'updateDelayList', method: 'get'},
+    {url: '/flight/update-delay', controller:'Flight', action: 'updateDelay', method: 'post'},
+    {url: '/flight/update-gate', controller:'Flight', action: 'updateGateChange', method: 'post'},
+    {url: '/flight/update-gate', controller:'Flight', action: 'updateGateChangeList', method: 'get'},
     //test
     {url: '/test/flightSchedule', controller:'Test', action: 'flightSchedule', method: 'get'},
     {url: '/test/getFlightById', controller:'Test', action: 'getFlightById', method: 'get'},
@@ -20,6 +25,7 @@ class Route{
     constructor(app){
         this.routes = routes;
         this.app = app;
+        app.use(bodyParser.urlencoded({ extended: true }));
         this.loadRoute();
     }
     loadRoute(){

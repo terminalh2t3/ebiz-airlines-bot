@@ -1,0 +1,40 @@
+<% include ../partials/header.ejs %>
+
+<div class="row">
+    <div class="col-xs-12">
+        <form class="form-horizontal" method="post">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th> Flight ID</th>
+                    <th> Flight Number</th>
+                    <th> Boarding Time</th>
+                    <th> Departure Time</th>
+                    <th> Arrival Time</th>
+                    <th> Delay Hour</th>
+                    <th> Delay Minute</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% flights.forEach(function (flight) { %>
+                <tr>
+                    <td><%= flight.get('flight_id') %></td>
+                    <td><%= flight.get('flight_code') %></td>
+                    <td><%= moment(flight.get('boarding_time')).format('YYYY-MM-DD HH:mm:ss') %></td>
+                    <td><%= moment(flight.get('departure_time')).format('YYYY-MM-DD HH:mm:ss') %></td>
+                    <td><%= moment(flight.get('arrival_time')).format('YYYY-MM-DD HH:mm:ss') %></td>
+                    <td><input name="flight[<%= flight.get('flight_id') %>][delay_hour]" size="2" maxlength="2" type="number" class="form-control" placeholder="Hour" value="0"></td>
+                    <td>
+                        <input name="flight[<%= flight.get('flight_id') %>][delay_minute]" size="2" maxlength="2" type="number" class="form-control" placeholder="Minute" value="0">
+                        <input name="flight[<%= flight.get('flight_id') %>][id]" type="hidden" value="<%= flight.get('flight_id') %>">
+                    </td>
+                </tr>
+                <% }) %>
+                </tbody>
+            </table>
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>

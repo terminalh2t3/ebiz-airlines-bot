@@ -19,22 +19,34 @@
     <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
         <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
+                <a href="#" class="simple-text">
                     Ebiz Airline
                 </a>
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="/">
                         <i class="pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="active">
+                <li class="<%= page_name == 'flight_list' ? 'active' : '' %>">
                     <a href="/flight">
                         <i class="pe-7s-graph"></i>
                         <p>Flight List</p>
+                    </a>
+                </li>
+                <li class="<%= page_name == 'delay' ? 'active' : '' %>">
+                    <a href="/flight/update-delay">
+                        <i class="pe-7s-graph"></i>
+                        <p>Update Delay Time</p>
+                    </a>
+                </li>
+                <li class="<%= page_name == 'gate' ? 'active' : '' %>">
+                    <a href="/flight/update-gate">
+                        <i class="pe-7s-graph"></i>
+                        <p>Update Gate Change</p>
                     </a>
                 </li>
             </ul>
