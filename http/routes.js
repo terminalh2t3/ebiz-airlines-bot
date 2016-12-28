@@ -11,6 +11,9 @@ const routes = [
     {url: '/flight/update-delay', controller:'Flight', action: 'updateDelay', method: 'post'},
     {url: '/flight/update-gate', controller:'Flight', action: 'updateGateChange', method: 'post'},
     {url: '/flight/update-gate', controller:'Flight', action: 'updateGateChangeList', method: 'get'},
+    {url: '/checkin', controller: 'Booking', action: 'checkinPage', method: 'get'},
+    {url: '/checkin', controller: 'Booking', action: 'updateCheckin', method: 'post'},
+    {url: '/checkin/success', controller: 'Booking', action: 'checkinSuccess', method: 'get'},
     //test
     {url: '/test/flightSchedule', controller:'Test', action: 'flightSchedule', method: 'get'},
     {url: '/test/getFlightById', controller:'Test', action: 'getFlightById', method: 'get'},

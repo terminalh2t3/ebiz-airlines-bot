@@ -46,12 +46,47 @@ module.exports = BaseController.extend({
         while (currentDate <= endDate) {
             between.push(new Date(currentDate));
             currentDate.setDate(currentDate.getDate() + 1);
-        };
+        }
         Route.fetchAll().then(function (routes) {
             routes = routes.toJSON();
             routes.forEach(function (value) {
                 var routeId = value.route_id;
-                console.log(between);
+                console.log(routeId);
+                between.forEach(function (time) {
+                    var departDate = datetime.create(time).format('Y-m-d');
+                    for(var i = 6; i < 20; i++) {
+                        var boardingTime  = datetime.create(departDate + " "+i+":00:00").format('Y-m-d H:M:S');
+                        var departureTime = datetime.create(departDate + " "+i+":45:00").format('Y-m-d H:M:S');
+                        var arrivalTime   = datetime.create(departDate + " "+(i+3)+":00:00").format('Y-m-d H:M:S');
+                        var flightCode = Math.floor((Math.random() * 900) + 99);
+                        var price = Math.floor((Math.random() * 900) + 99)+"000";
+                        var depart_terminal = Math.floor((Math.random() * 3) + 1);
+                        var depart_gate = Math.floor((Math.random() * 15) + 1);
+                        var destination_terminal = Math.floor((Math.random() * 3) + 1);
+                        var destination_gate = Math.floor((Math.random() * 15) + 1);
+                        var flightInfo = {
+                            aircraft_id: 1,
+                            route_id: routeId,
+                            flight_code: "VN"+flightCode,
+                            flight_company: "Vietnam Airline",
+                            ticket_price: price,
+                            boarding_time: boardingTime,
+                            departure_time: departureTime,
+                            arrival_time: arrivalTime,
+                            depart_terminal: depart_terminal,
+                            depart_gate: depart_gate,
+                            destination_terminal: destination_terminal,
+                            destination_gate: destination_gate
+                        };
+                        FlightSchedule.forge(flightInfo).save().then(function (model) {
+                            if(model)
+                                console.log("Insert success");
+                        }).catch(function (error) {
+                            console.log(error);
+                            console.log("Insert Fail")
+                        })
+                    }
+                });
             });
         });
     }
