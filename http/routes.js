@@ -18,7 +18,9 @@ const routes = [
     {url: '/test/reminder', controller:'Test', action: 'checkInRemind', method: 'get'},
     {url: '/test/booking', controller:'Test', action: 'bookingAll', method: 'get'},
     {url: '/test/boarding', controller:'Test', action: 'boardingPass', method: 'get'},
-    {url: '/test/flightupdate', controller:'Test', action: 'flightUpdate', method: 'get'}
+    {url: '/test/boarding/passenger', controller:'Test', action: 'boardingPassPassenger', method: 'get'},
+    {url: '/test/flightupdate', controller:'Test', action: 'flightUpdate', method: 'get'},
+    {url: '/test/add/flights', controller: 'Test', action: 'addFlights', method:'get'}
 ];
 
 class Route{
