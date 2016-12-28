@@ -12,11 +12,13 @@ module.exports = BaseController.extend({
         const bookingId   = req.query.booking;
         const datetime = require('node-datetime');
         const BookingBusiness = require('../../lib/api/business/BookingBusiness');
+        const url = require('url');
         BookingBusiness.getCheckInDetail(passengerId, bookingId, function (error, model) {
             if(model) {
                 res.render('flight/checkin', {
                     booking: model,
-                    datetime: datetime
+                    datetime: datetime,
+                    baseURL: url.hostname
                 });
             } else {
                 res.render('flight/checkin_success');

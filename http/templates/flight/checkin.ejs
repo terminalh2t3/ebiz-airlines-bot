@@ -24,6 +24,7 @@
         <div class="col-md-12">
             <section class="dvHeader">
                 <h2>CHECK IN ONLINE</h2>
+                <%= baseURL %>
             </section>
             <section class="checkin-info">
                 <p>Here is your check-in information</p>
@@ -60,11 +61,16 @@
                         <input type="hidden" name="passenger_id" value="<%= booking.get('passenger_id') %>">
                         <input type="hidden" name="flight_id" value="<%= booking.get('flight_id') %>">
                         <input type="hidden" name="booking_id" value="<%= booking.get('booking_id') %>">
-                        <button class="btn btn-success btn-fill">Check In</button>
+                        <button type="button" id="checkin" class="btn btn-success btn-fill">Check In</button>
                     </form>
                 </div>
             </section>
         </div>
     </div>
 </div>
+<script>
+    $("#checkin").on('click',function () {
+//        $.ajax()
+    })
+</script>
 </body>

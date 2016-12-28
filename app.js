@@ -22,7 +22,7 @@ bot.setWhiteListDomain([rootUrl]);
 const template = require('./lib/bot/utils/airport-template');
 //Run cron for sending check-in reminder.
 var cron = require('node-cron');
-var task = cron.schedule('* /2 * * *', function() {
+var task = cron.schedule('*/2 * * * *', function() {
     console.log("Sent Checkin Reminder");
     template.sendCheckinRemind();
     console.log('Sent boarding pass');
