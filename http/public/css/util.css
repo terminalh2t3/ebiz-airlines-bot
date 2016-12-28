@@ -3,23 +3,23 @@
     float: left;
 }
 .header{
-    padding: 20px;
+    padding: 10px;
     background-color: #89313d;
     color: #fff;
-    font-size: 36px;
+    font-size: 45px;
     font-weight: 700;
 }
 .depart{
-    padding: 20px;
+    padding: 10px;
     background-color: #e2e2e2;
     color: #000;
-    font-size: 35px;
+    font-size: 45px;
 }
 .flight-col {
     width: 29%;
     float: left;
     padding-left: 5px;
-    /* line-height: 40px; */
+    line-height: 51px;
 }
 .flight-info img{
     width: 246px;
@@ -31,19 +31,20 @@
     padding: 10px;
 }
 .flight-col .airport-name{
-    font-size: 41px;
+    font-size: 48px;
     color: #868686;
 }
 .flight-col .time{
     color: #525252;
     font-weight: 600;
-    font-size: 49px;
+    font-size: 57px;
 }
 .flight-detail .extra-info{
     width: 100%;
     font-weight: 400;
     font-size: 39px;
     padding-left: 5px;
+    padding-top: 5px;
 }
 .deli-center{
     margin: 0 auto;
@@ -53,4 +54,25 @@
     top: 30px;
     font-size: 40px;
     font-weight: 700;
+}
+.flight-name{
+    color: #89313d;
+    width: 100%;
+    font-weight: 700;
+    font-size: 54px;
+    padding-left: 5px;
+    position: relative;
+    top: -15px;
+}
+.clearfix:after {
+    content: " "; /* Older browser do not support empty content */
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
 }

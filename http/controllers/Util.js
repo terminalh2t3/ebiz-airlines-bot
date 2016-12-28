@@ -23,11 +23,11 @@ module.exports = BaseController.extend({
                 const options = {
                     screenSize: {
                         width: 800
-                        , height: 418
+                        , height: 416
                     }
                     , shotSize: {
                         width: 800
-                        , height: 'all'
+                        , height: 416
                     }
                     , userAgent: 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_2 like Mac OS X; en-us)'
                     + ' AppleWebKit/531.21.20 (KHTML, like Gecko) Mobile/7B298g',
@@ -36,9 +36,10 @@ module.exports = BaseController.extend({
 
                 const FlightSchedule = require('../../lib/api/business/FlightScheduleBusiness');
                 FlightSchedule.getFlightById(flight_id, function(err, data){
-                    // res.render('util/flightInfo', {flightInfo: data, rootUrl: rootUrl});
+                    // res.render('util/flightInfo', {flightInfo: data, rootUrl: rootUrl, DateTime: require('node-datetime')});
                     const viewFilePath = __dirname + '/../templates/util/flightInfo.ejs';
-                    ejs.renderFile(viewFilePath, {flightInfo: data, rootUrl: rootUrl}, {}, function(err, str){
+                    ejs.renderFile(viewFilePath, {flightInfo: data, rootUrl: rootUrl, DateTime: require('node-datetime')}, {},
+                        function(err, str){
                         webshot(str, filePath, options, function(err){
                             res.sendFile(filePath);
                         });

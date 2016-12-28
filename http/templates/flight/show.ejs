@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)file:///Users/vu/Documents/flight.htm -->
+<html lang="en" class="gr__m_onetravel_com">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/css/newcommon.css" rel="stylesheet">
+    <link href="/css/payment.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+</head>
+<body data-gr-c-s-loaded="true">
+<script>
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'Messenger'));
+</script>
+<script>
+    window.extAsyncInit = function() {
+        console.log('Messenger Extension Loaded');
+        var isSupported = MessengerExtensions.isInExtension();
+        log("Is supported: " + isSupported);
+        if(isSupported){
+            //Get User Id
+            MessengerExtensions.getUserID(function success(uids) {
+                var psid = uids.psid;
+                log(psid);
+            }, function error(err) {
+
+            });
+        }
+    };
+    function checkout(e){
+        e.preventDefault();
+        log('check out called');
+        MessengerExtensions.requestPaymentCredentials(
+            function success(name, email, cardType, cardLastFourDigits, shippingAddress) {
+                log("Success");
+            },
+            function error(err) {
+                log("error");
+            },
+            ['CONTACT_NAME', 'CONTACT_EMAIL', 'CONTACT_PHONE', 'SHIPPING_ADDRESS']
+        );
+    }
+    function log(messages){
+        var div = document.getElementById('log');
+        div.innerHTML = div.innerHTML + '<p>' + messages + '</p>';
+    }
+</script>
+<div class="mainContent" id="mainContent">
+    <div id="dvBookFlight">
+        <div class="log" id="log">
+
+        </div>
+        <summary class="row txt-c cwhite f10 prmry-bg">
+                    <span class="price rgt p-r">
+                    <span class="f18" id="bookTotalPrice">             <span class="fpcurrencytext">$</span><span
+                                class="fpamount fpRoundToFixDecimal"><%= flightInfo.ticket_price %></span>         </span>
+                    </span>
+            <div class="trip d-ib lft">
+                <span class="f16"><%= flightInfo.route.depart_state %></span><br>
+                <%
+                const dateTime = DateTime.create(flightInfo.flight_date).format('n d, w');
+                const dtDepartTime = DateTime.create('2016-12-31 ' + flightInfo.departure);
+                const dtArrivalTime = DateTime.create('2016-12-31 ' + flightInfo.arrival_time);
+                const departTime = dtDepartTime.format('H:M');
+                const arrivalTime = dtArrivalTime.format('H:M');
+                const lengthDay = Math.abs(dtDepartTime._now.getDate() - dtArrivalTime._now.getDate());
+                const lengthHour = Math.abs(dtDepartTime._now.getHours() - dtArrivalTime._now.getHours());
+                const lengthMin = Math.abs(dtDepartTime._now.getMinutes() - dtArrivalTime._now.getMinutes());
+                const strLengthTime = lengthDay != 0 ? (lengthDay + 'd') : '' + lengthHour + 'h' + lengthMin + 'm';
+
+                const total = flightInfo.ticket_price;
+                const taxPercent = 0.1;
+                const taxFee = Math.round(total * taxPercent);
+                const basePrice = total - taxFee;
+                %>
+                <%= dateTime %>
+            </div>
+            <span class="d-ib lft i-set arw"><i class="fa fa-arrow-right" style="font-size:12px; position:relative; top: -3px" aria-hidden="true"></i></span>
+            <div class="trip d-ib lft">
+                <span class="f16"><%= flightInfo.route.destination_state %></span>
+                <br>
+            </div>
+        </summary>
+        <div class="row" id="step3cont">
+            <section class="cont row" id="divContractToBook">
+                <h2 class="f14 cwhite row">Flight Details</h2>
+                <div class="list row">
+                    <div id="ulContractDetailsFull" class="none" style="display: block;">
+                        <section class="f12 row dash-btm">
+                            <div class="row">
+                                <span class="corg">
+                                    <%= dateTime %>
+                                </span>
+                            </div>
+                            <div class="row" style="margin-top: 5px">
+                                <bdi class="rgt f9 cgrey p-r" style="margin-top: 20px">
+                                    Coach
+                                </bdi>
+                                <figure class="lft">
+                                    <img src="/images/logo.png" width="25">
+                                    <figcaption class="f9 p-a cgrey lh-n">
+                                        <%= flightInfo.flight_company %> <span>| Flight  <%= flightInfo.flight_code %> </span>
+                                        <div class="tooltip f11 cblk none p-a out-sdw"
+                                             style="margin: 2px 0 0; right: 0; z-index: 1">787
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="row f12">
+                                <div class="trip lft">
+                                            <span class="time d-ib f14">
+                                            <%=departTime%><span class="f11 none cgrey"><%= dateTime %></span>
+                                            </span>
+                                    <span class="area cgrey d-ib"><%= flightInfo.route.depart_state %></span>
+                                    <div class="cgrey f9 wrap f-area"><%= flightInfo.route.depart_name %></div>
+                                </div>
+                                <span class="f10 txt-c lft stops" style="margin-top: 2px">
+                                        <span class="nons"></span><br>
+                                        <span class="i-set stops"><i class="fa fa-arrow-right" style="font-size:12px; position:relative; top: -3px" aria-hidden="true"></i></span>
+                                        </span>
+                                <div class="trip lft">
+                                            <span class="time d-ib f14">
+                                            <%= arrivalTime %> <span class="f11 cgrey none"><%= dateTime %></span>                    </span>
+                                    <span class="area cgrey d-ib"><%= flightInfo.route.destination_state %></span>
+                                    <div class="cgrey f9 wrap f-area"><%= flightInfo.route.destination_name %></div>
+                                </div>
+                                <span class="cgrey rgt"><%=strLengthTime%></span>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+            <section class="cont row no-m" id="dvPrD">
+                <h2 class="f14 cwhite row" id="sdvPrD">Price Details (<span class="icurrency">USD</span>)</h2>
+                <div id="divPriceSummary">
+                    <section class="cgrey row bdr-btm">
+                        <table class="f12" width="100%">
+                            <tbody>
+                            <tr class="clgray f11">
+                                <td>Traveler(s)</td>
+                                <td>Base Price</td>
+                                <td><a href="http://m.onetravel.com/flights/taxes-fees" data-fprel="dialog"
+                                       title="Taxes &amp; Fees" class="clgray">Taxes/fees</a></td>
+                                <td align="right">Subtotal</td>
+                            </tr>
+                            <tr>
+                                <td>1 x Adult</td>
+                                <td>
+                                    <span class="fpcurrencytext">$</span>
+                                    <span class="fpamount fpRoundToFixDecimal"><%= basePrice + '.00' %></span>
+                                </td>
+                                <td>
+                                    <span class="fpcurrencytext">$</span>
+                                    <span class="fpamount fpRoundToFixDecimal"><%= taxFee + '.00' %></span>
+                                </td>
+                                <td align="right"><span class="fpcurrencytext">$</span><span
+                                            class="fpamount fpRoundToFixDecimal"><%= total + '.00' %></span></td>
+                            </tr>
+                            <tr>
+                                <td>Insurance</td>
+                                <td></td>
+                                <td></td>
+                                <td align="right"><span class="fpcurrencytext">$</span><span
+                                            class="fpamount fpRoundToFixDecimal" title="0">0.00</span></td>
+                            </tr>
+                            <tr>
+                                <td>Travel Assist</td>
+                                <td></td>
+                                <td></td>
+                                <td align="right"><span class="fpcurrencytext">$</span><span
+                                            class="fpamount fpRoundToFixDecimal" title="0">0.00</span></td>
+                            </tr>
+                            <tr class="corg" id="dvbtnPromoCode">
+                                <td>Total Discount</td>
+                                <td class="promo p-r promoCode"></td>
+                                <td class="promo p-r giftCard"></td>
+                                <td align="right">-<span class="fpcurrencytext">$</span><span
+                                            class="fpamount fpRoundToFixDecimal" title="0">0.00</span></td>
+                            </tr>
+                            <tr id="divLinkPromoCode" class="promo none">
+                                <td colspan="4" class="p-r"><input type="text" autocomplete="off" autocorrect="off"
+                                                                   autocapitalize="off" spellcheck="false"
+                                                                   id="txtPromoCode" name="txtPromoCode"
+                                                                   placeholder="Promo Code" value="" class="f12 no-m">
+                                    <a href="javascript:void(0);" onclick="BookFlight.Review.ApplyPromoCode();"
+                                       class="btn p-a f11 txt-c cwhite" style="text-decoration: none">Submit</a>
+                                </td>
+                            </tr>
+                            <tr id="divGiftCard" class="promo none">
+                                <td colspan="4" class="p-r"><input type="text" autocomplete="off" autocorrect="off"
+                                                                   autocapitalize="off" spellcheck="false"
+                                                                   id="txtGiftCard" name="txtGiftCard"
+                                                                   placeholder="Gift card" value="" class="f12 no-m"> <a
+                                            href="javascript:void(0);" onclick="BookFlight.Review.ApplyGiftCode();"
+                                            class="btn p-a f11 txt-c cwhite" style="text-decoration: none">Submit</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                    <section class="row"><span class="rgt f18 cblue" id="fbTotalPrice">             <span
+                                    class="fpcurrencytext">$</span><span class="fpamount fpRoundToFixDecimal"><%= total + '.00' %></span>         </span>
+                        <span class="f14 cdgray">Total Price</span>
+                    </section>
+                </div>
+            </section>
+            <section class="row f11 clgray">
+                <a class="cta-btn f16" style="padding: 8px 0; margin-top: 30px" onclick="checkout(event);" href="/flight/checkout?flight_id=<%= flightInfo.flight_id %>">Check out
+                </a>
+            </section>
+        </div>
+    </div>
+    <div class="row" id="dvMstFooter">
+        <div class="footer f11 row cgrey">
+            <p>Powered by Ebiz Solutions</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
