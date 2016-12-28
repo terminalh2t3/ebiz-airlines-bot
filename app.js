@@ -9,7 +9,7 @@ const bot = require('./lib/bot/utils/get-bot');
 
 //Load all modules from modules folder
 const normalizedPath = require('path').join(__dirname, 'chatbot/modules');
-
+const MVC = require('path').join(__dirname, 'http/public');
 require("fs").readdirSync(normalizedPath).forEach(function(file) {
     bot.module(require("./chatbot/modules/" + file));
 });
