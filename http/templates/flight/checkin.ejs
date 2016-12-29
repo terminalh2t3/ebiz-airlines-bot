@@ -32,28 +32,28 @@
                 <table class="table table-responsive table table-striped">
                     <tbody>
                         <tr>
-                            <td>Passenger</td><td><%= booking.get('first_name')%></td>
+                            <td>Passenger</td><td><%= booking.passenger.first_name %> <%= booking.passenger.last_name %></td>
                         </tr>
                         <tr>
-                            <td>Booking Number</td><td><%= booking.get('booking_number') %></td>
+                            <td>Booking Number</td><td><%= booking.booking_number %></td>
                         </tr>
                         <tr>
-                            <td>Flight</td><td><%= booking.get('flight_code') %></td>
+                            <td>Flight</td><td><%= booking.flightSchedule.flight_code %></td>
                         </tr>
                         <!--<tr>-->
-                            <!--<td>Depart City</td><td><%= booking.get('depart_name') %> (<%= booking.get('depart_code') %>)</td>-->
+                            <!--<td>Depart City</td><td><%= booking.route.depart_name %> (<%= booking.route.depart_code %>)</td>-->
                         <!--</tr>-->
                         <tr>
-                            <td>Departure Airport</td><td><%= booking.get('depart_airport') %></td>
+                            <td>Departure Airport</td><td><%= booking.route.depart_airport %></td>
                         </tr>
                         <tr>
-                            <td>Arrival Airport</td><td><%= booking.get('destination_airport') %></td>
+                            <td>Arrival Airport</td><td><%= booking.route.destination_airport %></td>
                         </tr>
                         <tr>
-                            <td>Departure Time</td><td><%= datetime.create(booking.get('departure_time')).format('Y-m-d H:M') %></td>
+                            <td>Departure Time</td><td><%= datetime.create(booking.flightSchedule.departure_time).format('Y-m-d H:M') %></td>
                         </tr>
                         <tr>
-                            <td>Ticket Price</td><td>$<%= booking.get('ticket_price').toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") %></td>
+                            <td>Ticket Price</td><td>$<%= booking.flightSchedule.ticket_price.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") %></td>
                         </tr>
                     </tbody>
                 </table>
@@ -66,9 +66,9 @@
 
                     </div>
                     <form class="form-horizontal" method="post">
-                        <input type="hidden" name="passenger_id" value="<%= booking.get('passenger_id') %>">
-                        <input type="hidden" name="flight_id" value="<%= booking.get('flight_id') %>">
-                        <input type="hidden" name="booking_id" value="<%= booking.get('booking_id') %>">
+                        <input type="hidden" name="passenger_id" value="<%= booking.passenger.passenger_id %>">
+                        <input type="hidden" name="flight_id" value="<%= booking.flightSchedule.flight_id %>">
+                        <input type="hidden" name="booking_id" value="<%= booking.booking_id %>">
                         <input type="hidden" name="url" value="<%= baseURL %>">
                         <button type="button" id="checkin" class="btn btn-danger btn-fill">Check In</button>
                     </form>
