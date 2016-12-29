@@ -24,3 +24,10 @@ body {
     padding: 10px 15px;
     font-size: 17px;
 }
+.checkin_success {
+    background: #89313d;
+    padding: 10px 14px;
+    border-radius: 10px;
+    color: #fff;
+    margin-bottom: 10px;
+}

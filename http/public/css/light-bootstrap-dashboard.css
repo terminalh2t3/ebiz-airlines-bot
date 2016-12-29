@@ -656,13 +656,13 @@ body > .navbar-collapse[data-color="purple"]:after {
 }
 
 .btn-danger {
-  border-color: #FF4A55;
-  color: #FF4A55;
+  border-color: #89313d;
+  color: #fff;
 }
 .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open > .btn-danger.dropdown-toggle {
   background-color: transparent;
-  color: #EE2D20;
-  border-color: #EE2D20;
+  color: #89313d;
+  border-color: #89313d;
 }
 .btn-danger.disabled, .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled.focus, .btn-danger.disabled:active, .btn-danger.disabled.active, .btn-danger:disabled, .btn-danger:disabled:hover, .btn-danger:disabled:focus, .btn-danger:disabled.focus, .btn-danger:disabled:active, .btn-danger:disabled.active, .btn-danger[disabled], .btn-danger[disabled]:hover, .btn-danger[disabled]:focus, .btn-danger[disabled].focus, .btn-danger[disabled]:active, .btn-danger[disabled].active, fieldset[disabled] .btn-danger, fieldset[disabled] .btn-danger:hover, fieldset[disabled] .btn-danger:focus, fieldset[disabled] .btn-danger.focus, fieldset[disabled] .btn-danger:active, fieldset[disabled] .btn-danger.active {
   background-color: transparent;
@@ -670,12 +670,12 @@ body > .navbar-collapse[data-color="purple"]:after {
 }
 .btn-danger.btn-fill {
   color: #FFFFFF;
-  background-color: #FF4A55;
+  background-color: #89313d;
   opacity: 1;
   filter: alpha(opacity=100);
 }
 .btn-danger.btn-fill:hover, .btn-danger.btn-fill:focus, .btn-danger.btn-fill:active, .btn-danger.btn-fill.active, .open > .btn-danger.btn-fill.dropdown-toggle {
-  background-color: #EE2D20;
+  background-color: #89313d;
   color: #FFFFFF;
 }
 .btn-danger.btn-fill .caret {
