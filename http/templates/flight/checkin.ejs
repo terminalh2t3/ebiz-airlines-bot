@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/css/util.css">
     <link rel="stylesheet" href="/css/checkin.css">
     <link rel="stylesheet" href="/css/light-bootstrap-dashboard.css">
+    <script src="/js/jquery-1.10.2.js"></script>
     <title>Ebiz Airlines</title>
 </head>
 <body data-gr-c-s-loaded="true">
@@ -61,6 +62,7 @@
                         <input type="hidden" name="passenger_id" value="<%= booking.get('passenger_id') %>">
                         <input type="hidden" name="flight_id" value="<%= booking.get('flight_id') %>">
                         <input type="hidden" name="booking_id" value="<%= booking.get('booking_id') %>">
+                        <input type="hidden" name="url" value="<%= baseURL %>">
                         <button type="button" id="checkin" class="btn btn-success btn-fill">Check In</button>
                     </form>
                 </div>
@@ -70,7 +72,23 @@
 </div>
 <script>
     $("#checkin").on('click',function () {
-//        $.ajax()
+        var url = $("[name=url]").val();
+        console.log(url);
+        var passenger_id = $("[name=passenger_id]").val();
+        var flight_id    = $("[name=flight_id]").val();
+        var booking_id   = $("[name=booking_id]").val();
+        $.ajax({
+            type: "POST",
+            url: url+"/checkin",
+            data : {
+                passenger_id: passenger_id,
+                flight_id: flight_id,
+                booking_id: booking_id
+            },success: function (data) {
+                if(data)
+                    window.close();
+            }
+        })
     })
 </script>
 </body>

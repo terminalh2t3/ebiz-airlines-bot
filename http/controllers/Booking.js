@@ -36,7 +36,7 @@ module.exports = BaseController.extend({
                 console.log("Update checkin status for passenger" + passengerId);
                 //Send Boarding Pass
                 template.boardingPassOnePassenger(flightId, bookingId);
-                res.redirect('/checkin/success');
+                res.send(true);
             }
         });
     },
