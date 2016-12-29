@@ -9,7 +9,7 @@ const bot = require('./lib/bot/utils/get-bot');
 
 //Load all modules from modules folder
 const normalizedPath = require('path').join(__dirname, 'chatbot/modules');
-
+const MVC = require('path').join(__dirname, 'http/public');
 require("fs").readdirSync(normalizedPath).forEach(function(file) {
     bot.module(require("./chatbot/modules/" + file));
 });
@@ -20,16 +20,16 @@ bot.start(process.env.PORT || 5000);
 bot.setWhiteListDomain([rootUrl]);
 
 const template = require('./lib/bot/utils/airport-template');
-// //Run cron for sending check-in reminder.
-// var cron = require('node-cron');
-// var task = cron.schedule('* * * * *', function() {
-//     console.log("Sent Checkin Reminder");
-//     template.sendCheckinRemind();
-//     //console.log('Sent boarding pass');
-//     //template.sendBoardingPass();
-// }, false);
-//
-// task.start();
+//Run cron for sending check-in reminder.
+var cron = require('node-cron');
+var task = cron.schedule('*/2 * * * *', function() {
+    // console.log("Sent Checkin Reminder");
+    // template.sendCheckinRemind();
+    console.log('Sent boarding pass');
+    template.sendBoardingPass();
+}, false);
+
+task.start();
 
 
 const Route = require('./lib/api/models/Route');

@@ -33,7 +33,7 @@ function bookingFlight(flightId, fbId, chat, res){
                 console.log(error);
             } else{
                 chat.sendTextMessage('Thank you for your choosing Ebiz Airlines. We are so excited' +
-                    ' to have you on board soon. Here are your travel detail.');
+                    ' to have you on board soon.');
                 chat.sendTypingIndicator(15);
                 BookingBusiness.getBookingDetail(data.booking_id, function(error, bookingInfo){
                     if(error == null){

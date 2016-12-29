@@ -1,0 +1,36 @@
+<% include ../partials/header.ejs %>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <form class="form-horizontal" method="post">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th> Flight ID</th>
+                            <th> Flight Number</th>
+                            <th> Depart Gate</th>
+                            <th> Gate Change</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% flights.forEach(function (flight) { %>
+                        <tr>
+                            <td><%= flight.get('flight_id') %></td>
+                            <td><%= flight.get('flight_code') %></td>
+                            <td><%= flight.get('depart_gate') %></td>
+                            <td>
+                                <input name="flight[<%= flight.get('flight_id') %>][gate]" type="text" class="form-control" placeholder="Gate Change">
+                                <input name="flight[<%= flight.get('flight_id') %>][id]" type="hidden" value="<%= flight.get('flight_id') %>">
+                            </td>
+                        </tr>
+                        <% }) %>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-info btn-fill">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer.ejs %>

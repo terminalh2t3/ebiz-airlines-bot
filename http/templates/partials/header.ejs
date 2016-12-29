@@ -3,14 +3,62 @@
 
 <head>
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google" value="notranslate">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-
-    <title>My App</title>
+    <link rel="stylesheet" href="/css/light-bootstrap-dashboard.css">
+    <link rel="stylesheet" href="/css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="/css/animate.min.css">
+    <title>Ebbot Airline Panel</title>
 </head>
-
 <body>
+<div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    Ebiz Airline
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="<%= page_name == 'flight_list' ? 'active' : '' %>">
+                    <a href="/flight">
+                        <i class="pe-7s-graph"></i>
+                        <p>Flight List</p>
+                    </a>
+                </li>
+                <li class="<%= page_name == 'delay' ? 'active' : '' %>">
+                    <a href="/flight/update-delay">
+                        <i class="pe-7s-graph"></i>
+                        <p>Update Delay Time</p>
+                    </a>
+                </li>
+                <li class="<%= page_name == 'gate' ? 'active' : '' %>">
+                    <a href="/flight/update-gate">
+                        <i class="pe-7s-graph"></i>
+                        <p>Update Gate Change</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Dashboard</a>
+                </div>
+            </div>
+        </nav>
+
