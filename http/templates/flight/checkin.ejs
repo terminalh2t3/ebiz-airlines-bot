@@ -8,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="google" value="notranslate">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/util.css">
     <link rel="stylesheet" href="/css/checkin.css">
     <link rel="stylesheet" href="/css/light-bootstrap-dashboard.css">
@@ -58,13 +58,15 @@
                     </tbody>
                 </table>
                 <div class="checkin-confirm text-center">
-                    <h2 id="great" style="display: none">You have checked in success, we have sent your boarding to your messenger!</h2>
+                    <div class="checkin_success" id="great" style="display: none">
+                        <span>You have checked in success, we have sent your boarding to your messenger!</span>
+                    </div>
                     <form class="form-horizontal" method="post">
                         <input type="hidden" name="passenger_id" value="<%= booking.get('passenger_id') %>">
                         <input type="hidden" name="flight_id" value="<%= booking.get('flight_id') %>">
                         <input type="hidden" name="booking_id" value="<%= booking.get('booking_id') %>">
                         <input type="hidden" name="url" value="<%= baseURL %>">
-                        <button type="button" id="checkin" class="btn btn-success btn-fill">Check In</button>
+                        <button type="button" id="checkin" class="btn btn-danger btn-fill">Check In</button>
                     </form>
                 </div>
             </section>
@@ -87,6 +89,7 @@
             },success: function (data) {
                 if(data) {
                     $("#great").show();
+                    $("#checkin").hide();
                 }
             }
         })
