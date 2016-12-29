@@ -113,5 +113,17 @@ module.exports = BaseController.extend({
         BookingBusiness.testBoarding(bookingNumber, function(error, data){
             res.json(error == null ? data : error);
         });
+    },
+    getAvailableSeat: function (req, res) {
+        const flight_id = req.query.flight_id;
+        BookingBusiness.findListSeatNumber(flight_id, function (error, model) {
+            res.send(model);
+        })
+    },
+    chooseSeat: function (req, res) {
+        const flight_id = req.query.flight_id;
+        BookingBusiness.chooseASeatNumber(flight_id, function (error, model) {
+            res.send(model);
+        })
     }
 });

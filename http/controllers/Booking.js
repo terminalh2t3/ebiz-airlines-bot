@@ -33,9 +33,11 @@ module.exports = BaseController.extend({
         const template = require('../../lib/bot/utils/airport-template');
         BookingBusiness.updateCheckInStatus(passengerId, bookingId, function (error, model) {
             if(model) {
-                console.log("Update checkin status for passenger" + passengerId);
                 //Send Boarding Pass
-                template.boardingPassOnePassenger(flightId, bookingId);
+                setTimeout(function () {
+                    console.log("Update checkin status for passenger" + passengerId);
+                    template.boardingPassOnePassenger(flightId, bookingId);
+                }, 10000);
                 res.send(true);
             }
         });
