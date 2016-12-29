@@ -57,11 +57,13 @@
                     </tbody>
                 </table>
                 <div class="checkin-confirm text-center">
+                    <h2 id="great" style="display: none">You have checked in success, we have sent your boarding to your messenger!</h2>
                     <form class="form-horizontal" method="post">
                         <input type="hidden" name="passenger_id" value="<%= booking.get('passenger_id') %>">
                         <input type="hidden" name="flight_id" value="<%= booking.get('flight_id') %>">
                         <input type="hidden" name="booking_id" value="<%= booking.get('booking_id') %>">
-                        <input type="submit" id="checkin" class="btn btn-success btn-fill">Check In</input>
+                        <input type="hidden" name="url" value="<%= baseURL %>">
+                        <button type="button" id="checkin" class="btn btn-success btn-fill">Check In</button>
                     </form>
                 </div>
             </section>
@@ -69,5 +71,24 @@
     </div>
 </div>
 <script>
+    $("#checkin").on('click',function () {
+        var url = $("[name=url]").val();
+        var passenger_id = $("[name=passenger_id]").val();
+        var flight_id    = $("[name=flight_id]").val();
+        var booking_id   = $("[name=booking_id]").val();
+        $.ajax({
+            type: "POST",
+            url: url+"/checkin",
+            data : {
+                passenger_id: passenger_id,
+                flight_id: flight_id,
+                booking_id: booking_id
+            },success: function (data) {
+                if(data) {
+                    $("#great").show();
+                }
+            }
+        })
+    })
 </script>
 </body>
