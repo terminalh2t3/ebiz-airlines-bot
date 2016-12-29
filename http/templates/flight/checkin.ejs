@@ -58,6 +58,7 @@
                     </tbody>
                 </table>
                 <div class="checkin-confirm text-center">
+                    <h2 id="great" style="display: none">You have checked in success, we have sent your boarding to your messenger!</h2>
                     <form class="form-horizontal" method="post">
                         <input type="hidden" name="passenger_id" value="<%= booking.get('passenger_id') %>">
                         <input type="hidden" name="flight_id" value="<%= booking.get('flight_id') %>">
@@ -73,7 +74,6 @@
 <script>
     $("#checkin").on('click',function () {
         var url = $("[name=url]").val();
-        console.log(url);
         var passenger_id = $("[name=passenger_id]").val();
         var flight_id    = $("[name=flight_id]").val();
         var booking_id   = $("[name=booking_id]").val();
@@ -85,8 +85,9 @@
                 flight_id: flight_id,
                 booking_id: booking_id
             },success: function (data) {
-                if(data)
-                    window.close();
+                if(data) {
+                    $("#great").show();
+                }
             }
         })
     })
