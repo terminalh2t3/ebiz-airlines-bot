@@ -59,7 +59,11 @@
                 </table>
                 <div class="checkin-confirm text-center">
                     <div class="checkin_success" id="great" style="display: none">
-                        <span>You have checked in success, we have sent your boarding to your messenger!</span>
+                        <span>
+                            You have checked in success, we have sent your boarding to your messenger!<br>
+                            Please click close to go back!
+                        </span>
+
                     </div>
                     <form class="form-horizontal" method="post">
                         <input type="hidden" name="passenger_id" value="<%= booking.get('passenger_id') %>">
