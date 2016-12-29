@@ -33,22 +33,15 @@
             });
         }
     };
-    function checkout(e){
+    function gotIt(e){
         e.preventDefault();
         log('check out called');
-        MessengerExtensions.requestPaymentCredentials(
-            function success(name, email, cardType, cardLastFourDigits, shippingAddress) {
-                log("Success");
-            },
-            function error(err) {
-                log("error");
-            },
-            ['CONTACT_NAME', 'CONTACT_EMAIL', 'CONTACT_PHONE', 'SHIPPING_ADDRESS']
-        );
+        MessengerExtensions.requestCloseBrowser(function success() {
+        }, function error(err) {
+        });
     }
     function log(messages){
-        var div = document.getElementById('log');
-        div.innerHTML = div.innerHTML + '<p>' + messages + '</p>';
+        console.log(messages);
     }
 </script>
 <div class="mainContent" id="mainContent">
@@ -211,7 +204,7 @@
                 </div>
             </section>
             <section class="row f11 clgray">
-                <a class="cta-btn f16" style="padding: 8px 0; margin-top: 30px" onclick="checkout(event);" href="/flight/checkout?flight_id=<%= flightInfo.flight_id %>">Check out
+                <a class="cta-btn f16" style="padding: 8px 0; margin-top: 30px" onclick="gotIt(event);" href="/flight/checkout?flight_id=<%= flightInfo.flight_id %>">Got it!
                 </a>
             </section>
         </div>
