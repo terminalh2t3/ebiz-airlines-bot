@@ -101,5 +101,17 @@ module.exports = BaseController.extend({
         BookingBusiness.getBookingDetail(12, function(err, data){
             res.json(err != null ? err : data);
         });
+    },
+    testCheckin: function(req, res){
+        const bookingNumber = req.query.booking_number;
+        BookingBusiness.testCheckin(bookingNumber, function(error, data){
+            res.json(error == null ? data : error);
+        });
+    },
+    testBoarding: function(req, res){
+        const bookingNumber = req.query.booking_number;
+        BookingBusiness.testBoarding(bookingNumber, function(error, data){
+            res.json(error == null ? data : error);
+        });
     }
 });

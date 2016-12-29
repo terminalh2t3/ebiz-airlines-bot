@@ -24,6 +24,8 @@ const routes = [
     {url: '/test/flightupdate', controller:'Test', action: 'flightUpdate', method: 'get'},
     {url: '/test/getPassengerByFacebookId', controller:'Test', action: 'getPassengerByFacebookId', method: 'get'},
     {url: '/test/getBookingDetail', controller:'Test', action: 'getBookingDetail', method: 'get'},
+    {url: '/test/testCheckin', controller:'Test', action: 'testCheckin', method: 'get'},
+    {url: '/test/testBoarding', controller:'Test', action: 'testBoarding', method: 'get'},
 
     {url: '/test/boarding/passenger', controller:'Test', action: 'boardingPassPassenger', method: 'get'},
     {url: '/test/flightupdate', controller:'Test', action: 'flightUpdate', method: 'get'},
