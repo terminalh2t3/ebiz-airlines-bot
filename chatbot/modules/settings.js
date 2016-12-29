@@ -7,8 +7,8 @@ module.exports = (bot) => {
     bot.setPersistentMenu([
         {
             type: 'postback',
-            title: 'Help',
-            payload: 'PERSISTENT_MENU_HELP'
+            title: 'Booking flight',
+            payload: 'PERSISTENT_MENU_BOOKING'
         },
         {
             type: 'postback',
@@ -21,4 +21,13 @@ module.exports = (bot) => {
             url: 'http://www.ebiz.solutions'
         }
     ]);
+
+    bot.on('postback:PERSISTENT_MENU_BOOKING', function(payload, chat){
+        chat.runWit('Booking flight');
+    });
+
+    bot.on('postback:PERSISTEN_ABOUT_CHATBOT', function(payload, chat){
+        chat.sendTextMessage('Ebiz Airlines is not REAL but Ebiz Solutions is REAL. ' +
+            'We are a company from Vietnam who created this bot for airlines vertical.')
+    });
 };
