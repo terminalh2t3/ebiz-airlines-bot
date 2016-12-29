@@ -1,16 +1,18 @@
 "use strict";
 const   BaseController = require("./Base");
 const FlightScheduleBusiness = require('../../lib/api/business/FlightScheduleBusiness');
+const PassengerBusiness = require('../../lib/api/business/PassengerBusiness');
 const template = require('../../lib/bot/utils/airport-template');
 const Route = require('../../lib/api/models/Route');
 const FlightSchedule = require('../../lib/api/models/FlightSchedule');
 const Booking = require('../../lib/api/models/Booking');
-const datetime = require('node-datetime');
+const DateTime = require('node-datetime');
+const BookingBusiness = require('../../lib/api/business/BookingBusiness');
 module.exports = BaseController.extend({
     name: "Test",
     content: null,
     flightSchedule: function(req, res, next) {
-        FlightScheduleBusiness.findFlights("HAN", "SGN", "2016-12-26", function(error, data){
+        FlightScheduleBusiness.findFlights("HAN", "SGN", "2016-12-29 00:00:00", function(error, data){
             res.json(data);
         });
     },
@@ -39,8 +41,8 @@ module.exports = BaseController.extend({
         template.sendFlightUpdate(9, "gate_change");
     },
     addFlights: function (req, res) {
-        var startDate = datetime.create();
-        var endDate   = datetime.create("2017-01-15 00:00:00").getTime();
+        var startDate = DateTime.create();
+        var endDate   = DateTime.create("2017-01-15 00:00:00").getTime();
         var currentDate = new Date(startDate.getTime());
         var between = [];
         while (currentDate <= endDate) {
@@ -53,11 +55,11 @@ module.exports = BaseController.extend({
                 var routeId = value.route_id;
                 console.log(routeId);
                 between.forEach(function (time) {
-                    var departDate = datetime.create(time).format('Y-m-d');
+                    var departDate = DateTime.create(time).format('Y-m-d');
                     for(var i = 6; i < 20; i++) {
-                        var boardingTime  = datetime.create(departDate + " "+i+":00:00").format('Y-m-d H:M:S');
-                        var departureTime = datetime.create(departDate + " "+i+":45:00").format('Y-m-d H:M:S');
-                        var arrivalTime   = datetime.create(departDate + " "+(i+3)+":00:00").format('Y-m-d H:M:S');
+                        var boardingTime  = DateTime.create(departDate + " "+i+":00:00").format('Y-m-d H:M:S');
+                        var departureTime = DateTime.create(departDate + " "+i+":45:00").format('Y-m-d H:M:S');
+                        var arrivalTime   = DateTime.create(departDate + " "+(i+3)+":00:00").format('Y-m-d H:M:S');
                         var flightCode = Math.floor((Math.random() * 900) + 99);
                         var price = Math.floor((Math.random() * 900) + 99);
                         var depart_terminal = Math.floor((Math.random() * 3) + 1);
@@ -88,6 +90,16 @@ module.exports = BaseController.extend({
                     }
                 });
             });
+        });
+    },
+    getPassengerByFacebookId: function(req, res){
+        PassengerBusiness.getPassengerByFacebookId('1367518156615879', function(error, data){
+            res.json(error == null ? data : error);
+        });
+    },
+    getBookingDetail: function(req, res){
+        BookingBusiness.getBookingDetail(12, function(err, data){
+            res.json(err != null ? err : data);
         });
     }
 });
