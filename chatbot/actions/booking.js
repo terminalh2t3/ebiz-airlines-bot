@@ -34,7 +34,7 @@ module.exports = (bot) => ({
                 //Send the ticket list
                 bot.sendTextMessage(recipientId, 'OK! I will find the flights for you. Please' +
                     ' keep in mind that at the moment I can not booking for you with any extra bags via Messenger but it will support soon.');
-                bot.sendTypingIndicator(recipientId);
+                bot.sendTypingIndicator(recipientId, 15);
                 const fromLocation = context.data.fromLocation;
                 const toLocation = context.data.toLocation;
                 const dateTime = context.data.dateTime;
@@ -46,9 +46,9 @@ module.exports = (bot) => ({
                     airportApi.getAirport({term: toLocation}, function(error, data){
                         const iTo = data.airports[0].iata;
                         const FlightSchedule = require('../../lib/api/business/FlightScheduleBusiness');
-                        const fDateTime = DateTime.create(dateTime).format('Y-m-d');
+                        const fDateTime = DateTime.create(dateTime).format('Y-m-d H:M:S');
                         FlightSchedule.findFlights(iFrom, iTo, fDateTime, function(error, data){
-                            if(data && data.length == 0){
+                            if(data == null || data.length == 0){
                                 bot.sendTextMessage(recipientId, 'Sorry, we have no flight suitable for you.');
                             } else {
                                 const flights = data;
@@ -67,7 +67,7 @@ module.exports = (bot) => ({
                                             {
                                                 "type":"payment",
                                                 "title":"buy",
-                                                "payload":"DEVELOPER_DEFINED_PAYLOAD",
+                                                "payload":flight.flight_code + '_' + flight.flight_id,
                                                 "payment_summary":{
                                                     "currency":"USD",
                                                     "payment_type":"FIXED_AMOUNT",

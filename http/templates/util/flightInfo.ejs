@@ -16,9 +16,9 @@
 
 <body>
 <%
-const dateTime = DateTime.create(flightInfo.flight_date).format('n d, w');
-const dtDepartTime = DateTime.create('2016-12-31 ' + flightInfo.departure);
-const dtArrivalTime = DateTime.create('2016-12-31 ' + flightInfo.arrival_time);
+const dateTime = DateTime.create(flightInfo.departure_time).format('n d, w');
+const dtDepartTime = DateTime.create(flightInfo.departure_time);
+const dtArrivalTime = DateTime.create(flightInfo.arrival_time);
 const departTime = dtDepartTime.format('H:M');
 const arrivalTime = dtArrivalTime.format('H:M');
 const lengthDay = Math.abs(dtDepartTime._now.getDate() - dtArrivalTime._now.getDate());
@@ -41,14 +41,14 @@ const basePrice = total - taxFee;
     <img src="<%= rootUrl %>/images/logo.png">
     <div class="flight-detail">
         <div class="flight-col">
-            <div class="airport-name"><%= flightInfo.route.depart_state %></div>
+            <div class="airport-name"><%= flightInfo.route.depart_code %></div>
             <div class="time"><%= departTime %></div>
         </div>
         <div class="flight-col deli-center">
             <span>-</span>
         </div>
         <div class="flight-col">
-            <div class="airport-name"><%= flightInfo.route.destination_state %></div>
+            <div class="airport-name"><%= flightInfo.route.destination_code %></div>
             <div class="time"><%= arrivalTime %></div>
         </div>
         <div class="clearfix"></div>

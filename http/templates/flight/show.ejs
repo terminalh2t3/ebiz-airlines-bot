@@ -62,11 +62,11 @@
                                 class="fpamount fpRoundToFixDecimal"><%= flightInfo.ticket_price %></span>         </span>
                     </span>
             <div class="trip d-ib lft">
-                <span class="f16"><%= flightInfo.route.depart_state %></span><br>
+                <span class="f16"><%= flightInfo.route.depart_code %></span><br>
                 <%
-                const dateTime = DateTime.create(flightInfo.flight_date).format('n d, w');
-                const dtDepartTime = DateTime.create('2016-12-31 ' + flightInfo.departure);
-                const dtArrivalTime = DateTime.create('2016-12-31 ' + flightInfo.arrival_time);
+                const dateTime = DateTime.create(flightInfo.departure_time).format('n d, w');
+                const dtDepartTime = DateTime.create(flightInfo.departure_time);
+                const dtArrivalTime = DateTime.create(flightInfo.arrival_time);
                 const departTime = dtDepartTime.format('H:M');
                 const arrivalTime = dtArrivalTime.format('H:M');
                 const lengthDay = Math.abs(dtDepartTime._now.getDate() - dtArrivalTime._now.getDate());
@@ -83,7 +83,7 @@
             </div>
             <span class="d-ib lft i-set arw"><i class="fa fa-arrow-right" style="font-size:12px; position:relative; top: -3px" aria-hidden="true"></i></span>
             <div class="trip d-ib lft">
-                <span class="f16"><%= flightInfo.route.destination_state %></span>
+                <span class="f16"><%= flightInfo.route.destination_code %></span>
                 <br>
             </div>
         </summary>
@@ -117,7 +117,7 @@
                                             <span class="time d-ib f14">
                                             <%=departTime%><span class="f11 none cgrey"><%= dateTime %></span>
                                             </span>
-                                    <span class="area cgrey d-ib"><%= flightInfo.route.depart_state %></span>
+                                    <span class="area cgrey d-ib"><%= flightInfo.route.depart_code %></span>
                                     <div class="cgrey f9 wrap f-area"><%= flightInfo.route.depart_name %></div>
                                 </div>
                                 <span class="f10 txt-c lft stops" style="margin-top: 2px">
@@ -127,7 +127,7 @@
                                 <div class="trip lft">
                                             <span class="time d-ib f14">
                                             <%= arrivalTime %> <span class="f11 cgrey none"><%= dateTime %></span>                    </span>
-                                    <span class="area cgrey d-ib"><%= flightInfo.route.destination_state %></span>
+                                    <span class="area cgrey d-ib"><%= flightInfo.route.destination_code %></span>
                                     <div class="cgrey f9 wrap f-area"><%= flightInfo.route.destination_name %></div>
                                 </div>
                                 <span class="cgrey rgt"><%=strLengthTime%></span>
