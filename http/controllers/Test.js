@@ -125,5 +125,19 @@ module.exports = BaseController.extend({
         BookingBusiness.chooseASeatNumber(flight_id, function (error, model) {
             res.send(model);
         })
+    },
+    getNearBooking: function(req, res){
+        PassengerBusiness.getNearBooking(5, function(err, model){
+            res.send(model);
+        });
+    },
+    changeSeat: function(req, res){
+        const passengerId = req.query.passenger_id;
+        const seat = req.query.seat;
+        PassengerBusiness.getNearBooking(passengerId, function(error, booking){
+            BookingBusiness.changeSeat(booking.booking_id, seat, function(error, model){
+                res.json(model);
+            });
+        });
     }
 });

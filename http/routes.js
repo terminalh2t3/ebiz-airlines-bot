@@ -32,6 +32,8 @@ const routes = [
     {url: '/test/add/flights', controller: 'Test', action: 'addFlights', method:'get'},
     {url: '/test/seat', controller: 'Test', action: 'getAvailableSeat', method:'get'},
     {url: '/test/allseat', controller: 'Test', action: 'chooseSeat', method:'get'},
+    {url: '/test/getNearBooking', controller: 'Test', action: 'getNearBooking', method:'get'},
+    {url: '/test/changeSeat', controller: 'Test', action: 'changeSeat', method:'get'},
 ];
 
 class Route{

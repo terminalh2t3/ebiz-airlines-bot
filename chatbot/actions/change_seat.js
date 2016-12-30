@@ -8,7 +8,10 @@ module.exports = (bot) => ({
     changeSeat({context, entities, sessionId, text})
     {
         return new Promise(function (resolve, reject) {
-            const seat = (entities.seat_number) ? entities.seat_number[0].value : null;
+            let seat = (entities.seat_number) ? entities.seat_number[0].value : null;
+            if(seat == null && (context.missingSeatNumber || context.invalidSeat || context.belongToOther)){
+                seat = text;
+            }
             const recipientId = bot.sessions[sessionId].fbid;
             PassengerBusiness.getPassengerByFacebookId(recipientId, function (err, passenger) {
                 if(err == null) {
@@ -27,11 +30,25 @@ module.exports = (bot) => ({
                                                 delete context.invalidSeat;
                                                 resolve(context);
                                             } else if (status == 'empty') {
-                                                context.changedSeat = true;
-                                                delete context.missingSeatNumber;
-                                                delete context.belongToOther;
-                                                delete context.invalidSeat;
-                                                resolve(context);
+                                                PassengerBusiness.getNearBooking(passengerId, function(error, booking){
+                                                    if(booking == null){
+                                                        context.noBooking = true;
+                                                        delete context.missingSeatNumber;
+                                                        delete context.belongToOther;
+                                                        delete context.invalidSeat;
+                                                        context.done = true;
+                                                        resolve(context);
+                                                    } else {
+                                                        BookingBusiness.changeSeat(booking.booking_id, seat, function (error, callback) {
+                                                            context.changedSeat = true;
+                                                            delete context.missingSeatNumber;
+                                                            delete context.belongToOther;
+                                                            delete context.invalidSeat;
+                                                            context.done = true;
+                                                            resolve(context);
+                                                        });
+                                                    }
+                                                });
                                             }
                                         }
                                     });
