@@ -2,7 +2,6 @@
   "appSecret"       : "2c4757093c69eaee5d8985dd7e524f12",
   "pageAccessToken" : "EAAJn6TCEUUEBADLSciZAZAoKveZAZB0JtD8jze69AVjrUjBAmQsmsZBXBvUJ5Ndd3hBXPplXpJUgelgkxxmZAQbJVKZBJFpZBsmzGZAYxeKb1ogIZCZAWXYKxGnA3mwFlVU6N549XGxRyIRKV55AKR78WybpxLZBpCd3E3FulDEZCJXZCSygZDZD",
   "validationToken" : "ebizsolutions",
-  "serverURL"       : "http://demo-chatbot.herokuapp.com",
   "database_url"    : "postgres://postgres:123456@127.0.0.1:5432/ebizairlines",
   "wit_token"       : "XEOIWZBYV6L6M2E5VJDZQYNV6JOEWBFC",
   "apc-auth"        : "d81b6370d0",
