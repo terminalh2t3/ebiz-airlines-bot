@@ -1,0 +1,30 @@
+{
+  "name": "Ebiz Airlines",
+  "description": "This app is demonstration for airlines vertical.",
+  "repository": "https://github.com/terminalh2t3/ebiz-shop-bot",
+  "logo": "https://www.marketingcloud.com/sites/exacttarget/files/partner-logos/e-biz_solutions_-_logo.png",
+  "keywords": ["php", "Giga.ai", "Heroku Connect"],
+  "websites": "https://terminalh2t3.github.io/ebiz-shop-bot/introduction/",
+
+  "env": {
+    "FACEBOOK_PAGE_ACCESS_TOKEN": {
+      "description": "Your facebook page access token",
+      "required": true
+    },
+    "FACEBOOK_PAGE_ID": {
+      "description": "Your facebook page id",
+      "required": true
+    },
+    "FACEBOOK_APP_ID": {
+      "description": "Your facebook app id",
+      "required": true
+    },
+    "PRIMARY_EMAIL_ADDRESS": {
+      "description": "The email address that will be the sender address when confirm receipt",
+      "required": true
+    }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ]
+}
