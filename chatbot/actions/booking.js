@@ -33,8 +33,8 @@ module.exports = (bot) => ({
             if(context.data.fromLocation && context.data.toLocation && context.data.dateTime){
                 //Send the ticket list
                 bot.sendTextMessage(recipientId, 'OK! I will find the flights for you. Please' +
-                    ' keep in mind that at the moment I can not booking for you with any extra bags via Messenger but it will support soon.');
-                bot.sendTypingIndicator(recipientId, 15);
+                    ' keep in mind that at the moment I can not booking for you with any extra bags via Messenger but it will support soon.', null, {typing: true});
+                setTimeout(() => bot.sendTypingIndicator(recipientId, 15000), 2000);
                 const fromLocation = context.data.fromLocation;
                 const toLocation = context.data.toLocation;
                 const dateTime = context.data.dateTime;
@@ -49,12 +49,13 @@ module.exports = (bot) => ({
                         const fDateTime = DateTime.create(dateTime).format('Y-m-d H:M:S');
                         FlightSchedule.findFlights(iFrom, iTo, fDateTime, function(error, data){
                             if(data == null || data.length == 0){
-                                bot.sendTextMessage(recipientId, 'Sorry, we have no flight suitable for you.');
+                                setTimeout(() => bot.sendTextMessage(recipientId, 'Sorry, we have no flight suitable for you.', null, {typing: true}), 2000);
                             } else {
                                 const flights = data;
                                 let elements = [];
                                 const rootUrl = (process.env.ROOT_URL) ? process.env.ROOT_URL : require('config').get('root-url');
-                                flights.forEach(function (flight) {
+                                for(let i = 0; i < 5; i ++){
+                                    let flight = flights[i];
                                     const total = flight.ticket_price;
                                     const taxPercent = 0.1;
                                     const taxFee = Math.round(total * taxPercent);
@@ -99,9 +100,8 @@ module.exports = (bot) => ({
                                         ]
                                     };
                                     elements.push(element);
-                                });
-                                bot.sendGenericTemplate(recipientId, elements, {});
-                                bot.sendOffTypingIndicator(recipientId);
+                                }
+                                setTimeout(() => bot.sendGenericTemplate(recipientId, elements, {typing: true}), 3000);
                             }
                         });
                     });

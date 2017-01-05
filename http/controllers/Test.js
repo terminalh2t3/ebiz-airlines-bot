@@ -28,9 +28,11 @@ module.exports = BaseController.extend({
     },
     checkInRemind: function(req, res) {
         template.sendCheckinRemind();
+        res.sendStatus(200);
     },
     boardingPass: function (req, res) {
         template.sendBoardingPass();
+        res.sendStatus(200);
     },
     boardingPassPassenger: function (req, res) {
         const flightId = req.query.flight_id;

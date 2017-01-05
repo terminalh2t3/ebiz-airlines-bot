@@ -2,7 +2,7 @@
 module.exports = (bot) => {
     bot.setGreetingText('Hi {{user_first_name}}, welcome to Ebiz Airlines.');
     bot.setGetStartedButton((payload, chat) => {
-        chat.say('Welcome to Ebiz Airlines. If you don\'t know how to getting started, type \'help\' for support');
+        chat.say('Welcome to Ebiz Airlines. If you don\'t know how to getting started, type \'help\' for support', {typing: true});
     });
     bot.setPersistentMenu([
         {
@@ -28,6 +28,6 @@ module.exports = (bot) => {
 
     bot.on('postback:PERSISTEN_ABOUT_CHATBOT', function(payload, chat){
         chat.sendTextMessage('Ebiz Airlines is not REAL but Ebiz Solutions is REAL. ' +
-            'We are a company from Vietnam who created this bot for airlines vertical.')
+            'We are a company from Vietnam who created this bot for airlines vertical.', {typing: true})
     });
 };

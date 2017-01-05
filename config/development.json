@@ -2,9 +2,10 @@
   "appSecret"       : "2c4757093c69eaee5d8985dd7e524f12",
   "pageAccessToken" : "EAAJn6TCEUUEBADLSciZAZAoKveZAZB0JtD8jze69AVjrUjBAmQsmsZBXBvUJ5Ndd3hBXPplXpJUgelgkxxmZAQbJVKZBJFpZBsmzGZAYxeKb1ogIZCZAWXYKxGnA3mwFlVU6N549XGxRyIRKV55AKR78WybpxLZBpCd3E3FulDEZCJXZCSygZDZD",
   "validationToken" : "ebizsolutions",
-  "database_url"    : "postgres://postgres:123456@127.0.0.1:5432/ebizairlines",
+  "database_url"    : "postgres://postgres:123456@127.0.0.1:5432/sfebiz",
   "wit_token"       : "XEOIWZBYV6L6M2E5VJDZQYNV6JOEWBFC",
   "apc-auth"        : "d81b6370d0",
   "apc-auth-secret" : "0f757d2a62a79d5",
-  "root-url"        : "https://e1d90371.ngrok.io"
+  "root-url"        : "https://84f66a1f.ngrok.io",
+  "google-api"      : "AIzaSyAjBCCcqXqtO54CU0jahi0_YdNmz18k4fk"
 }
