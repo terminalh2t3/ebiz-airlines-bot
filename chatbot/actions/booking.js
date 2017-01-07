@@ -2,7 +2,7 @@
 /**
  * @param bot Bootbot
  */
-const FlightScheduleBusiness = require('../../lib/api/business/FlightScheduleBusiness');
+const FlightScheduleBusiness = require('../../lib/api/business/FlightBusiness');
 const DateTime = require('node-datetime');
 module.exports = (bot) => ({
     showBookingTicket({context, entities, sessionId, text})
@@ -45,7 +45,7 @@ module.exports = (bot) => ({
                     const iFrom = data.airports[0].iata;
                     airportApi.getAirport({term: toLocation}, function(error, data){
                         const iTo = data.airports[0].iata;
-                        const FlightSchedule = require('../../lib/api/business/FlightScheduleBusiness');
+                        const FlightSchedule = require('../../lib/api/business/FlightBusiness');
                         const fDateTime = DateTime.create(dateTime).format('Y-m-d H:M:S');
                         FlightSchedule.findFlights(iFrom, iTo, fDateTime, function(error, data){
                             if(data == null || data.length == 0){

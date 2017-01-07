@@ -1,10 +1,10 @@
 "use strict";
 const   BaseController = require("./Base");
-const FlightScheduleBusiness = require('../../lib/api/business/FlightScheduleBusiness');
+const FlightScheduleBusiness = require('../../lib/api/business/FlightBusiness');
 const PassengerBusiness = require('../../lib/api/business/PassengerBusiness');
 const template = require('../../lib/bot/utils/airport-template');
 const Route = require('../../lib/api/models/Route');
-const FlightSchedule = require('../../lib/api/models/FlightSchedule');
+const FlightSchedule = require('../../lib/api/models/Flight');
 const Booking = require('../../lib/api/models/Booking');
 const DateTime = require('node-datetime');
 const BookingBusiness = require('../../lib/api/business/BookingBusiness');

@@ -29,10 +29,3 @@ bot.setWhiteListDomain([rootUrl]);
 // }, false);
 //
 // task.start();
-
-
-const Route = require('./lib/api/models/Route');
-const State = require('./lib/api/models/State');
-const Country = require('./lib/api/models/Country');
-const FlightSchedule = require('./lib/api/models/FlightSchedule');
-const Booking = require('./lib/api/models/Booking');

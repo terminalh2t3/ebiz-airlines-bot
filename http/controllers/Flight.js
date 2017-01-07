@@ -9,14 +9,14 @@ module.exports = BaseController.extend({
     content: null,
     show: function(req, res, next) {
         const flight_id = req.query.flight_id;
-        const FlightSchedule = require('../../lib/api/business/FlightScheduleBusiness');
+        const FlightSchedule = require('../../lib/api/business/FlightBusiness');
         FlightSchedule.getFlightById(flight_id, function(err, data){
             const DateTime = require('node-datetime');
             res.render('flight/show', {flightInfo: data, DateTime: DateTime});
         });
     },
     list: function (req, res, next) {
-        const FlightSchedule = require('../../lib/api/business/FlightScheduleBusiness');
+        const FlightSchedule = require('../../lib/api/business/FlightBusiness');
         FlightSchedule.getAllFlight(function (error, result) {
             res.render('flight/list', {
                 flights: result,
@@ -32,7 +32,7 @@ module.exports = BaseController.extend({
      * @param next
      */
     updateDelayList: function (req, res, next) {
-        const FlightSchedule = require('../../lib/api/business/FlightScheduleBusiness');
+        const FlightSchedule = require('../../lib/api/business/FlightBusiness');
         FlightSchedule.getAllFlight(function (error, result) {
             res.render('flight/delay', {
                 flights: result,
@@ -50,7 +50,7 @@ module.exports = BaseController.extend({
      */
     updateDelay: function (req, res, next) {
         const flights = req.body.flight;
-        const FlightSchedule = require('../../lib/api/business/FlightScheduleBusiness');
+        const FlightSchedule = require('../../lib/api/business/FlightBusiness');
         for (let key in flights) {
             let flight = flights[key];
             if(flight.delay_hour || flight.delay_minute) {
@@ -70,7 +70,7 @@ module.exports = BaseController.extend({
      * @param next
      */
     updateGateChangeList: function (req, res, next) {
-        const FlightSchedule = require('../../lib/api/business/FlightScheduleBusiness');
+        const FlightSchedule = require('../../lib/api/business/FlightBusiness');
         FlightSchedule.getAllFlight(function (error, result) {
             res.render('flight/gate_change', {
                 flights: result,
@@ -87,7 +87,7 @@ module.exports = BaseController.extend({
      */
     updateGateChange: function (req, res, next) {
         const flights = req.body.flight;
-        const FlightSchedule = require('../../lib/api/business/FlightScheduleBusiness');
+        const FlightSchedule = require('../../lib/api/business/FlightBusiness');
         for (let key in flights) {
             let flight = flights[key];
             if(flight.gate) {
