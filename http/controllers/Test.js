@@ -100,7 +100,9 @@ module.exports = BaseController.extend({
         });
     },
     getBookingDetail: function(req, res){
-        BookingBusiness.getBookingDetail(12, function(err, data){
+        const passengerSfid = req.query.passengerSfid;
+        const flightSfid = req.query.flightSfid;
+        BookingBusiness.getBookingDetail(passengerSfid, flightSfid, function(err, data){
             res.json(err != null ? err : data);
         });
     },
@@ -117,14 +119,14 @@ module.exports = BaseController.extend({
         });
     },
     getAvailableSeat: function (req, res) {
-        const flight_id = req.query.flight_id;
-        BookingBusiness.findListSeatNumber(flight_id, function (error, model) {
+        const flightSfid = req.query.flightSfid;
+        BookingBusiness.findListSeatNumber(flightSfid, function (error, model) {
             res.send(model);
         })
     },
     chooseSeat: function (req, res) {
-        const flight_id = req.query.flight_id;
-        BookingBusiness.chooseASeatNumber(flight_id, function (error, model) {
+        const flightSfid = req.query.flightSfid;
+        BookingBusiness.chooseASeatNumber(flightSfid, function (error, model) {
             res.send(model);
         })
     },
@@ -137,7 +139,7 @@ module.exports = BaseController.extend({
         const passengerId = req.query.passenger_id;
         const seat = req.query.seat;
         PassengerBusiness.getNearBooking(passengerId, function(error, booking){
-            BookingBusiness.changeSeat(booking.booking_id, seat, function(error, model){
+            BookingBusiness.changeSeat(booking.sfid, seat, function(error, model){
                 res.json(model);
             });
         });

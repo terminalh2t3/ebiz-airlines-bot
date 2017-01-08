@@ -4,13 +4,13 @@ const DateTime = require('node-datetime');
 
 module.exports =
 {
-    sendItinerary(recipientId, passengerId, flightId, callback){
+    sendItinerary(recipientId, passengerSfid, flightSfid, callback){
         bot.sendTypingIndicator(recipientId, 15000);
-        BookingBusiness.getBookingDetail(passengerId, flightId, function (error, bookingInfo) {
+        BookingBusiness.getBookingDetail(passengerSfid, flightSfid, function (error, bookingInfo) {
             if(error){
                 callback(error, null);
             } else {
-                const total = bookingInfo.flightSchedule.ticket_price;
+                const total = bookingInfo.flight.economyprice__c;
                 const taxPercent = 0.1;
                 const taxFee = Math.round(total * taxPercent);
                 const basePrice = total - taxFee;
@@ -19,35 +19,35 @@ module.exports =
                     "intro_message": "Here\'s your flight itinerary.",
                     "theme_color": "#89313d",
                     "locale": "en_US",
-                    "pnr_number": bookingInfo.booking_number,
+                    "pnr_number": bookingInfo.name,
                     "passenger_info": [
                         {
-                            "name": bookingInfo.passenger.first_name,
-                            "ticket_number": bookingInfo.booking_number,
-                            "passenger_id": bookingInfo.passenger.passenger_id
+                            "name": bookingInfo.passenger.name,
+                            "ticket_number": bookingInfo.name,
+                            "passenger_id": bookingInfo.passenger.sfid
                         }
                     ],
                     "flight_info": [
                         {
                             "connection_id": "c001",
                             "segment_id": "s001",
-                            "flight_number": bookingInfo.flightSchedule.flight_code,
+                            "flight_number": bookingInfo.flight.name,
                             "aircraft_type": "Airbus 320",
                             "departure_airport": {
-                                "airport_code": bookingInfo.route.depart_code,
-                                "city": bookingInfo.route.depart_name,
-                                "terminal": 'T' + bookingInfo.flightSchedule.depart_terminal,
-                                "gate": bookingInfo.flightSchedule.depart_gate
+                                "airport_code": bookingInfo.departure.code__c,
+                                "city": bookingInfo.departure.city__c,
+                                "terminal": 'T' + bookingInfo.flight.departureterminal__c,
+                                "gate": bookingInfo.flight.departuregate__c
                             },
                             "arrival_airport": {
-                                "airport_code": bookingInfo.route.destination_code,
-                                "city": bookingInfo.route.destination_name,
-                                "terminal": 'T' + bookingInfo.flightSchedule.destination_terminal,
-                                "gate": bookingInfo.flightSchedule.destination_gate
+                                "airport_code": bookingInfo.destination.code__c,
+                                "city": bookingInfo.destination.city__c,
+                                "terminal": 'T' + bookingInfo.flight.destinationterminal__c,
+                                "gate": bookingInfo.flight.destinationgate__c
                             },
                             "flight_schedule": {
-                                "departure_time": DateTime.create(bookingInfo.flightSchedule.departure_time).format('y-m-dTH:M'),
-                                "arrival_time": DateTime.create(bookingInfo.flightSchedule.arrival_time).format('y-m-dTH:M'),
+                                "departure_time": DateTime.create(bookingInfo.flight.departuretime__c).format('y-m-dTH:M'),
+                                "arrival_time": DateTime.create(bookingInfo.flight.arrivaltime__c).format('y-m-dTH:M'),
                             },
                             "travel_class": "economy"
                         }
@@ -55,8 +55,8 @@ module.exports =
                     "passenger_segment_info": [
                         {
                             "segment_id": "s001",
-                            "passenger_id": bookingInfo.passenger.passenger_id,
-                            "seat": bookingInfo.seat_number,
+                            "passenger_id": bookingInfo.passenger.sfid,
+                            "seat": bookingInfo.seatnumber__c,
                             "seat_type": 'economy'
                         }
                     ],

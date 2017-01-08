@@ -15,13 +15,13 @@ module.exports = (bot) => ({
             const recipientId = bot.sessions[sessionId].fbid;
             PassengerBusiness.getPassengerByFacebookId(recipientId, function (err, passenger) {
                 if(err == null) {
-                    const passengerId = passenger.passenger_id;
-                    BookingBusiness.getBookingByPassengerId(passengerId, function (err1, booking) {
-                        const flightId = booking.flightSchedule.flight_id;
+                    const passengerSfid = passenger.sfid;
+                    BookingBusiness.getBookingByPassengerId(passengerSfid, function (err1, booking) {
+                        const flightSfid = booking.flight.sfid;
                         if (seat) {
-                            BookingBusiness.checkValidSeat(flightId, seat, function (err2, valid) {
+                            BookingBusiness.checkValidSeat(flightSfid, seat, function (err2, valid) {
                                 if (valid == true) {
-                                    BookingBusiness.checkSeatStatus(flightId, seat, function (err3, status) {
+                                    BookingBusiness.checkSeatStatus(flightSfid, seat, function (err3, status) {
                                         if (err3 == null) {
                                             if (status == 'reserved') {
                                                 context.belongToOther = true;
@@ -30,7 +30,7 @@ module.exports = (bot) => ({
                                                 delete context.invalidSeat;
                                                 resolve(context);
                                             } else if (status == 'empty') {
-                                                PassengerBusiness.getNearBooking(passengerId, function(error, booking){
+                                                PassengerBusiness.getNearBooking(passengerSfid, function(error, booking){
                                                     if(booking == null){
                                                         context.noBooking = true;
                                                         delete context.missingSeatNumber;
@@ -39,7 +39,7 @@ module.exports = (bot) => ({
                                                         context.done = true;
                                                         resolve(context);
                                                     } else {
-                                                        BookingBusiness.changeSeat(booking.booking_id, seat, function (error, callback) {
+                                                        BookingBusiness.changeSeat(booking.sfid, seat, function (error, callback) {
                                                             context.changedSeat = true;
                                                             delete context.missingSeatNumber;
                                                             delete context.belongToOther;

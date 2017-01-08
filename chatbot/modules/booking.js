@@ -5,18 +5,18 @@ const DateTime = require('node-datetime');
 const airlinesBot = require('../customBot/airlinesBot');
 module.exports = (bot) => {
     bot.on('payment', (event, chat, res) => {
-        const flightId = event.payment.payload.split('_')[1];
+        const flightSfid = event.payment.payload.split('_')[1];
         const fbId = event.sender.id;
         //check user
         Passenger.isHasPassenger(fbId, function(err, exist){
             if(exist){
-                bookingFlight(flightId, fbId, chat, res);
+                bookingFlight(flightSfid, fbId, chat, res);
             } else{
                 //create passenger
                 const info = event.payment.requested_user_info;
                 Passenger.createPassenger(fbId, info.contact_name, info.contact_phone, info.contact_email, function(error, data){
                     if(error == null){
-                        bookingFlight(flightId, fbId, chat, res);
+                        bookingFlight(flightSfid, fbId, chat, res);
                     } else{
                         console.log(error);
                     }
@@ -26,13 +26,14 @@ module.exports = (bot) => {
     });
 };
 
-function bookingFlight(flightId, fbId, chat, res){
+function bookingFlight(flightSfid, fbId, chat, res){
     chat.sendTypingIndicator(15000);
+    //TODO: next in here
     Passenger.getPassengerByFacebookId(fbId, function(error, passenger){
-        const passengerId = passenger.passenger_id;
-        BookingBusiness.validateBooking(passengerId, flightId, function(error, valid){
+        const passengerSfid = passenger.sfid;
+        BookingBusiness.validateBooking(passengerSfid, flightSfid, function(error, valid){
             if(valid) {
-                BookingBusiness.bookFlight(flightId, passengerId, function (error, data) {
+                BookingBusiness.bookFlight(flightSfid, passengerSfid, function (error, resp) {
                     if (error != null) {
                         console.log(error);
                     } else {

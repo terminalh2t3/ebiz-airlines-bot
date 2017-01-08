@@ -10,9 +10,9 @@ module.exports = BaseController.extend({
     name: "Util",
     content: null,
     renderFlightInfo: function(req, res, next){
-        const flight_id = req.query.flight_id;
+        const flightSfid = req.query.flightSfid;
         //check this flight has image or not
-        const filePath = path.join(__dirname, '../public/webshot/', flight_id + '.png');
+        const filePath = path.join(__dirname, '../public/webshot/', flightSfid + '.png');
         fs.stat(filePath, function(err, stat){
             if(err == null) {
                 //If file exist -> send this file
@@ -35,7 +35,7 @@ module.exports = BaseController.extend({
                 };
 
                 const FlightSchedule = require('../../lib/api/business/FlightBusiness');
-                FlightSchedule.getFlightById(flight_id, function(err, data){
+                FlightSchedule.getFlightById(flightSfid, function(err, data){
                     // res.render('util/flightInfo', {flightInfo: data, rootUrl: rootUrl, DateTime: require('node-datetime')});
                     const viewFilePath = __dirname + '/../templates/util/flightInfo.ejs';
                     ejs.renderFile(viewFilePath, {flightInfo: data, rootUrl: rootUrl, DateTime: require('node-datetime')}, {},

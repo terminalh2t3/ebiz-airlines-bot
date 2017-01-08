@@ -16,9 +16,9 @@
 
 <body>
 <%
-const dateTime = DateTime.create(flightInfo.departure_time).format('n d, w');
-const dtDepartTime = DateTime.create(flightInfo.departure_time);
-const dtArrivalTime = DateTime.create(flightInfo.arrival_time);
+const dateTime = DateTime.create(flightInfo.departuretime__c).format('n d, w');
+const dtDepartTime = DateTime.create(flightInfo.departuretime__c);
+const dtArrivalTime = DateTime.create(flightInfo.arrivaltime__c);
 const departTime = dtDepartTime.format('H:M');
 const arrivalTime = dtArrivalTime.format('H:M');
 const lengthDay = Math.abs(dtDepartTime._now.getDate() - dtArrivalTime._now.getDate());
@@ -26,7 +26,7 @@ const lengthHour = Math.abs(dtDepartTime._now.getHours() - dtArrivalTime._now.ge
 const lengthMin = Math.abs(dtDepartTime._now.getMinutes() - dtArrivalTime._now.getMinutes());
 const strLengthTime = lengthDay != 0 ? (lengthDay + 'd') : '' + lengthHour + 'h' + lengthMin + 'm';
 
-const total = flightInfo.ticket_price;
+const total = flightInfo.economyprice__c;
 const taxPercent = 0.1;
 const taxFee = Math.round(total * taxPercent);
 const basePrice = total - taxFee;
@@ -41,14 +41,14 @@ const basePrice = total - taxFee;
     <img src="<%= rootUrl %>/images/logo.png">
     <div class="flight-detail">
         <div class="flight-col">
-            <div class="airport-name"><%= flightInfo.route.depart_code %></div>
+            <div class="airport-name"><%= flightInfo.departure.code__c %></div>
             <div class="time"><%= departTime %></div>
         </div>
         <div class="flight-col deli-center">
             <span>-</span>
         </div>
         <div class="flight-col">
-            <div class="airport-name"><%= flightInfo.route.destination_code %></div>
+            <div class="airport-name"><%= flightInfo.destination.code__c %></div>
             <div class="time"><%= arrivalTime %></div>
         </div>
         <div class="clearfix"></div>
@@ -57,7 +57,7 @@ const basePrice = total - taxFee;
         </div>
         <div class="clearfix"></div>
         <div class="flight-name">
-            <%= flightInfo.flight_code %>
+            <%= flightInfo.name %>
         </div>
     </div>
 </div>

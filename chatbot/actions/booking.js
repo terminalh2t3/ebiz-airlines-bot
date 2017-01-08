@@ -62,13 +62,13 @@ module.exports = (bot) => ({
                                     const basePrice = total - taxFee;
 
                                     const element = {
-                                        "title": 'Booking ' + flight.flight_code,
-                                        "image_url": rootUrl + '/util/render-flight-info?flight_id=' + flight.flight_id,
+                                        "title": 'Booking ' + flight.name,
+                                        "image_url": rootUrl + '/util/render-flight-info?flightSfid=' + flight.sfid,
                                         "buttons":[
                                             {
                                                 "type":"payment",
                                                 "title":"buy",
-                                                "payload":flight.flight_code + '_' + flight.flight_id,
+                                                "payload":flight.name + '_' + flight.sfid,
                                                 "payment_summary":{
                                                     "currency":"USD",
                                                     "payment_type":"FIXED_AMOUNT",
@@ -93,7 +93,7 @@ module.exports = (bot) => ({
                                             },
                                             {
                                                 "type": "web_url",
-                                                "url": rootUrl + '/flight/show?flight_id=' + flight.flight_id,
+                                                "url": rootUrl + '/flight/show?flight_id=' + flight.sfid,
                                                 "webview_height_ratio": "full",
                                                 "title": 'View detail'
                                             }
