@@ -35,9 +35,9 @@ module.exports = BaseController.extend({
         res.sendStatus(200);
     },
     boardingPassPassenger: function (req, res) {
-        const flightId = req.query.flight_id;
-        const bookingId = req.query.booking_id;
-        template.boardingPassOnePassenger(flightId, bookingId);
+        const flightSfId = req.query.flightSfid;
+        const bookingSfId = req.query.bookingSfid;
+        template.boardingPassOnePassenger(flightSfId, bookingSfId);
     },
     flightUpdate: function (req, res) {
         template.sendFlightUpdate(9, "gate_change");
