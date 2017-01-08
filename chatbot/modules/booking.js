@@ -39,7 +39,7 @@ function bookingFlight(flightSfid, fbId, chat, res){
                     } else {
                         chat.sendTextMessage('Thank you for your choosing Ebiz Airlines. We are so excited' +
                             ' to have you on board soon.', null, {typing: true});
-                        airlinesBot.sendItinerary(fbId, passengerId, flightId, (error, data) => {
+                        airlinesBot.sendItinerary(fbId, passengerSfid, flightSfid, (error, data) => {
                             console.log(data);
                         });
                     }
@@ -52,7 +52,7 @@ function bookingFlight(flightSfid, fbId, chat, res){
                     }, (payload, convo) => {
                         const text = payload.message.text;
                         if(text == 'Yes'){
-                            airlinesBot.sendItinerary(fbId, passengerId, flightId, (error, data) => {
+                            airlinesBot.sendItinerary(fbId, passengerSfid, flightSfid, (error, data) => {
                                 console.log(data);
                             })
                         } else{

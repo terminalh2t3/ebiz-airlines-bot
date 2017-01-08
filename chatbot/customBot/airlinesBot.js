@@ -34,14 +34,14 @@ module.exports =
                             "flight_number": bookingInfo.flight.name,
                             "aircraft_type": "Airbus 320",
                             "departure_airport": {
-                                "airport_code": bookingInfo.departure.code__c,
-                                "city": bookingInfo.departure.city__c,
+                                "airport_code": bookingInfo.flight.route.departure.code__c,
+                                "city": bookingInfo.flight.route.departure.city__c,
                                 "terminal": 'T' + bookingInfo.flight.departureterminal__c,
                                 "gate": bookingInfo.flight.departuregate__c
                             },
                             "arrival_airport": {
-                                "airport_code": bookingInfo.destination.code__c,
-                                "city": bookingInfo.destination.city__c,
+                                "airport_code": bookingInfo.flight.route.destination.code__c,
+                                "city": bookingInfo.flight.route.destination.city__c,
                                 "terminal": 'T' + bookingInfo.flight.destinationterminal__c,
                                 "gate": bookingInfo.flight.destinationgate__c
                             },

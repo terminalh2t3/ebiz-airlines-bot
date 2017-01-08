@@ -1,23 +1,26 @@
 "use strict";
 const   BaseController = require("./Base");
-const FlightScheduleBusiness = require('../../lib/api/business/FlightBusiness');
+const FlightBusiness = require('../../lib/api/business/FlightBusiness');
 const PassengerBusiness = require('../../lib/api/business/PassengerBusiness');
 const template = require('../../lib/bot/utils/airport-template');
 const Route = require('../../lib/api/models/Route');
-const FlightSchedule = require('../../lib/api/models/Flight');
+const Flight = require('../../lib/api/models/Flight');
 const Booking = require('../../lib/api/models/Booking');
 const DateTime = require('node-datetime');
 const BookingBusiness = require('../../lib/api/business/BookingBusiness');
 module.exports = BaseController.extend({
     name: "Test",
     content: null,
-    flightSchedule: function(req, res, next) {
-        FlightScheduleBusiness.findFlights("HAN", "SGN", "2016-12-29 00:00:00", function(error, data){
+    findFlights: function(req, res, next) {
+        const from = req.query.from;
+        const to = req.query.to;
+        const datetime = req.query.datetime;
+        FlightBusiness.findFlights(from, to, datetime, function(error, data){
             res.json(data);
         });
     },
     getFlightById: function(req, res, next) {
-        FlightScheduleBusiness.getFlightById(5, function(error, data){
+        FlightBusiness.getFlightById(5, function(error, data){
             res.json(data);
         });
     },
@@ -82,7 +85,7 @@ module.exports = BaseController.extend({
                             destination_terminal: destination_terminal,
                             destination_gate: destination_gate
                         };
-                        FlightSchedule.forge(flightInfo).save().then(function (model) {
+                        Flight.forge(flightInfo).save().then(function (model) {
                             if(model)
                                 console.log("Insert success");
                         }).catch(function (error) {

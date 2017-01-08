@@ -8,9 +8,9 @@ module.exports = BaseController.extend({
     name: "Home",
     content: null,
     show: function(req, res, next) {
-        const flight_id = req.query.flight_id;
-        const FlightSchedule = require('../../lib/api/business/FlightBusiness');
-        FlightSchedule.getFlightById(flight_id, function(err, data){
+        const flightSfid = req.query.flightSfid;
+        const FlightBusiness = require('../../lib/api/business/FlightBusiness');
+        FlightBusiness.getFlightById(flightSfid, function(err, data){
             const DateTime = require('node-datetime');
             res.render('flight/show', {flightInfo: data, DateTime: DateTime});
         });
@@ -54,7 +54,7 @@ module.exports = BaseController.extend({
         for (let key in flights) {
             let flight = flights[key];
             if(flight.delay_hour || flight.delay_minute) {
-                FlightSchedule.updateDelayTime(flight.id, flight.delay_hour, flight.delay_minute, function (error, result) {
+                FlightSchedule.updateDelayTime(flight.sfid, flight.delay_hour, flight.delay_minute, function (error, result) {
                     if(!error) {
                         res.redirect('/flight/update-delay');
                     }
@@ -91,7 +91,7 @@ module.exports = BaseController.extend({
         for (let key in flights) {
             let flight = flights[key];
             if(flight.gate) {
-                FlightSchedule.updateGateChange(flight.id, flight.gate, function (error, result) {
+                FlightSchedule.updateGateChange(flight.sfid, flight.gate, function (error, result) {
                     if(!error) {
                         res.redirect('/flight/update-gate');
                     }

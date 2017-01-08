@@ -54,9 +54,12 @@ module.exports = (bot) => ({
                                 const flights = data;
                                 let elements = [];
                                 const rootUrl = (process.env.ROOT_URL) ? process.env.ROOT_URL : require('config').get('root-url');
-                                for(let i = 0; i < 5; i ++){
+                                let max = data.length;
+                                if(max > 5)
+                                    max = 5;
+                                for(let i = 0; i < max; i ++){
                                     let flight = flights[i];
-                                    const total = flight.ticket_price;
+                                    const total = flight.economyprice__c;
                                     const taxPercent = 0.1;
                                     const taxFee = Math.round(total * taxPercent);
                                     const basePrice = total - taxFee;

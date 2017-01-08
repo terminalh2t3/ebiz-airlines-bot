@@ -34,8 +34,8 @@ module.exports = BaseController.extend({
                     siteType: 'html'
                 };
 
-                const FlightSchedule = require('../../lib/api/business/FlightBusiness');
-                FlightSchedule.getFlightById(flightSfid, function(err, data){
+                const FlightBusiness = require('../../lib/api/business/FlightBusiness');
+                FlightBusiness.getFlightById(flightSfid, function(err, data){
                     // res.render('util/flightInfo', {flightInfo: data, rootUrl: rootUrl, DateTime: require('node-datetime')});
                     const viewFilePath = __dirname + '/../templates/util/flightInfo.ejs';
                     ejs.renderFile(viewFilePath, {flightInfo: data, rootUrl: rootUrl, DateTime: require('node-datetime')}, {},

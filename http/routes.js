@@ -15,7 +15,7 @@ const routes = [
     {url: '/checkin', controller: 'Booking', action: 'updateCheckin', method: 'post'},
     {url: '/checkin/success', controller: 'Booking', action: 'checkinSuccess', method: 'get'},
     //test
-    {url: '/test/flightSchedule', controller:'Test', action: 'flightSchedule', method: 'get'},
+    {url: '/test/findFlights', controller:'Test', action: 'findFlights', method: 'get'},
     {url: '/test/getFlightById', controller:'Test', action: 'getFlightById', method: 'get'},
     {url: '/test/flightSchedule', controller:'Test', action: 'flightSchedule', method: 'get'},
     {url: '/test/reminder/checkin', controller:'Test', action: 'checkInRemind', method: 'get'},

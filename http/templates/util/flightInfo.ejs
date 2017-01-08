@@ -41,14 +41,14 @@ const basePrice = total - taxFee;
     <img src="<%= rootUrl %>/images/logo.png">
     <div class="flight-detail">
         <div class="flight-col">
-            <div class="airport-name"><%= flightInfo.departure.code__c %></div>
+            <div class="airport-name"><%= flightInfo.route.departure.code__c %></div>
             <div class="time"><%= departTime %></div>
         </div>
         <div class="flight-col deli-center">
             <span>-</span>
         </div>
         <div class="flight-col">
-            <div class="airport-name"><%= flightInfo.destination.code__c %></div>
+            <div class="airport-name"><%= flightInfo.route.destination.code__c %></div>
             <div class="time"><%= arrivalTime %></div>
         </div>
         <div class="clearfix"></div>

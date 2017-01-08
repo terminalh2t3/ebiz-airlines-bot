@@ -38,19 +38,19 @@
                             <td>Booking Number</td><td><%= booking.name %></td>
                         </tr>
                         <tr>
-                            <td>Flight</td><td><%= booking.flightSchedule.name %></td>
+                            <td>Flight</td><td><%= booking.flight.name %></td>
                         </tr>
                         <tr>
-                            <td>Departure Airport</td><td><%= booking.flightSchedule.route.departure.name %></td>
+                            <td>Departure Airport</td><td><%= booking.flight.route.departure.name %></td>
                         </tr>
                         <tr>
-                            <td>Arrival Airport</td><td><%= booking.flightSchedule.route.destination.name %></td>
+                            <td>Arrival Airport</td><td><%= booking.flight.route.destination.name %></td>
                         </tr>
                         <tr>
-                            <td>Departure Time</td><td><%= datetime.create(booking.flightSchedule.departuretime__c).format('Y-m-d H:M') %></td>
+                            <td>Departure Time</td><td><%= datetime.create(booking.flight.departuretime__c).format('Y-m-d H:M') %></td>
                         </tr>
                         <tr>
-                            <td>Ticket Price</td><td>$<%= booking.flightSchedule.economyprice__c.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") %></td>
+                            <td>Ticket Price</td><td>$<%= booking.flight.economyprice__c.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") %></td>
                         </tr>
                     </tbody>
                 </table>
@@ -64,7 +64,7 @@
                     </div>
                     <form class="form-horizontal" method="post">
                         <input type="hidden" name="passenger_sfid" value="<%= booking.passenger.sfid %>">
-                        <input type="hidden" name="flight_sfid" value="<%= booking.flightSchedule.sfid %>">
+                        <input type="hidden" name="flight_sfid" value="<%= booking.flight.sfid %>">
                         <input type="hidden" name="booking_id" value="<%= booking.id %>">
                         <input type="hidden" name="booking_sfid" value="<%= booking.sfid %>">
                         <input type="hidden" name="url" value="<%= baseURL %>">

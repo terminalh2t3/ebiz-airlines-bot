@@ -8,7 +8,6 @@
                     <tr>
                         <th> Flight ID</th>
                         <th> Flight Number</th>
-                        <th> Boarding Time</th>
                         <th> Departure Time</th>
                         <th> Arrival Time</th>
                     </tr>
@@ -16,11 +15,10 @@
                     <tbody>
                     <% flights.forEach(function (flight) { %>
                     <tr>
-                        <td><%= flight.get('flight_id') %></td>
-                        <td><%= flight.get('flight_code') %></td>
-                        <td><%= flight.get('boarding_time') %></td>
-                        <td><%= flight.get('departure_time') %></td>
-                        <td><%= flight.get('arrival_time') %></td>
+                        <td><%= flight.sfid %></td>
+                        <td><%= flight.name %></td>
+                        <td><%= flight.departuretime__c %></td>
+                        <td><%= flight.arrivaltime__c %></td>
                     </tr>
                     <% }) %>
                     </tbody>

@@ -9,7 +9,6 @@
                         <tr>
                             <th> Flight ID</th>
                             <th> Flight Number</th>
-                            <th> Boarding Time</th>
                             <th> Departure Time</th>
                             <th> Arrival Time</th>
                             <th> Delay Hour</th>
@@ -19,15 +18,14 @@
                         <tbody>
                         <% flights.forEach(function (flight) { %>
                         <tr>
-                            <td><%= flight.get('flight_id') %></td>
-                            <td><%= flight.get('flight_code') %></td>
-                            <td><%= moment(flight.get('boarding_time')).format('YYYY-MM-DD HH:mm:ss') %></td>
-                            <td><%= moment(flight.get('departure_time')).format('YYYY-MM-DD HH:mm:ss') %></td>
-                            <td><%= moment(flight.get('arrival_time')).format('YYYY-MM-DD HH:mm:ss') %></td>
-                            <td><input name="flight[<%= flight.get('flight_id') %>][delay_hour]" size="2" maxlength="2" type="number" class="form-control" placeholder="Hour" value="0"></td>
+                            <td><%= flight.sfid %></td>
+                            <td><%= flight.name %></td>
+                            <td><%= moment(flight.departuretime__c).format('YYYY-MM-DD HH:mm:ss') %></td>
+                            <td><%= moment(flight.arrivaltime__c).format('YYYY-MM-DD HH:mm:ss') %></td>
+                            <td><input name="flight[<%= flight.sfid %>][delay_hour]" size="2" maxlength="2" type="number" class="form-control" placeholder="Hour" value="0"></td>
                             <td>
-                                <input name="flight[<%= flight.get('flight_id') %>][delay_minute]" size="2" maxlength="2" type="number" class="form-control" placeholder="Minute" value="0">
-                                <input name="flight[<%= flight.get('flight_id') %>][id]" type="hidden" value="<%= flight.get('flight_id') %>">
+                                <input name="flight[<%= flight.sfid %>][delay_minute]" size="2" maxlength="2" type="number" class="form-control" placeholder="Minute" value="0">
+                                <input name="flight[<%= flight.sfid %>][sfid]" type="hidden" value="<%= flight.sfid %>">
                             </td>
                         </tr>
                         <% }) %>

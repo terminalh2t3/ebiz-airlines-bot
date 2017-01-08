@@ -16,12 +16,12 @@
                         <tbody>
                         <% flights.forEach(function (flight) { %>
                         <tr>
-                            <td><%= flight.get('flight_id') %></td>
-                            <td><%= flight.get('flight_code') %></td>
-                            <td><%= flight.get('depart_gate') %></td>
+                            <td><%= flight.sfid %></td>
+                            <td><%= flight.name %></td>
+                            <td><%= flight.departuregate__c %></td>
                             <td>
-                                <input name="flight[<%= flight.get('flight_id') %>][gate]" type="text" class="form-control" placeholder="Gate Change">
-                                <input name="flight[<%= flight.get('flight_id') %>][id]" type="hidden" value="<%= flight.get('flight_id') %>">
+                                <input name="flight[<%= flight.sfid %>][gate]" type="text" class="form-control" placeholder="Gate Change">
+                                <input name="flight[<%= flight.sfid %>][sfid]" type="hidden" value="<%= flight.sfid %>">
                             </td>
                         </tr>
                         <% }) %>
