@@ -26,57 +26,21 @@ module.exports = BaseController.extend({
     },
 
     /**
-     * List delay flight
-     * @param req
-     * @param res
-     * @param next
-     */
-    updateDelayList: function (req, res, next) {
-        const FlightSchedule = require('../../lib/api/business/FlightBusiness');
-        FlightSchedule.getAllFlight(function (error, result) {
-            res.render('flight/delay', {
-                flights: result,
-                page_name: 'delay',
-                moment: moment
-            });
-        });
-    },
-
-    /**
      * Update delay flight
      * @param req
      * @param res
      * @param next
      */
     updateDelay: function (req, res, next) {
-        const flights = req.body.flight;
-        const FlightSchedule = require('../../lib/api/business/FlightBusiness');
-        for (let key in flights) {
-            let flight = flights[key];
-            if(flight.delay_hour || flight.delay_minute) {
-                FlightSchedule.updateDelayTime(flight.sfid, flight.delay_hour, flight.delay_minute, function (error, result) {
-                    if(!error) {
-                        res.redirect('/flight/update-delay');
-                    }
-                });
-            }
-        }
-    },
 
-    /**
-     * Gate change list
-     * @param req
-     * @param res
-     * @param next
-     */
-    updateGateChangeList: function (req, res, next) {
-        const FlightSchedule = require('../../lib/api/business/FlightBusiness');
-        FlightSchedule.getAllFlight(function (error, result) {
-            res.render('flight/gate_change', {
-                flights: result,
-                page_name: 'gate',
-            });
-        });
+        const sfId         = req.body.sfid;
+        const newDeparture = req.body.newDeparture;
+        const newArrival   = req.body.newArrival;
+
+        if(sfId && newDeparture && newArrival) {
+            const template = require('../../../lib/bot/utils/airport-template');
+            template.sendFlightUpdate(sfId, "delay", newDeparture, newArrival, null)
+        }
     },
 
     /**
@@ -86,17 +50,13 @@ module.exports = BaseController.extend({
      * @param next
      */
     updateGateChange: function (req, res, next) {
-        const flights = req.body.flight;
-        const FlightSchedule = require('../../lib/api/business/FlightBusiness');
-        for (let key in flights) {
-            let flight = flights[key];
-            if(flight.gate) {
-                FlightSchedule.updateGateChange(flight.sfid, flight.gate, function (error, result) {
-                    if(!error) {
-                        res.redirect('/flight/update-gate');
-                    }
-                });
-            }
+
+        const sfId         = req.body.sfid;
+        const newGate      = req.body.newGate;
+
+        if(sfId && newGate) {
+            const template = require('../../../lib/bot/utils/airport-template');
+            template.sendFlightUpdate(sfId, "gate_change", null, null, newGate)
         }
     },
 });
