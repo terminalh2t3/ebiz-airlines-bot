@@ -8,6 +8,8 @@ const Flight = require('../../lib/api/models/Flight');
 const Booking = require('../../lib/api/models/Booking');
 const DateTime = require('node-datetime');
 const BookingBusiness = require('../../lib/api/business/BookingBusiness');
+const org = require('../../lib/api/database/connect-salesforce');
+const nforce = require('nforce');
 module.exports = BaseController.extend({
     name: "Test",
     content: null,
@@ -146,5 +148,8 @@ module.exports = BaseController.extend({
                 res.json(model);
             });
         });
+    },
+    addPassenger: function (req, res) {
+        console.log(org);
     }
 });

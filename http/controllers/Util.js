@@ -48,4 +48,7 @@ module.exports = BaseController.extend({
             }
         });
     },
+    callBackSuccess: function (req, res) {
+        console.log(req);
+    }
 });

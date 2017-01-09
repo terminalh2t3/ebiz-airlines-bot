@@ -14,6 +14,9 @@ const routes = [
     {url: '/checkin', controller: 'Booking', action: 'checkinPage', method: 'get'},
     {url: '/checkin', controller: 'Booking', action: 'updateCheckin', method: 'post'},
     {url: '/checkin/success', controller: 'Booking', action: 'checkinSuccess', method: 'get'},
+
+    //SF API
+    {url: '/oauth/_callback.', controller: 'Util', action: 'callBackSuccess', method: 'get'},
     //test
     {url: '/test/findFlights', controller:'Test', action: 'findFlights', method: 'get'},
     {url: '/test/getFlightById', controller:'Test', action: 'getFlightById', method: 'get'},
@@ -34,6 +37,7 @@ const routes = [
     {url: '/test/allseat', controller: 'Test', action: 'chooseSeat', method:'get'},
     {url: '/test/getNearBooking', controller: 'Test', action: 'getNearBooking', method:'get'},
     {url: '/test/changeSeat', controller: 'Test', action: 'changeSeat', method:'get'},
+    {url: '/test/sf/passenger', controller: 'Test', action: 'addPassenger', method:'get'},
 ];
 
 class Route{
