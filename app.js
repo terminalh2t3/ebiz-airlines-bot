@@ -15,6 +15,7 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
 });
 
 const rootUrl = (process.env.ROOT_URL) ? process.env.ROOT_URL : config.get('root-url');
+console.log('Root url: ' + rootUrl);
 bot.startWeb();
 bot.start(process.env.PORT || 5000);
 bot.setWhiteListDomain([rootUrl]);
