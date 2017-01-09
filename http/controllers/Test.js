@@ -6,10 +6,13 @@ const template = require('../../lib/bot/utils/airport-template');
 const Route = require('../../lib/api/models/Route');
 const Flight = require('../../lib/api/models/Flight');
 const Booking = require('../../lib/api/models/Booking');
+const Passenger = require('../../lib/api/models/Passenger');
 const DateTime = require('node-datetime');
 const BookingBusiness = require('../../lib/api/business/BookingBusiness');
+const config = require('config');
 const org = require('../../lib/api/database/connect-salesforce');
 const nforce = require('nforce');
+const RandomString = require('randomstring');
 module.exports = BaseController.extend({
     name: "Test",
     content: null,
@@ -149,7 +152,96 @@ module.exports = BaseController.extend({
             });
         });
     },
-    addPassenger: function (req, res) {
-        console.log(org);
+    addPassenger: function (req, res, callback) {
+        org.authenticate().then(function (res) {
+            var passenger = nforce.createSObject('Lead');
+            passenger.set('LastName', 'Hoang');
+            passenger.set('facebookId__c', '1234567');
+            passenger.set('Phone', '090962');
+            passenger.set('Email', 'hoanglongps3333@yahoo.com');
+            passenger.set('Company', 'Ebizsolutions');
+            org.insert({ sobject: passenger }).then(function(resp){
+                //Add passenger to heroku postgres after success
+                if(resp.success == true) {
+                    var sfId = resp.id;
+                    var currentTime  = DateTime.create().format('Y-m-d\TH:M:S');
+                    new Passenger({
+                        sfid: sfId,
+                        name: 'Hoang',
+                        facebookid__c: '1234567',
+                        phone: '090962',
+                        email: 'hoanglongps333@yahoo.com',
+                        systemmodstamp: currentTime,
+                        createddate: currentTime
+                    }).save().then(function(model){
+                        callback(null, model.toJSON());
+                    }).catch(function(e){
+                        callback(e, null);
+                    });
+                }
+            }).error(function (err1) {
+                console.log(err1)
+            });
+        }).error(function (err2) {
+            console.log(err2)
+        });
+    },
+    addBooking : function (req, res, callback) {
+        const status__c = 'paid';
+        const ischeckin__c  = false;
+        const isboarding__c = false;
+        const isremind__c   = false;
+        const name = RandomString.generate(5).trim().toUpperCase();
+        const travelclass__c = 'economy';
+        const qrcode__c = RandomString.generate(10);
+        const flightSfid = 'a0G2800000byChVEAU';
+        const passengerSfid = '00Q2800000SmTDHEA3';
+        //get a seat number
+        BookingBusiness.chooseASeatNumber(flightSfid, function(err, seatNumber){
+            if(err != null){
+                callback(err, null);
+            } else{
+                org.authenticate().then(function (res) {
+                    var newBooking = nforce.createSObject('Booking__c');
+                    newBooking.set('Name', name);
+                    newBooking.set('FlightId__c', flightSfid);
+                    newBooking.set('PassengerId__c', passengerSfid);
+                    newBooking.set('IsCheckin__c', ischeckin__c);
+                    newBooking.set('IsBoarding__c', isboarding__c);
+                    newBooking.set('IsRemind__c', isremind__c);
+                    newBooking.set('SeatNumber__c', seatNumber);
+                    newBooking.set('TravelClass__c', travelclass__c);
+                    newBooking.set('QrCode__c', qrcode__c);
+                    newBooking.set('Status__c', status__c);
+
+                    org.insert({ sobject: newBooking }).then(function(resp){
+                        if(resp.success == true) {
+                            console.log(resp);
+                            new Booking({
+                                sfid: resp.id,
+                                flightid__c: flightSfid,
+                                passengerid__c: passengerSfid,
+                                status__c: status__c,
+                                ischeckin__c: ischeckin__c,
+                                isboarding__c: isboarding__c,
+                                isremind__c: isremind__c,
+                                name: name, //booking code
+                                seatnumber__c: seatNumber,
+                                travelclass__c: travelclass__c,
+                                qrcode__c: qrcode__c
+                            }).save().then(function (model) {
+                                callback(null, model.toJSON());
+                            }).catch(function (e) {
+                                callback(e, null);
+                            });
+                        }
+                    }).error(function (err1) {
+                        console.log(err1);
+                    })
+                }).error(function (err2) {
+                    console.log(err2)
+                });
+            }
+        });
     }
 });
