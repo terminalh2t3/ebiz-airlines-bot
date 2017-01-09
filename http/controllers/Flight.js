@@ -2,7 +2,8 @@
 const BaseController = require("./Base"),
     ejs = require('ejs'),
     bodyParser = require("body-parser"),
-    moment = require("moment");
+    moment = require("moment"),
+    momenttz = require('moment-timezone');
 
 module.exports = BaseController.extend({
     name: "Home",
@@ -37,10 +38,14 @@ module.exports = BaseController.extend({
         const newDeparture = req.body.newDeparture;
         const newArrival   = req.body.newArrival;
 
+        const tzDepartureTime = momenttz(newDeparture).tz('Asia/Ho_Chi_Minh').format('YYYY-MM-DD HH:mm:ss');
+        const tzArrivalTime = momenttz(newArrival).tz('Asia/Ho_Chi_Minh').format('YYYY-MM-DD HH:mm:ss');
+
         if(sfId && newDeparture && newArrival) {
-            const template = require('../../../lib/bot/utils/airport-template');
-            template.sendFlightUpdate(sfId, "delay", newDeparture, newArrival, null)
+            const template = require('../../lib/bot/utils/airport-template');
+            template.sendFlightUpdate(sfId, "delay", tzDepartureTime, tzArrivalTime, null)
         }
+        res.sendStatus(200);
     },
 
     /**
@@ -55,8 +60,9 @@ module.exports = BaseController.extend({
         const newGate      = req.body.newGate;
 
         if(sfId && newGate) {
-            const template = require('../../../lib/bot/utils/airport-template');
+            const template = require('../../lib/bot/utils/airport-template');
             template.sendFlightUpdate(sfId, "gate_change", null, null, newGate)
         }
+        res.sendStatus(200);
     },
 });

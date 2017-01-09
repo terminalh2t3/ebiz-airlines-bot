@@ -28,11 +28,10 @@ module.exports = BaseController.extend({
     updateCheckin: function (req, res, next) {
         const passengerSfid = req.body.passenger_sfid;
         const flightSfid    = req.body.flight_sfid;
-        const bookingId     = req.body.booking_id;
         const bookingSfid   = req.body.booking_sfid;
         const BookingBusiness = require('../../lib/api/business/BookingBusiness');
         const template = require('../../lib/bot/utils/airport-template');
-        BookingBusiness.updateCheckInStatus(bookingId, function (error, model) {
+        BookingBusiness.updateCheckInStatus(bookingSfid, function (error, model) {
             if(model) {
                 //Send Boarding Pass
                 setTimeout(function () {

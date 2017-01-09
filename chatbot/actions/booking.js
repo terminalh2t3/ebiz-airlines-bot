@@ -96,7 +96,7 @@ module.exports = (bot) => ({
                                             },
                                             {
                                                 "type": "web_url",
-                                                "url": rootUrl + '/flight/show?flight_id=' + flight.sfid,
+                                                "url": rootUrl + '/flight/show?flightSfid=' + flight.sfid,
                                                 "webview_height_ratio": "full",
                                                 "title": 'View detail'
                                             }
