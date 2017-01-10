@@ -9,18 +9,22 @@ module.exports = (bot) => {
         const fbId = event.sender.id;
         //check user
         Passenger.isHasPassenger(fbId, function(err, exist){
-            if(exist){
-                bookingFlight(flightSfid, fbId, chat, res);
+            if(err == null) {
+                if (exist) {
+                    bookingFlight(flightSfid, fbId, chat, res);
+                } else {
+                    //create passenger
+                    const info = event.payment.requested_user_info;
+                    Passenger.createPassenger(fbId, info.contact_name, info.contact_phone, info.contact_email, function (error2, data) {
+                        if (error == null) {
+                            bookingFlight(flightSfid, fbId, chat, res);
+                        } else {
+                            console.error(error2);
+                        }
+                    });
+                }
             } else{
-                //create passenger
-                const info = event.payment.requested_user_info;
-                Passenger.createPassenger(fbId, info.contact_name, info.contact_phone, info.contact_email, function(error, data){
-                    if(error == null){
-                        bookingFlight(flightSfid, fbId, chat, res);
-                    } else{
-                        console.log(error);
-                    }
-                });
+                console.error(err);
             }
         });
     });
