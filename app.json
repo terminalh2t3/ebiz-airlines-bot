@@ -1,28 +1,60 @@
 {
   "name": "Ebiz Airlines",
   "description": "This app is demonstration for airlines vertical.",
-  "repository": "https://github.com/terminalh2t3/ebiz-shop-bot",
+  "repository": "https://github.com/terminalh2t3/ebiz-airlines-bot.git",
   "logo": "https://www.marketingcloud.com/sites/exacttarget/files/partner-logos/e-biz_solutions_-_logo.png",
-  "keywords": ["php", "Giga.ai", "Heroku Connect"],
+  "keywords": ["nodejs", "wit.ai", "Heroku Connect, Salesforce API"],
   "websites": "https://terminalh2t3.github.io/ebiz-shop-bot/introduction/",
 
   "env": {
-    "FACEBOOK_PAGE_ACCESS_TOKEN": {
-      "description": "Your facebook page access token",
+	"WIT_TOKEN": {
+	  "description": "Wit AI Token for Bot",
       "required": true
-    },
-    "FACEBOOK_PAGE_ID": {
-      "description": "Your facebook page id",
+	},
+	"MESSENGER_APP_SECRET": {
+	  "description": "Your facebook app secret",
       "required": true
-    },
-    "FACEBOOK_APP_ID": {
-      "description": "Your facebook app id",
+	},
+	"MESSENGER_PAGE_ACCESS_TOKEN": {
+	  "description": "Your facebook page access token",
       "required": true
-    },
-    "PRIMARY_EMAIL_ADDRESS": {
-      "description": "The email address that will be the sender address when confirm receipt",
+	},
+	"MESSENGER_VALIDATION_TOKEN": {
+	  "description": "Validation token for your bot",
       "required": true
-    }
+	},
+	"CLIENT_ID": {
+	  "description": "Consumer Key from Salesforce connected app for API permission",
+      "required": true
+	},
+	"CLIENT_SECRET": {
+	  "description": "Consumer Secrect from Salesforce connected app for API permission",
+      "required": true
+	},
+	"SF_USER": {
+	  "description": "Your Salesforce username",
+      "required": true
+	},
+	"SF_PASS": {
+	  "description": "Your Salesforce password, combine with password and security token",
+      "required": true
+	},
+	"GOOGLE_API": {
+	  "description": "Your Google API Key",
+      "required": true
+	},
+	"APC_AUTH": {
+	  "description": "Your Authenticate key from http://www.air-port-codes.com/",
+      "required": true
+	},
+	"APC_AUTH_SECRET": {
+	  "description": "Your Authenticate Secret from http://www.air-port-codes.com/",
+      "required": true
+	},
+	"DATABASE_URL": {
+	  "description": "Heroku Postgres Database URL",
+      "required": true
+	}
   },
   "addons": [
     "heroku-postgresql"
