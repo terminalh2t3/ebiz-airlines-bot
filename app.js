@@ -20,13 +20,13 @@ bot.startWeb();
 bot.start(process.env.PORT || 5000);
 bot.setWhiteListDomain([rootUrl]);
 
-// const template = require('./lib/bot/utils/airport-template');
-// //Run cron for sending check-in reminder.
-//
-// const cron = require('node-cron');
-// const task = cron.schedule('* * * * *', function() {
-//     template.sendCheckinRemind();
-//     template.sendBoardingPass();
-// }, false);
-//
-// task.start();
+const template = require('./lib/bot/utils/airport-template');
+//Run cron for sending check-in reminder.
+
+const cron = require('node-cron');
+const task = cron.schedule('* * * * *', function() {
+    template.sendCheckinRemind();
+    template.sendBoardingPass();
+}, false);
+
+task.start();
