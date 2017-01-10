@@ -33,43 +33,51 @@ module.exports = (bot) => {
 function bookingFlight(flightSfid, fbId, chat, res){
     chat.sendTypingIndicator(15000);
     //TODO: next in here
-    Passenger.getPassengerByFacebookId(fbId, function(error, passenger){
-        const passengerSfid = passenger.sfid;
-        BookingBusiness.validateBooking(passengerSfid, flightSfid, function(error, valid){
-            if(valid) {
-                BookingBusiness.bookFlight(flightSfid, passengerSfid, function (error, resp) {
-                    if (error != null) {
-                        console.log(error);
+    Passenger.getPassengerByFacebookId(fbId, function(error1, passenger){
+        if(error1 != null) {
+            const passengerSfid = passenger.sfid;
+            BookingBusiness.validateBooking(passengerSfid, flightSfid, function (error2, valid) {
+                if(error2 != null) {
+                    if (valid) {
+                        BookingBusiness.bookFlight(flightSfid, passengerSfid, function (error3, resp) {
+                            if (error3 != null) {
+                                console.log(error3);
+                            } else {
+                                chat.sendTextMessage('Thank you for your choosing Ebiz Airlines. We are so excited' +
+                                    ' to have you on board soon.', null, {typing: true});
+                                airlinesBot.sendItinerary(fbId, passengerSfid, flightSfid, (error, data) => {
+                                    console.log(data);
+                                });
+                            }
+                        });
                     } else {
-                        chat.sendTextMessage('Thank you for your choosing Ebiz Airlines. We are so excited' +
-                            ' to have you on board soon.', null, {typing: true});
-                        airlinesBot.sendItinerary(fbId, passengerSfid, flightSfid, (error, data) => {
-                            console.log(data);
+                        const ask = (convo) => {
+                            convo.ask({
+                                text: 'You\'ve booked this flight already. Do you need to resend the itinerary?',
+                                quickReplies: ['Yes', 'No']
+                            }, (payload, convo) => {
+                                const text = payload.message.text;
+                                if (text == 'Yes') {
+                                    airlinesBot.sendItinerary(fbId, passengerSfid, flightSfid, (error, data) => {
+                                        console.log(data);
+                                    })
+                                } else {
+                                    chat.say('Ok. If you need further information, please type \'help\'');
+                                }
+                            });
+                        }
+
+                        //Start the conversation
+                        chat.conversation((convo) => {
+                            ask(convo);
                         });
                     }
-                });
-            } else{
-                const ask = (convo) => {
-                    convo.ask({
-                        text: 'You\'ve booked this flight already. Do you need to resend the itinerary?',
-                        quickReplies: ['Yes', 'No']
-                    }, (payload, convo) => {
-                        const text = payload.message.text;
-                        if(text == 'Yes'){
-                            airlinesBot.sendItinerary(fbId, passengerSfid, flightSfid, (error, data) => {
-                                console.log(data);
-                            })
-                        } else{
-                            chat.say('Ok. If you need further information, please type \'help\'');
-                        }
-                    });
+                } else{
+                    console.error(error2);
                 }
-
-                //Start the conversation
-                chat.conversation((convo) => {
-                    ask(convo);
-                });
-            }
-        });
+            });
+        } else{
+            console.error(error1);
+        }
     });
 }
