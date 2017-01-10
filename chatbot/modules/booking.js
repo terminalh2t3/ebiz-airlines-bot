@@ -34,20 +34,20 @@ function bookingFlight(flightSfid, fbId, chat, res){
     chat.sendTypingIndicator(15000);
     //TODO: next in here
     Passenger.getPassengerByFacebookId(fbId, function(error1, passenger){
-        if(error1 != null) {
+        if(error1 == null) {
             const passengerSfid = passenger.sfid;
             BookingBusiness.validateBooking(passengerSfid, flightSfid, function (error2, valid) {
-                if(error2 != null) {
+                if(error2 == null) {
                     if (valid) {
                         BookingBusiness.bookFlight(flightSfid, passengerSfid, function (error3, resp) {
-                            if (error3 != null) {
-                                console.log(error3);
-                            } else {
+                            if (error3 == null) {
                                 chat.sendTextMessage('Thank you for your choosing Ebiz Airlines. We are so excited' +
                                     ' to have you on board soon.', null, {typing: true});
                                 airlinesBot.sendItinerary(fbId, passengerSfid, flightSfid, (error, data) => {
                                     console.log(data);
                                 });
+                            } else {
+                                console.error(error3);
                             }
                         });
                     } else {
