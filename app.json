@@ -53,7 +53,7 @@
 	},
 	"DATABASE_URL": {
 	  "description": "Heroku Postgres Database URL",
-      "required": true
+      "required": false
 	}
   },
   "addons": [
