@@ -47,7 +47,7 @@ module.exports = (bot) => ({
                         const iTo = data.airports[0].iata;
                         const FlightSchedule = require('../../lib/api/business/FlightBusiness');
                         const fDateTime = DateTime.create(dateTime).format('Y-m-d H:M:S');
-                        console.log("Finding flight from " + iFrom + ' to ' + iTo + ' at ' + fDateTime);
+                        console.log("Finding flight from " + iFrom + ' to ' + iTo + ' at ' + dateTime);
                         FlightSchedule.findFlights(iFrom, iTo, fDateTime, function(error, data){
                             if(data == null || data.length == 0){
                                 setTimeout(() => bot.sendTextMessage(recipientId, 'Sorry, we have no flight suitable for you.', null, {typing: true}), 2000);
