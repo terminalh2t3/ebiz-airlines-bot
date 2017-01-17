@@ -142,7 +142,7 @@ const that =
         FlightBusiness.boardingPassToPassenger(flightSfId, bookingSfId, function (error, flight) {
             if (flight != null) {
                 const boardingText = "You have checked-in. Here is you ticket and hope you have a happy flight :)";
-                that.boardingPassProcess(flight, boardingText, false);
+                that.checkRemindBoardingPass(flight, boardingText, false);
             } else {
                 console.log('Error to print boarding pass: ' + error);
             }
