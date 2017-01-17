@@ -1,7 +1,6 @@
 'use strict';
 const GooglePlaces = require('../../utils/google-places');
-const bot = require('../../bot');
-module.exports = () => ({
+module.exports = (bot) => ({
     getPlaces({context, entities, sessionId, text})
     {
         return new Promise(function (resolve, reject) {
@@ -72,7 +71,7 @@ module.exports = () => ({
                     GooglePlaces[func](parameter, function (error, response) {
                         const results = response.results;
                         if(results.length == 0){
-                            setTimeout(() => bot.sendTextMessage(recipientId, "Sorry. I could not " +
+                            setTimeout(() => bot.sendTextMessage(recipientId, "I could not " +
                                 "find any " + context.query + " for you. Could you try again?" , null, {typing: true}), 2000);
 
                             context.noResult = true;
@@ -112,21 +111,19 @@ module.exports = () => ({
                                     elements.push(element);
                                 });
                             }
-
-                            //send
-                            setTimeout(() => bot.sendGenericTemplate(recipientId, elements, {typing: true}), 3000);
                             context.foundPlaces = true;
-
                             delete context.missingLocation;
                             delete context.requireCurrentLocation;
                             delete context.missingQuery;
                             context.done = true;
+                            //send
+                            setTimeout(() => bot.sendGenericTemplate(recipientId, elements, {typing: true}), 3000);
                             return resolve(context);
                         }
                     });
                 }
             } else{
-                return reject();
+                return reject("Invalid data");
             }
         });
     },

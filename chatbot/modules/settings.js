@@ -26,7 +26,7 @@ module.exports = (bot) => {
         chat.runWit('Booking flight');
     });
 
-    bot.on('postback:PERSISTEN_ABOUT_CHATBOT', function(payload, chat){
+    bot.on('postback:PERSISTENT_ABOUT_CHATBOT', function(payload, chat){
         chat.sendTextMessage('Ebiz Airlines is not REAL but Ebiz Solutions is REAL. ' +
             'We are a company from Vietnam who created this bot for airlines vertical as an app showcase', {typing: true})
     });

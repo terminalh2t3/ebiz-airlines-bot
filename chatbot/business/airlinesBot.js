@@ -7,7 +7,7 @@ const moment = require('moment');
 const config = require('config');
 const rootUrl = (process.env.ROOT_URL) ? process.env.ROOT_URL : config.get('root-url');
 
-module.exports =
+const that =
 {
     sendItinerary(recipientId, passengerSfid, flightSfid, callback){
         bot.sendTypingIndicator(recipientId, 15000);
@@ -75,12 +75,11 @@ module.exports =
             }
         });
     },
-    sendCheckInRemind(){
+    cronCheckInRemind(){
         console.log("Cron: start remind checkin");
         FlightBusiness.checkInReminder(function (error, flights) {
             if (error == null) {
                 flights.forEach(function (flight) {
-                    console.log(flight);
                     const flightBooking = flight.booking;
                     const flightRoute = flight.route;
                     if (flightBooking != null) {
@@ -126,7 +125,7 @@ module.exports =
                                 };
                                 BookingBusiness.updateCheckInRemind(booking.sfid, function (error, updateBooking) {
                                     if (updateBooking) {
-                                        console.log("Update check-in status for booking: " + updateBooking.sfid)
+                                        console.log("Updated check-in status for booking");
                                     }
                                 });
 
@@ -145,25 +144,25 @@ module.exports =
                 const boardingText = "You have checked-in. Here is you ticket and hope you have a happy flight :)";
                 that.boardingPassProcess(flight, boardingText, false);
             } else {
-                console.log('Cron: no flight to boarding')
+                console.log('Error to print boarding pass: ' + error);
             }
         })
     },
-    sendBoardingPass() {
+    cronBoardingPass() {
         console.log("Cron: start remind boarding");
         FlightBusiness.boardingPass(function (error, flights) {
             if (flights != null) {
                 flights.forEach(function (flight) {
                     const boardingText = "Here it is! Your boarding pass. Keep it handy and it'll " +
                         "fly you through the airport. Hurry up and get on board now!";
-                    that.boardingPassProcess(flight, boardingText, true);
+                    that.checkRemindBoardingPass(flight, boardingText, true);
                 });
             } else {
                 console.log('Cron: no flights to remind');
             }
         })
     },
-    boardingPassProcess(flight, boardingText, cron) {
+    checkRemindBoardingPass(flight, boardingText, cron) {
         const flightBooking = flight.booking;
         const flightRoute = flight.route;
         if (flightBooking != null) {
@@ -307,3 +306,5 @@ module.exports =
         });
     }
 };
+
+module.exports = that;

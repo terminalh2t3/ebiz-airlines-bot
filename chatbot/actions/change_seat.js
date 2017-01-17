@@ -4,8 +4,7 @@
  */
 const BookingBusiness = require('../../lib/business/BookingBusiness');
 const PassengerBusiness = require('../../lib/business/PassengerBusiness');
-const bot = require('../../bot');
-module.exports = () => ({
+module.exports = (bot) => ({
     changeSeat({context, entities, sessionId, text})
     {
         return new Promise(function (resolve, reject) {

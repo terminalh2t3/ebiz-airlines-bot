@@ -8,14 +8,15 @@ const config = require('config');
 const cron = require('node-cron');
 const template = require('./chatbot/business/airlinesBot');
 const bot = module.exports = require('./bot');
+const path = require('path');
 
 // Setting up web
 const lessMiddleware = require('less-middleware');
-bot.app.use(lessMiddleware(__dirname + './http/public'));
-bot.app.use(express.static(__dirname + './http/public'));
+bot.app.use(lessMiddleware(path.join(__dirname, './http/public')));
+bot.app.use(express.static(path.join(__dirname, './http/public')));
 
 // Init view and controller
-bot.app.set('views', __dirname + '/../../http/templates');
+bot.app.set('views', path.join(__dirname, './http/templates'));
 bot.app.set('view engine', 'ejs');
 const Route = require('./http/routes');
 const route = new Route(bot.app);
@@ -35,8 +36,8 @@ bot.setWhiteListDomain([rootUrl]);
 
 // Setting cron job
 const task = cron.schedule('* * * * *', function() {
-    template.sendCheckInRemind();
-    template.sendBoardingPass();
+    template.cronCheckInRemind();
+    template.cronBoardingPass();
 }, false);
 
 // Start task
