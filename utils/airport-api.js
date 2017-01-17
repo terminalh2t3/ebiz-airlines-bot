@@ -3,7 +3,7 @@ const _ = require('underscore');
 const config = require('config');
 
 exports.getAirport = function ( opts, callback ) {
-    if(!process.env.HEROKU_POSTGRESQL_MAROON_URL){
+    if(process.env.NODE_ENV != 'production'){
         result = {};
         result.airports = [];
         airport = {};

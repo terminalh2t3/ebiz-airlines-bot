@@ -1,3 +1,4 @@
+'use strict';
 module.exports = (bot) => {
     bot.on('attachment', (payload, chat) => {
         //Handle location

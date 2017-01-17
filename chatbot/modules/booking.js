@@ -1,8 +1,7 @@
 'use strict';
-const BookingBusiness = require('../../lib/api/business/BookingBusiness');
-const Passenger = require('../../lib/api/business/PassengerBusiness');
-const DateTime = require('node-datetime');
-const airlinesBot = require('../customBot/airlinesBot');
+const BookingBusiness = require('../../lib/business/BookingBusiness');
+const Passenger = require('../../lib/business/PassengerBusiness');
+const airlinesBot = require('../business/airlinesBot');
 module.exports = (bot) => {
     bot.on('payment', (event, chat, res) => {
         const flightSfid = event.payment.payload.split('_')[1];

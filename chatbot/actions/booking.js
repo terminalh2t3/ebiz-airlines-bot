@@ -2,8 +2,9 @@
 /**
  * @param bot Bootbot
  */
-const FlightScheduleBusiness = require('../../lib/api/business/FlightBusiness');
+
 const DateTime = require('node-datetime');
+const FlightSchedule = require('../../lib/business/FlightBusiness');
 module.exports = (bot) => ({
     showBookingTicket({context, entities, sessionId, text})
     {
@@ -40,12 +41,11 @@ module.exports = (bot) => ({
                 const dateTime = context.data.dateTime;
 
                 //standardize location
-                const airportApi = require('../../lib/bot/utils/airport-api');
+                const airportApi = require('../../utils/airport-api');
                 airportApi.getAirport({term: fromLocation}, function(error, data){
                     const iFrom = data.airports[0].iata;
                     airportApi.getAirport({term: toLocation}, function(error, data){
                         const iTo = data.airports[0].iata;
-                        const FlightSchedule = require('../../lib/api/business/FlightBusiness');
                         const fDateTime = DateTime.create(dateTime).format('Y-m-d H:M:S');
                         console.log("Finding flight from " + iFrom + ' to ' + iTo + ' at ' + fDateTime);
                         FlightSchedule.findFlights(iFrom, iTo, fDateTime, function(error, data){
@@ -145,14 +145,20 @@ module.exports = (bot) => ({
 
 function getLocation(context, entities, text, pointText){
     //Case 1: input in missing
+    let locations = [];
+    if(entities.location !== undefined){
+        locations = entities.location;
+    }
+    if(entities.local_search_query !== undefined){
+        locations = [...locations, ...entities.local_search_query];
+    }
     const casePointText = pointText == 'from' ? 'From' : 'To';
     if (context['missing' + casePointText]){
-        return (entities.location) ? entities.location[0].value : null;
+        return (locations.length != 0) ? locations[0].value : null;
     }
     //Case 2: input as the following example "I want to go from Hanoi to HoChiMinh"
     else{
-        const locations = entities.location;
-        if(locations) {
+        if(locations.length != 0) {
             for (let index = 0; index < locations.length; index++) {
                 const search = pointText + ' ' + locations[index].value.trim().toLowerCase();
                 if (text.trim().toLowerCase().includes(search)) //matched

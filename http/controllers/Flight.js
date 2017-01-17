@@ -1,24 +1,23 @@
 "use strict";
-const BaseController = require("./Base"),
-    ejs = require('ejs'),
-    bodyParser = require("body-parser"),
-    moment = require("moment"),
-    momenttz = require('moment-timezone');
+const BaseController = require("./Base");
+const ejs = require('ejs');
+const moment = require("moment");
+const momenttz = require('moment-timezone');
+const template = require('../../chatbot/business/airlinesBot');
+const FlightBusiness = require('../../lib/business/FlightBusiness');
 
 module.exports = BaseController.extend({
     name: "Home",
     content: null,
     show: function(req, res, next) {
         const flightSfid = req.query.flightSfid;
-        const FlightBusiness = require('../../lib/api/business/FlightBusiness');
         FlightBusiness.getFlightById(flightSfid, function(err, data){
             const DateTime = require('node-datetime');
             res.render('flight/show', {flightInfo: data, DateTime: DateTime});
         });
     },
     list: function (req, res, next) {
-        const FlightSchedule = require('../../lib/api/business/FlightBusiness');
-        FlightSchedule.getAllFlight(function (error, result) {
+        FlightBusiness.getAllFlight(function (error, result) {
             res.render('flight/list', {
                 flights: result,
                 page_name: 'flight_list',
@@ -42,7 +41,6 @@ module.exports = BaseController.extend({
         const tzArrivalTime = momenttz(newArrival).tz('Asia/Ho_Chi_Minh').format('YYYY-MM-DD HH:mm:ss');
 
         if(sfId && newDeparture && newArrival) {
-            const template = require('../../lib/bot/utils/airport-template');
             template.sendFlightUpdate(sfId, "delay", tzDepartureTime, tzArrivalTime, null)
         }
         res.sendStatus(200);
@@ -60,7 +58,6 @@ module.exports = BaseController.extend({
         const newGate      = req.body.newGate;
 
         if(sfId && newGate) {
-            const template = require('../../lib/bot/utils/airport-template');
             template.sendFlightUpdate(sfId, "gate_change", null, null, newGate)
         }
         res.sendStatus(200);

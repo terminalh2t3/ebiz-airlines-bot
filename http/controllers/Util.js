@@ -1,10 +1,11 @@
 "use strict";
-const   BaseController = require("./Base"),
-        path = require('path'),
-        fs = require('fs'),
-        ejs = require('ejs');
+const BaseController = require("./Base");
+const path = require('path');
+const fs = require('fs');
+const ejs = require('ejs');
 const config = require('config');
 const rootUrl = (process.env.ROOT_URL) ? process.env.ROOT_URL : config.get('root-url');
+const FlightBusiness = require('../../lib/business/FlightBusiness');
 
 module.exports = BaseController.extend({
     name: "Util",
@@ -34,7 +35,6 @@ module.exports = BaseController.extend({
                     siteType: 'html'
                 };
 
-                const FlightBusiness = require('../../lib/api/business/FlightBusiness');
                 FlightBusiness.getFlightById(flightSfid, function(err, data){
                     // res.render('util/flightInfo', {flightInfo: data, rootUrl: rootUrl, DateTime: require('node-datetime')});
                     const viewFilePath = __dirname + '/../templates/util/flightInfo.ejs';

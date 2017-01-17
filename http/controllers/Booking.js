@@ -1,8 +1,8 @@
 "use strict";
-const BaseController = require("./Base"),
-    ejs = require('ejs'),
-    bodyParser = require("body-parser"),
-    moment = require("moment");
+const BaseController = require("./Base");
+const ejs = require('ejs');
+const template = require('../../chatbot/business/airlinesBot');
+const BookingBusiness = require('../../lib/business/BookingBusiness');
 
 module.exports = BaseController.extend({
     name: "Home",
@@ -11,7 +11,6 @@ module.exports = BaseController.extend({
         const passengerSfId = req.query.passenger;
         const bookingSfId   = req.query.booking;
         const datetime = require('node-datetime');
-        const BookingBusiness = require('../../lib/api/business/BookingBusiness');
         const url = require('url');
         BookingBusiness.getCheckInDetail(bookingSfId, passengerSfId, function (error, model) {
             if(model) {
@@ -29,8 +28,6 @@ module.exports = BaseController.extend({
         const passengerSfid = req.body.passenger_sfid;
         const flightSfid    = req.body.flight_sfid;
         const bookingSfid   = req.body.booking_sfid;
-        const BookingBusiness = require('../../lib/api/business/BookingBusiness');
-        const template = require('../../lib/bot/utils/airport-template');
         BookingBusiness.updateCheckInStatus(bookingSfid, function (error, model) {
             if(model) {
                 //Send Boarding Pass

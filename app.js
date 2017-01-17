@@ -1,32 +1,43 @@
 'use strict';
 
+// Setting for postgres
 const pg = require('pg');
 pg.defaults.ssl = true;
-
+const express = require('express');
 const config = require('config');
+const cron = require('node-cron');
+const template = require('./chatbot/business/airlinesBot');
+const bot = module.exports = require('./bot');
 
-const bot = require('./lib/bot/utils/get-bot');
+// Setting up web
+const lessMiddleware = require('less-middleware');
+bot.app.use(lessMiddleware(__dirname + './http/public'));
+bot.app.use(express.static(__dirname + './http/public'));
 
-//Load all modules from modules folder
+// Init view and controller
+bot.app.set('views', __dirname + '/../../http/templates');
+bot.app.set('view engine', 'ejs');
+const Route = require('./http/routes');
+const route = new Route(bot.app);
+
+// Setting up bot module folder
 const normalizedPath = require('path').join(__dirname, 'chatbot/modules');
-const MVC = require('path').join(__dirname, 'http/public');
 require("fs").readdirSync(normalizedPath).forEach(function(file) {
     bot.module(require("./chatbot/modules/" + file));
 });
 
-const rootUrl = (process.env.ROOT_URL) ? process.env.ROOT_URL : config.get('root-url');
-console.log('Root url: ' + rootUrl);
-bot.startWeb();
+// Start bot
 bot.start(process.env.PORT || 5000);
+
+// Set white list for this domain
+const rootUrl = (process.env.ROOT_URL) ? process.env.ROOT_URL : config.get('root-url');
 bot.setWhiteListDomain([rootUrl]);
 
-const template = require('./lib/bot/utils/airport-template');
-//Run cron for sending check-in reminder.
-
-const cron = require('node-cron');
+// Setting cron job
 const task = cron.schedule('* * * * *', function() {
-    template.sendCheckinRemind();
+    template.sendCheckInRemind();
     template.sendBoardingPass();
 }, false);
 
+// Start task
 task.start();

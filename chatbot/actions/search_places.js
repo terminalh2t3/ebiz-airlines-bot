@@ -1,6 +1,7 @@
 'use strict';
-const GooglePlaces = require('../../lib/bot/utils/googlePlaces');
-module.exports = (bot) => ({
+const GooglePlaces = require('../../utils/google-places');
+const bot = require('../../bot');
+module.exports = () => ({
     getPlaces({context, entities, sessionId, text})
     {
         return new Promise(function (resolve, reject) {

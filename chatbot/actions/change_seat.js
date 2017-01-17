@@ -2,9 +2,10 @@
 /**
  * @param bot Bootbot
  */
-const BookingBusiness = require('../../lib/api/business/BookingBusiness');
-const PassengerBusiness = require('../../lib/api/business/PassengerBusiness');
-module.exports = (bot) => ({
+const BookingBusiness = require('../../lib/business/BookingBusiness');
+const PassengerBusiness = require('../../lib/business/PassengerBusiness');
+const bot = require('../../bot');
+module.exports = () => ({
     changeSeat({context, entities, sessionId, text})
     {
         return new Promise(function (resolve, reject) {

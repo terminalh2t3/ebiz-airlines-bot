@@ -1,4 +1,7 @@
-module.exports = (bot) => ({
+'use strict';
+const bot = require('../../bot');
+
+module.exports = () => ({
     getForecast({context, entities, sessionId, text})
     {
         return new Promise(function (resolve, reject) {

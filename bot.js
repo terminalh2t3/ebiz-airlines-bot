@@ -1,6 +1,6 @@
-'use strict';
-const BootBot = require('../BootBot');
 const config = require('config');
+const BelendBot = require('belend-bot');
+
 // App Secret can be retrieved from the App Dashboard
 const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ?
     process.env.MESSENGER_APP_SECRET :
@@ -26,9 +26,12 @@ if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN)) {
     process.exit(1);
 }
 
-module.exports = new BootBot({
+const bot = new BelendBot({
     accessToken : PAGE_ACCESS_TOKEN,
     verifyToken : VALIDATION_TOKEN,
     appSecret   : APP_SECRET,
     witToken    : WIT_TOKEN,
+    witActionDir: require('path').join(__dirname, './chatbot/actions')
 });
+
+module.exports = bot;

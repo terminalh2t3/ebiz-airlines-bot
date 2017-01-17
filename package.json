@@ -20,6 +20,7 @@
   "repository": "https://anhvt39@bitbucket.org/anhvt39/ebiz-bot-airlines.git",
   "license": "UNLICENSED",
   "dependencies": {
+    "belend-bot": "git+https://github.com/terminalh2t3/belend-bot.git",
     "body-parser": "^1.15.2",
     "bookshelf": "git+https://github.com/tgriesser/bookshelf.git",
     "bookshelf-modelbase": "^2.10.2",

@@ -1,16 +1,15 @@
 "use strict";
 const   BaseController = require("./Base");
-const FlightBusiness = require('../../lib/api/business/FlightBusiness');
-const PassengerBusiness = require('../../lib/api/business/PassengerBusiness');
-const template = require('../../lib/bot/utils/airport-template');
-const Route = require('../../lib/api/models/Route');
-const Flight = require('../../lib/api/models/Flight');
-const Booking = require('../../lib/api/models/Booking');
-const Passenger = require('../../lib/api/models/Passenger');
+const FlightBusiness = require('../../lib/business/FlightBusiness');
+const PassengerBusiness = require('../../lib/business/PassengerBusiness');
+const BookingBusiness = require('../../lib/business/BookingBusiness');
+const Route = require('../../lib/models/Route');
+const Flight = require('../../lib/models/Flight');
+const Booking = require('../../lib/models/Booking');
+const Passenger = require('../../lib/models/Passenger');
 const DateTime = require('node-datetime');
-const BookingBusiness = require('../../lib/api/business/BookingBusiness');
 const config = require('config');
-const org = require('../../lib/api/database/connect-salesforce');
+const org = require('../../lib/connect/connect-salesforce');
 const nforce = require('nforce');
 const RandomString = require('randomstring');
 module.exports = BaseController.extend({
