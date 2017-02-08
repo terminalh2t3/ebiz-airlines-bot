@@ -62,6 +62,9 @@
                     <a href="src/ebbot-airlines.json" target="_blank">
                         <img src="img/hcc_light.png" class="install-button">
                     </a>
+                    <a href="src/ebiz-airlines-witai.zip" target="_blank">
+                        <img src="img/dth_wit.png" class="install-button">
+                    </a>
                 </div>
             </div>
         </div>
@@ -77,27 +80,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <ol class="setup">
-                        <li>Create Facebook App</li>
                         <li>Install the Ebiz Airline Bot package to your Salesforce org.<br><a href="#salesforce">Step-by-step</a></li>
                         <li>Create a Salesforce connected app for API. <br><a href="#connected-app">Step-by-step </a></li>
                         <li>Create WIT AI account for bot conversation <br><a href="#wit-ai">Step-by-step</a></li>
                         <li>Create Account on http://www.air-port-codes.com for Airport API</li>
                         <li>Deploy a copy of the app to Heroku.<br><a href="#heroku">Step-by-step</a></li>
+                        <li>Create Facebook App<a href="#facebook-app">Step-by-step</a></li>
                         <li>Connect the Heroku Connect add-on to your Salesforce org, and import the configuration file.<br><a href="#heroku-connect">Step-by-step</a></li>
-                        <li>Subscribe Facebook Page</li>
-                    </ol>
-                </div>
-            </div>
-        </section>
-        <header class="block-heading cleafix" id="facebook-app">
-            <h2>Create Facebook App</h2>
-        </header>
-        <section class="block-body block-border-bottom">
-            <div class="row">
-                <div class="col-md-12">
-                    <ol class="setup">
-                        <li>Create a new Facebook Application on <a href="https://developers.facebook.com/">Facebook Developer</a></li>
-                        <li>Get App ID, Page Access Token, Page ID and prepare for Heroku Config</li>
                     </ol>
                 </div>
             </div>
@@ -111,14 +100,14 @@
                     <ol class="setup">
                         <li>If you do not have a Salesforce org to connect Ebiz Airlines Bot <a href="http://developer.salesforce.com/signup">create a free Developer Edition org</a>.</li>
                         <li>
-                            Install the Ebiz Airline Bot package by clicking the link below. If you have multiple Salesforce orgs, make sure you pick the one you would like to connect to your Ebiz Airline Bot app.<br><br>
+                            <b>Install the Ebiz Airline Bot</b> package by clicking the link below. If you have multiple Salesforce orgs, make sure you pick the one you would like to connect to your Ebiz Airline Bot app.<br><br>
                             <a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04t28000000yBRX" target="_blank">
                                 <img src="img/dts_light.png" class="install-button">
                             </a>
                         </li>
                         <li>
-                            Please note that, the above Sales install button supports for Salesforce free version. That mean, it does not support Apex Classes or Process Builder</br>
-                            If you have Salesforce with Professional Edition, please click the bellow button for install Ebiz Airlines Package that support Apex Classes and Process Builder</br></br>
+                            Please note that, the above Sales install button supports for Salesforce free version. But, it does not support Apex Classes or Process Builder</br>
+                            If you have <b>Salesforce Professional Edition</b>, please click the bellow button for install Ebiz Airlines Package that support Apex Classes and Process Builder</br></br>
                             <a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04t28000000yBRm" target="_blank">
                                 <img src="img/dts_light.png" class="install-button">
                             </a>
@@ -139,37 +128,52 @@
             <div class="row">
                 <div class="col-md-12">
                     <ol class="setup">
-                        <li>In your Salesforce setup page, find App in "Quick Find" box. At Build section, choose Create -> Apps</li>
-                        <li>In create apps page, at connected app section -> click new</li>
+                        <li>In your Salesforce setup page, find App in <b>Quick Find</b> box. At Build section, choose <b>Create</b> -> <b>Apps</b></li>
+                        <li>In create apps page, at connected app section -> click <b>New</b></li>
                         <li>
                             <p>Fill required information</p>
                             <img src="img/salesforce/step-5.jpg">
                         </li>
-                        <li>Click save. In next screen, at "API (Enable OAuth Settings)" section, get your Consumer Key (CLIENT_ID), Consumer Secret (CLIENT_SECRET) to prepare for Heroku config</li>
+                        <li>Click <b>Save</b>. In next screen, at <b>API (Enable OAuth Settings)</b> section, get your <b>Consumer Key</b> (CLIENT_ID), <b>Consumer Secret</b> (CLIENT_SECRET) to prepare for Heroku config</li>
                     </ol>
                 </div>
             </div>
         </section>
         <header class="block-heading cleafix" id="wit-ai">
-            <h2>Wit AI</h2>
+            <h2>Wit.AI</h2>
         </header>
         <section class="block-body block-border-bottom">
             <div class="row">
                 <div class="col-md-12">
                     <ol class="setup">
-                        <li>User Wit AI Secret for Heroku Config: XEOIWZBYV6L6M2E5VJDZQYNV6JOEWBFC</li>
+                        <li>
+                            <p>Download WIT.AI App by click on this button</a></p>
+                            <a href="src/ebiz-airlines-witai.zip" target="_blank">
+                                <img src="img/dth_wit.png" class="install-button">
+                            </a>
+                        </li>
+                        <li>
+                            <p>Login to WIT.AI and click on the following link to create a new WIT.AI app <a href="https://wit.ai/apps/new" target="_blank">https://wit.ai/apps/new</a></p>
+                            <img src="img/wit/s1.png">
+                        </li>
+                        <li>Enter <b>App Name</b>, <b>App Description</b> and choose English as default language.</li>
+                        <li><b>Import your app</b> from the backup file you downloaded at step 1 and click <b>Create App</b></li>
+                        <li>After created app, click <b>Setting</b> and copy Server Access Token. Save it to somewhere, it will be the <b>WIT_TOKEN</b> in <b>Heroku Config</b> in few next steps</li>
                     </ol>
                 </div>
             </div>
         </section>
         <header class="block-heading cleafix" id="airport">
-            <h2>Airport Code API</h2>
+            <h2>Airport Code API (free 14 days)</h2>
         </header>
         <section class="block-body block-border-bottom">
             <div class="row">
                 <div class="col-md-12">
                     <ol class="setup">
-                        <li>Create an account on http://www.air-port-codes.com. Get app authenticate and app authenticate secret for Heroku config</li>
+                        <li>Create an account at Air-port-codes at the following link <a href="https://www.air-port-codes.com/auth/register/" target="_blank">https://www.air-port-codes.com/auth/register/</a> </li>
+                        <li><b>Login</b> with your new account</li>
+                        <li>Access the following link <a href="https://www.air-port-codes.com/auth/api-access/" target="_blank">https://www.air-port-codes.com/auth/api-access/</a></li>
+                        <li>Click <b>Request New API Secret</b> to obtain API Secret(APC_AUTH_SECRET) and API Key (APC_AUTH) that required for Heroku config</li>
                     </ol>
                 </div>
             </div>
@@ -190,7 +194,47 @@
                             <p>Choose a unique name for your Ebiz Airline Bot instance.</p>
                         </li>
                         <li>
-                            <p>Define your config variables with information get from steps above</p>
+                            <p>Define your config variables with information get from steps above except <b>MESSENGER_PAGE_ACCESS_TOKEN</b> and <b>MESSENGER_APP_SECRET</b></p>
+                        </li>
+                        <li>
+                            <p>Please note that, <b>MESSENGER_VALIDATION_TOKEN</b> is anything you want. It will be required to verify your heroku URL in Facebook Messenger App in the next step.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        <header class="block-heading cleafix" id="facebook-app">
+            <h2>Create Facebook App</h2>
+        </header>
+        <section class="block-body block-border-bottom">
+            <div class="row">
+                <div class="col-md-12">
+                    <ol class="setup">
+                        <li>
+                            <p>
+                                Create or configure a Facebook App or Page here <a href="https://developers.facebook.com/">https://developers.facebook.com/apps</a>
+                            </p>
+                            <img src="img/facebook/s1.jpg">
+                        </li>
+                        <li>
+                            <p>
+                                In the app go to Messenger tab then click Setup Webhook.
+                                Here you will put in the URL of your Heroku server and a token (Token is the string you defined in the previous step. You can get from Heroku config will the name is <b>MESSENGER_VALIDATION_TOKEN</b> ).
+                                Make sure to check all the subscription fields.
+                            </p>
+                            <img src="img/facebook/s2.jpg">
+                        </li>
+                        <li>
+                            <p>
+                                Get a Page Access Token, Facebook App Secret and save to Heroku Config as <b>MESSENGER_APP_SECRET</b> and <b>MESSENGER_PAGE_ACCESS_TOKEN</b>.
+                            </p>
+                            <img src="img/facebook/s3.jpg">
+                        </li>
+                        <li>
+                            <p>
+                                Go back to Terminal and type in this command to trigger the Facebook app to send messages. Remember to use the token you requested earlier.
+                            </p>
+                            <pre>curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=&lt;MESSENGER_PAGE_ACCESS_TOKEN&gt;"</pre>
                         </li>
                     </ol>
                 </div>
@@ -203,53 +247,29 @@
             <div class="row">
                 <div class="col-md-12">
                     <ol class="setup">
-                        <li>Click the Heroku Connect link in the Installed add-ons section of the app dashboard.</li>
-                        <li>Click the Setup Connection button. </li>
-                        <li>Select the HEROKU_CONNECT_DB Postgres database. Choose HEROKU_POSTGRESQL_MAROON_URL for DB Config Vars</li>
-                        <li>Click the Next button in the top right of the page.</li>
-                        <li>Click the Authorize button in the top right of the page.</li>
+                        <li>Click the <b>Heroku Connect link</b> in the Installed add-ons section of the app dashboard.</li>
+                        <li>Click the <b>Setup Connection button</b>. </li>
+                        <li>Select the <b>HEROKU_CONNECT_DB Postgres database</b>. Choose <b>DATABASE_URL</b> for DB Config Vars</li>
+                        <li>Click the <b>Next</b> button in the top right of the page.</li>
+                        <li>Click the <b>Authorize</b> button in the top right of the page.</li>
                         <li>You will be prompted to Choose a Username. If you have multiple options, be sure to select the username associated with the Salesforce org your Ebiz Airline Bot instance should connect to</li>
-                        <li>You will be prompted to Allow Access?. Click the Allow button at the bottom right</li>
-                        <li>Now back to Heroku Connect Dashboard, choose Settings > Import/Export Configuration > click Import for mapping data with Salesforce</li>
+                        <li>You will be prompted to Allow Access?. Click the <b>Allow</b> button at the bottom right</li>
+                        <li>Now back to <b>Heroku Connect Dashboard</b>, choose <b>Settings</b> > <b>Import/Export</b> Configuration > click <b>Import</b> for mapping data with Salesforce</li>
                         <li>
-                            <p>Download the Heroku Connect configuration file to your computer.</p>
+                            <p>Download the <b>Heroku Connect configuration</b> file to your computer.</p>
                             <a href="src/ebbot-airlines.json">
                                 <img src="img/hcc_light.png" class="install-button">
                             </a>
                         </li>
                         <li>
-                            On the Heroku Connect page, click Choose a File and select the file you have downloaded
+                            On the Heroku Connect page, click <b>Choose a File</b> and select the file you have downloaded
                         </li>
                         <li>
-                            Click the Upload button in the top right of the page
+                            Click the <b>Upload</b> button in the top right of the page
                         </li>
                         <li>
-                            <p>The connection between your Ebiz Airline Bot database and Salesforce is now being set up. Keep an eye on the Mappings section. Wait until you have nine objects wth a status of OK before you continue. This may take a few minutes.</p>
+                            <p>The connection between your Ebiz Airline Bot database and Salesforce is now being set up. Keep an eye on the Mappings section. Wait until you have six objects with a status of OK before you continue. This may take a few minutes.</p>
                             <img src="img/salesforce/step-2.jpg">
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </section>
-        <header class="block-heading cleafix" id="subscribe-page">
-            <h2>Subscribe Facebook Page</h2>
-        </header>
-        <section class="block-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <ol class="setup">
-                        <li>Create a new Facebook Application on <a href="https://developers.facebook.com/">Facebook Developer</a></li>
-                        <li>
-                            Go to <b>Dash board</b>, in Product Section, click <b>+Add Product</b> and select <b>Messenger</b>
-                        </li>
-                        <li>
-                            In the <b>Messenger Settings</b>, scroll down to <b>Webhook</b> and click <b>Setup Webhooks</b>.
-                        </li>
-                        <li>
-                            In Callback URL, type "https://yourappname.herokuapp.com/public". In Verify Token, type "GigaAI". I will need to choose all the subscription fields and click <b>Verify and Save</b>
-                        </li>
-                        <li>
-                            Start chat with your Page :);
                         </li>
                     </ol>
                 </div>

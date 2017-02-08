@@ -456,3 +456,7 @@ Responsive styles
     color: #89313d;
     font-weight: bold;
 }
+
+li img{
+    max-width: 680px;
+}
