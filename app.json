@@ -50,10 +50,6 @@
 	"APC_AUTH_SECRET": {
 	  "description": "Your Authenticate Secret from http://www.air-port-codes.com/",
       "required": true
-	},
-	"HEROKU_POSTGRESQL_MAROON_URL": {
-	  "description": "Heroku Postgres Database URL",
-      "required": true
 	}
   },
   "addons": [
