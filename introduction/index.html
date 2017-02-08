@@ -83,7 +83,8 @@
                         <li>Install the Ebiz Airline Bot package to your Salesforce org.<br><a href="#salesforce">Step-by-step</a></li>
                         <li>Create a Salesforce connected app for API. <br><a href="#connected-app">Step-by-step </a></li>
                         <li>Create WIT AI account for bot conversation <br><a href="#wit-ai">Step-by-step</a></li>
-                        <li>Create Account on http://www.air-port-codes.com for Airport API</li>
+                        <li>Create Account on http://www.air-port-codes.com for Airport API <br><a href="#airport">Step-by-step</a></li>
+                        <li>Google Places API <br><a href="#google">Step-by-step</a></li>
                         <li>Deploy a copy of the app to Heroku.<br><a href="#heroku">Step-by-step</a></li>
                         <li>Create Facebook App<a href="#facebook-app">Step-by-step</a></li>
                         <li>Connect the Heroku Connect add-on to your Salesforce org, and import the configuration file.<br><a href="#heroku-connect">Step-by-step</a></li>
@@ -174,6 +175,36 @@
                         <li><b>Login</b> with your new account</li>
                         <li>Access the following link <a href="https://www.air-port-codes.com/auth/api-access/" target="_blank">https://www.air-port-codes.com/auth/api-access/</a></li>
                         <li>Click <b>Request New API Secret</b> to obtain API Secret(APC_AUTH_SECRET) and API Key (APC_AUTH) that required for Heroku config</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        <header class="block-heading cleafix" id="google">
+            <h2>Google Places API</h2>
+        </header>
+        <section class="block-body block-border-bottom">
+            <div class="row">
+                <div class="col-md-12">
+                    <ol class="setup">
+                        <li>Go to <a href="https://console.developers.google.com/" target="_blank">https://console.developers.google.com/</a> </li>
+                        <li>
+                            <p>Create a new project</p>
+                            <img src="img/google/g1.png">
+                        </li>
+                        <li>
+                            <p>Click <b>Library</b> on the left menu and select <b>Google Places API Web Service</b> in the <b>Google Map API</b> section</p>
+                            <img src="img/google/g3.png">
+                        </li>
+                        <li>
+                            <p>Click <b>Enable</b> button to enable Google Map API</p>
+                            <img src="img/google/g4.png">
+                        </li>
+                        <li>On the left menu, click <b>Credential</b> button</li>
+                        <li>
+                            <p>Select <b>Create credentials</b> button and select <b>API key</b> option</p>
+                            <img src="img/google/g6.png">
+                        </li>
+                        <li>Copy the API key. It will be used in the next step as <b>GOOGLE_API</b></li>
                     </ol>
                 </div>
             </div>
