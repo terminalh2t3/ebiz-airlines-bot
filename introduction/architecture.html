@@ -53,7 +53,7 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="architecture.html">Architecture</a></li>
                     <li><a href="setup.html">Setup</a></li>
-                    <li><a href="walkthrough.html">Case Sample</a></li>
+                    <li><a href="usecase.html">Case Sample</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a target="_blank" href="https://heroku.com/deploy?template=https://github.com/trifinlabs/salesforce-heroku-membership/tree/master"><img src="img/dth_light.png" width="150px" alt="image deploy button"></a></li>
@@ -64,60 +64,96 @@
     </nav>
 </header>
 <div class="clearfix"></div>
-<div class="hero">
-    <div class="container-bs">
-        <img src="img/iAirlines.png" class="img-responsive">
-    </div>
-</div>
 
 <div id="blog" class="content-block content-block-gray">
     <div class="container">
         <header class="block-heading cleafix">
-            <h2>Overview</h2>
+            <h2>Architecture</h2>
         </header>
         <section class="block-body block-border-bottom">
             <div class="row">
-                <div class="col-md-12">
-                    <p>Airline chatbot for Facebook Messenger that could help customers find available flights, online bookings, check-in, boarding pass, change seats and update flight status.</p>
-                    <p>A flexible – user friendly customer support solution across multiple touchpoints & real time messaging with passengers.</p>
-                    <ul>
-                        <li>Booking confirmation</li>
-                        <li>Ticket payment via messenger</li>
-                        <li>Check-in, boarding pass</li>
-                        <li>Change seats, extra luggage</li>
-                        <li>Flight status update</li>
-                    </ul>
-                </div>
+                <img class="img-responsive img-center img-resized" src="img/archi.png"/>
             </div>
         </section>
         <header class="block-heading cleafix">
-            <h2>Travel Assistance</h2>
+            <h2>Description</h2>
         </header>
         <section class="block-body block-border-bottom">
             <div class="row">
                 <div class="col-md-12">
-                    <p>Personalize 1-1 customer experience using semi or full auto-response 24/7/365 with Chatbot for Airlines – AI version.</p>
-                    <p>Turns Chatbot into a personal travel assistant that helps passengers looking for hotels, restaurants or tour guide using their local language – be a useful friend, creating a journey together.</p>
-                    <ul>
-                        <li>24/7 social customer service</li>
-                        <li>Hybrid or full auto response message</li>
-                        <li>Nature language processing with Wit.ai</li>
-                        <li>Search hotels, nearby places</li>
-                        <li>Personal travel assistant</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        <header class="block-heading cleafix">
-            <h2>Demo Video</h2>
-        </header>
-        <section class="block-body block-border-bottom">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="video-holder">&nbsp;<iframe src="http://player.vimeo.com/video/202004426"
-                                                            width="50%" height="316" frameborder="0" webkitAllowFullScreen mozallowfullscreen
-                                                            allowFullScreen></iframe></p></div>
-                    <p><a href="https://vimeo.com/202004426">Ebiz-Airlines-Bot</a> from <a href="https://vimeo.com/user62296941">Hieu Nguyen</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+                    <p>Above is the complete architecture for the Ebiz Airlines Bot. By leveraging the Salesforce App Cloud, we can now offer customers an amazing and seamless flight booking experience.</p>
+                    <p>Additionally, because we are using Heroku Connect and Salesforce Restful API to synchronize data between Heroku and Salesforce, our internal business users can manage all the customers, flights, routes, airports, messages, etc.</p>
+                    <br>
+                    <ol class="setup">
+                        <li>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-2 text-center-xs">
+                                    <img src="img/arch/salesforce.png" alt="Salesforce" width="130">
+                                </div>
+                                <div class="col-sm-12 col-md-10">
+                                    <p class="lead">Salesforce</p>
+                                    <p class="margin-t md">Salesforce is the leading cloud platform as a service and CRM on the planet!</p>
+                                    <p>For this example app, Salesforce is our business system to manage members, membership options, and allows for membership management</p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-2 text-center-xs">
+                                    <img src="img/arch/heroku-connect.png" alt="Heroku Connect" width="130">
+                                </div>
+                                <div class="col-sm-12 col-md-10">
+                                    <p class="lead">Heroku Connect</p>
+                                    <p class="margin-t md">Using bi-directional synchronization between Salesforce and Heroku Postgres, Heroku Connect unifies the data in your Postgres database with members, membership contacts, memberships, and membership tiers</p>
+                                    <p>NO coding or complex configuration is required</p>
+                                </div>
+                            </div>
+
+                        </li>
+
+                        <li>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-2 text-center-xs">
+                                    <img src="img/arch/heroku-postgres.png" alt="Heroku Postgres" width="130">
+                                </div>
+                                <div class="col-sm-12 col-md-10">
+                                    <p class="lead">Heroku Postgres - HEROKU ADDON</p>
+                                    <p class="margin-t md">The SQL database service for developers.</p>
+                                    <p>Easy to Set Up, Secure by Default</p>
+                                </div>
+                            </div>
+
+
+                        </li>
+
+                        <li>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-2 text-center-xs">
+                                    <img src="img/arch/wit.png" alt="Wit.AI" width="130">
+                                </div>
+                                <div class="col-sm-12 col-md-10">
+                                    <p class="lead">Wit.AI</p>
+                                    <p class="margin-t md">Wit is a natural language interface for applications capable of turning sentences into structured data.</p>
+                                    <p>The API authenticates with OAuth2 and returns JSON formatted responses.</p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-2 text-center-xs">
+                                    <img src="img/arch/nodejs_logo.png" alt="Nodejs" width="130">
+                                </div>
+                                <div class="col-sm-12 col-md-10">
+                                    <p class="lead">NodeJS</p>
+                                    <p class="margin-t md">Using bi-directional synchronization between Salesforce and Heroku Postgres, Heroku Connect unifies the data in your Postgres database with customers, flights, routes, airports, messages, etc.</p>
+                                    <p>NO coding or complex configuration is required</p>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ol>
                 </div>
             </div>
         </section>
