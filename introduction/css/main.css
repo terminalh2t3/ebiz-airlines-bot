@@ -255,6 +255,18 @@ Navigation
     margin: 46px auto;
 }
 
+.video-holder{
+    display: block;
+    max-width: 650px;
+}
+@media (max-width: 768px) {
+    .video-holder {
+        display: block;
+        height: 280px;
+    }
+}
+
+
 .img-center{
     margin: 0 auto;
 }
