@@ -11,6 +11,5 @@
   "sf-user"         : "anhvt39@ebiz.solutions",
   "sf-pass"         : "abc123tuananhdr2Z4O43XRK101L41N9rnnKF",
   "clientId"        : "3MVG9ZL0ppGP5UrAzUcEOMyQPVSxUnGY0ESKki7p3km4W8Fl_kFJDb7uj1Ti6n6psuB89jcyxEf91AkAraEI1",
-  "clientSecret"    : "7410141109122007711",
-  "redirectUri"     : "https://a33eabc8.ngrok.io/oauth/_callback"
+  "clientSecret"    : "7410141109122007711"
 }
