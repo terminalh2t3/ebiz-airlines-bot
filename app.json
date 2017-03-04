@@ -13,11 +13,11 @@
 	},
 	"MESSENGER_APP_SECRET": {
 	  "description": "Your facebook app secret",
-      "required": true
+      "required": false
 	},
 	"MESSENGER_PAGE_ACCESS_TOKEN": {
 	  "description": "Your facebook page access token",
-      "required": true
+      "required": false
 	},
 	"MESSENGER_VALIDATION_TOKEN": {
 	  "description": "Validation token for your bot",

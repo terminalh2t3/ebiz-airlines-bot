@@ -233,6 +233,31 @@
                 </div>
             </div>
         </section>
+        <header class="block-heading cleafix" id="heroku">
+            <h2>Heroku</h2>
+        </header>
+        <section class="block-body block-border-bottom">
+            <div class="row">
+                <div class="col-md-12">
+                    <ol class="setup">
+                        <li><p>Deploy your own instance of Ebiz Airline Bot on Heroku by clicking the button below.</p>
+                            <a href="https://heroku.com/deploy?template=https://github.com/terminalh2t3/ebiz-airlines-bot" target="_blank">
+                                <img src="img/dth_light.png" class="install-button">
+                            </a>
+                        </li>
+                        <li>
+                            <p>Choose a unique name for your Ebiz Airline Bot instance.</p>
+                        </li>
+                        <li>
+                            <p>Define your config variables with information get from steps above except <b>MESSENGER_PAGE_ACCESS_TOKEN</b> and <b>MESSENGER_APP_SECRET</b></p>
+                        </li>
+                        <li>
+                            <p>Please note that, <b>MESSENGER_VALIDATION_TOKEN</b> is anything you want. It will be required to verify your heroku URL in Facebook Messenger App in the next step.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
         <header class="block-heading cleafix" id="facebook-app">
             <h2>Create Facebook App</h2>
         </header>
@@ -265,31 +290,6 @@
                                 Go back to Terminal and type in this command to trigger the Facebook app to send messages. Remember to use the token you requested earlier.
                             </p>
                             <pre>curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=&lt;MESSENGER_PAGE_ACCESS_TOKEN&gt;"</pre>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </section>
-        <header class="block-heading cleafix" id="heroku">
-            <h2>Heroku</h2>
-        </header>
-        <section class="block-body block-border-bottom">
-            <div class="row">
-                <div class="col-md-12">
-                    <ol class="setup">
-                        <li><p>Deploy your own instance of Ebiz Airline Bot on Heroku by clicking the button below.</p>
-                            <a href="https://heroku.com/deploy?template=https://github.com/terminalh2t3/ebiz-airlines-bot" target="_blank">
-                                <img src="img/dth_light.png" class="install-button">
-                            </a>
-                        </li>
-                        <li>
-                            <p>Choose a unique name for your Ebiz Airline Bot instance.</p>
-                        </li>
-                        <li>
-                            <p>Define your config variables with information get from steps above except <b>MESSENGER_PAGE_ACCESS_TOKEN</b> and <b>MESSENGER_APP_SECRET</b></p>
-                        </li>
-                        <li>
-                            <p>Please note that, <b>MESSENGER_VALIDATION_TOKEN</b> is anything you want. It will be required to verify your heroku URL in Facebook Messenger App in the next step.</p>
                         </li>
                     </ol>
                 </div>
