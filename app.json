@@ -50,6 +50,10 @@
 	"APC_AUTH_SECRET": {
 	  "description": "Your Authenticate Secret from http://www.air-port-codes.com/",
       "required": true
+	},
+    "ROOT_URL": {
+      "description": "Your app url. ex: https://appnames.herokuapp.com",
+      "required": true
 	}
   },
   "addons": [
