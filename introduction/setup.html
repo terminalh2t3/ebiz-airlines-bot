@@ -80,7 +80,7 @@
                     <a href="https://heroku.com/deploy?template=https://github.com/terminalh2t3/ebiz-airlines-bot" target="_blank">
                         <img src="img/dth_light.png" class="install-button">
                     </a>
-                    <a href="src/ebbot-airlines.json" target="_blank">
+                    <a href="src/ebbot-airlines.json" target="_blank" download="ebbot-airlines.json">
                         <img src="img/hcc_light.png" class="install-button">
                     </a>
                     <a href="src/ebiz-airlines-witai.zip" target="_blank">
@@ -307,7 +307,7 @@
                     <ol class="setup">
                         <li>Click the <b>Heroku Connect link</b> in the Installed add-ons section of the app dashboard.</li>
                         <li>Click the <b>Setup Connection button</b>. </li>
-                        <li>Select the <b>HEROKU_CONNECT_DB Postgres database</b>. Choose <b>DATABASE_URL</b> for DB Config Vars</li>
+                        <li>Select your postgres database listed on the screen. Please note that the schema name must be <b>salesforce</b> as the default</li>
                         <li>Click the <b>Next</b> button in the top right of the page.</li>
                         <li>Click the <b>Authorize</b> button in the top right of the page.</li>
                         <li>You will be prompted to Choose a Username. If you have multiple options, be sure to select the username associated with the Salesforce org your Ebiz Airline Bot instance should connect to</li>
@@ -315,7 +315,7 @@
                         <li>Now back to <b>Heroku Connect Dashboard</b>, choose <b>Settings</b> > <b>Import/Export</b> Configuration > click <b>Import</b> for mapping data with Salesforce</li>
                         <li>
                             <p>Download the <b>Heroku Connect configuration</b> file to your computer.</p>
-                            <a href="src/ebbot-airlines.json">
+                            <a href="src/ebbot-airlines.json" target="_blank" download="ebbot-airlines.json">
                                 <img src="img/hcc_light.png" class="install-button">
                             </a>
                         </li>
