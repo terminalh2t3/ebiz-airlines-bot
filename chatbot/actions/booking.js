@@ -69,37 +69,42 @@ module.exports = (bot) => ({
                                         "title": 'Booking ' + flight.name,
                                         "image_url": rootUrl + '/util/render-flight-info?flightSfid=' + flight.sfid,
                                         "buttons":[
-                                            {
-                                                "type":"payment",
-                                                "title":"buy",
-                                                "payload":flight.name + '_' + flight.sfid,
-                                                "payment_summary":{
-                                                    "currency":"USD",
-                                                    "payment_type":"FIXED_AMOUNT",
-                                                    "is_test_payment" : true,
-                                                    "merchant_name":"Ebiz Airlines",
-                                                    "requested_user_info":[
-                                                        "contact_name",
-                                                        "contact_phone",
-                                                        "contact_email"
-                                                    ],
-                                                    "price_list":[
-                                                        {
-                                                            "label":"Subtotal",
-                                                            "amount": basePrice
-                                                        },
-                                                        {
-                                                            "label":"Taxes",
-                                                            "amount": taxFee
-                                                        }
-                                                    ]
-                                                }
-                                            },
+                                            // {
+                                            //     "type":"payment",
+                                            //     "title":"buy",
+                                            //     "payload":flight.name + '_' + flight.sfid,
+                                            //     "payment_summary":{
+                                            //         "currency":"USD",
+                                            //         "payment_type":"FIXED_AMOUNT",
+                                            //         "is_test_payment" : true,
+                                            //         "merchant_name":"Ebiz Airlines",
+                                            //         "requested_user_info":[
+                                            //             "contact_name",
+                                            //             "contact_phone",
+                                            //             "contact_email"
+                                            //         ],
+                                            //         "price_list":[
+                                            //             {
+                                            //                 "label":"Subtotal",
+                                            //                 "amount": basePrice
+                                            //             },
+                                            //             {
+                                            //                 "label":"Taxes",
+                                            //                 "amount": taxFee
+                                            //             }
+                                            //         ]
+                                            //     }
+                                            // },
                                             {
                                                 "type": "web_url",
                                                 "url": rootUrl + '/flight/show?flightSfid=' + flight.sfid,
                                                 "webview_height_ratio": "full",
                                                 "title": 'View detail'
+                                            },
+                                            {
+                                                "type": "postback",
+                                                "title": "Sandbox buy",
+                                                "payload": "BUY_" + flight.sfid
                                             }
                                         ]
                                     };

@@ -27,6 +27,39 @@ module.exports = (bot) => {
             }
         });
     });
+
+    bot.on('postback', (payload, chat) => {
+        //Check the payload
+        const postback = payload.postback.payload;
+        if (postback != null && postback.indexOf('BUY') > -1){
+            const flightSfid = postback.split('_')[1];
+            const fbId = payload.sender.id;
+            //check user
+            Passenger.isHasPassenger(fbId, function(err, exist){
+                if(err == null) {
+                    if (exist) {
+                        bookingFlight(flightSfid, fbId, chat);
+                    } else {
+                        //sandbox info
+                        const info = {
+                            contact_name: "Sandbox info",
+                            contact_phone: "0123456789",
+                            contact_email: "sandbox@emailsandbox.com"
+                        };
+                        Passenger.createPassenger(fbId, info.contact_name, info.contact_phone, info.contact_email, function (error2, data) {
+                            if (error2 == null) {
+                                bookingFlight(flightSfid, fbId, chat, res);
+                            } else {
+                                console.error(error2);
+                            }
+                        });
+                    }
+                } else{
+                    console.error(err);
+                }
+            });
+        }
+    });
 };
 
 function bookingFlight(flightSfid, fbId, chat, res){
