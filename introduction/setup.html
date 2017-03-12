@@ -267,7 +267,7 @@
                     <ol class="setup">
                         <li>
                             <p>
-                                Create or configure a Facebook App or Page here <a href="https://developers.facebook.com/">https://developers.facebook.com/apps</a>
+                                Create or configure a Facebook App or Page here <a href="https://developers.facebook.com/" target="_blank">https://developers.facebook.com/apps</a>
                             </p>
                             <img src="img/facebook/s1.jpg">
                         </li>
@@ -286,13 +286,15 @@
                             <p>
                                 Get a Page Access Token, Facebook App Secret and save to Heroku Config as <b>MESSENGER_APP_SECRET</b> and <b>MESSENGER_PAGE_ACCESS_TOKEN</b>.
                             </p>
+                            <p>Please not that, you can generate <b>Page Access Token</b> for any Facebook Page you want. After done the setup, Ebiz Airlines Chatbot will be installed on this page and allow it for automatically response to user when ever user chat with it.</p>
+                            <p>One more thing, <b>Facebook App Secret</b> is App Secret field . You can access to <b>Dashboard</b> tab at the Facebook Developer page to get it</p>
                             <img src="img/facebook/s3.jpg">
                         </li>
                         <li>
                             <p>
                                 Go back to Terminal and type in this command to trigger the Facebook app to send messages. Remember to use the token you requested earlier.
                             </p>
-                            <pre>curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=&lt;MESSENGER_PAGE_ACCESS_TOKEN&gt;"</pre>
+                            <pre>curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=<b>MESSENGER_PAGE_ACCESS_TOKEN</b>"</pre>
                         </li>
                     </ol>
                 </div>
